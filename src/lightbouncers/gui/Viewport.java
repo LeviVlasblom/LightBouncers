@@ -6,7 +6,6 @@ import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.paint.Color;
 import lightbouncers.vectormath.Vector2D;
-import org.omg.CORBA.PUBLIC_MEMBER;
 
 public class Viewport extends Canvas
 {

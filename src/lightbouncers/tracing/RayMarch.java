@@ -1,18 +1,17 @@
 package lightbouncers.tracing;
 
 import javafx.scene.canvas.GraphicsContext;
-import lightbouncers.objects.ISceneObject;
-import lightbouncers.objects.SceneObject;
+import lightbouncers.objects.Actor;
 import lightbouncers.vectormath.Vector2D;
 
 import java.util.ArrayList;
 
 public class RayMarch
 {
-    public static TraceResult2D sphereTrace2D(Vector2D origin, double direction, ArrayList<SceneObject> objects, double maxDistance, GraphicsContext graphicsContext)
+    public static TraceResult2D sphereTrace2D(Vector2D origin, double direction, ArrayList<Actor> objects, double maxDistance, GraphicsContext graphicsContext)
     {
         Vector2D currentPoint = origin.clone();
-        ISceneObject closestObject;
+        Actor closestObject;
         double totalDistance = 0;
         TraceResult2D traceResult2D = new TraceResult2D();
 
@@ -59,12 +58,12 @@ public class RayMarch
         return traceResult2D;
     }
 
-    private static ISceneObject getClosestObject(Vector2D point, ArrayList<SceneObject> objects)
+    private static Actor getClosestObject(Vector2D point, ArrayList<Actor> objects)
     {
-        ISceneObject closestObject = objects.get(0);
+        Actor closestObject = objects.get(0);
         double closestDistance = closestObject.getDistanceFromPoint(point);
 
-        for(ISceneObject object : objects)
+        for(Actor object : objects)
         {
             double distance = object.getDistanceFromPoint(point);
             if(distance < closestDistance)

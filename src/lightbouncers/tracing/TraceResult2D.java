@@ -1,11 +1,11 @@
 package lightbouncers.tracing;
 
+import lightbouncers.objects.Actor;
 import lightbouncers.vectormath.Vector2D;
-import lightbouncers.objects.ISceneObject;
 
 public class TraceResult2D
 {
-    private ISceneObject objectHit;
+    private Actor objectHit;
     private Vector2D hitPoint;
 
     public TraceResult2D()
@@ -13,13 +13,13 @@ public class TraceResult2D
 
     }
 
-    public TraceResult2D(ISceneObject objectHit, Vector2D hitPoint)
+    public TraceResult2D(Actor objectHit, Vector2D hitPoint)
     {
         this.objectHit = objectHit;
         this.hitPoint = hitPoint;
     }
 
-    public ISceneObject getObjectHit()
+    public Actor getObjectHit()
     {
         return this.objectHit;
     }
@@ -29,7 +29,7 @@ public class TraceResult2D
         return this.hitPoint;
     }
 
-    public void setObjectHit(ISceneObject objectHit)
+    public void setObjectHit(Actor objectHit)
     {
         this.objectHit = objectHit;
     }

@@ -67,8 +67,8 @@ public class LightBouncer extends Character
     }
 
     @Override
-    public Vector2D getClosedPointToActor(Actor actor)
+    public double getDistanceFromPoint(Vector2D point)
     {
-        return null;
+        return 0.0;
     }
 }

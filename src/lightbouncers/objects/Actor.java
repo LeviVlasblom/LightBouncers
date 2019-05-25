@@ -38,7 +38,7 @@ public abstract class Actor
 
     public abstract void checkCollision(Actor actor);
 
-    public abstract Vector2D getClosedPointToActor(Actor actor);
+    public abstract double getDistanceFromPoint(Vector2D point);
 
     public Vector2D getWorldPosition()
     {
