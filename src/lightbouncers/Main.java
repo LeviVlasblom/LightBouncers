@@ -19,13 +19,15 @@ public class Main extends Application
     {
         Viewport viewport = new Viewport(1920, 1080);
 
-        Scene scene = new Scene(new Group(viewport, new Button("Test")), 1920, 1080);
-//        scene.setOnKeyPressed(event -> {
-//            viewport.onKeyPressed(event.getCode());
-//        });
-//        scene.setOnKeyReleased(event -> {
-//            viewport.onKeyReleased(event.getCode());
-//        });
+        Scene scene = new Scene(new Group(viewport), 1920, 1080);
+//        scene.setOnKeyPressed(event -> viewport.onKeyPressed(event));
+//        scene.setOnKeyReleased(event -> viewport.onKeyReleased(event));
+        scene.setOnKeyPressed(event -> {
+            viewport.onKeyPressed(event);
+        });
+        scene.setOnKeyReleased(event -> {
+            viewport.onKeyReleased(event);
+        });
         primaryStage.setScene(scene);
         primaryStage.show();
     }

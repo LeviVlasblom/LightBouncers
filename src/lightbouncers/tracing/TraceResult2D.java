@@ -1,7 +1,7 @@
 package lightbouncers.tracing;
 
 import lightbouncers.objects.Actor;
-import lightbouncers.vectormath.Vector2D;
+import lightbouncers.math.Vector2D;
 
 public class TraceResult2D
 {

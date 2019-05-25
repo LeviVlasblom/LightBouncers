@@ -2,7 +2,7 @@ package lightbouncers.objects;
 
 import com.sun.javafx.geom.transform.Affine2D;
 import javafx.scene.canvas.GraphicsContext;
-import lightbouncers.vectormath.Vector2D;
+import lightbouncers.math.Vector2D;
 
 public abstract class Actor
 {

@@ -1,7 +1,7 @@
 package lightbouncers.objects.pawns;
 
 import lightbouncers.objects.Actor;
-import lightbouncers.vectormath.Vector2D;
+import lightbouncers.math.Vector2D;
 
 public abstract class Pawn extends Actor
 {
@@ -9,6 +9,8 @@ public abstract class Pawn extends Actor
     protected double maxVelocity;
     protected double acceleration;
     protected double scale;
+
+    protected boolean isMoving;
 
     public Pawn(Vector2D position, double rotation, double maxVelocity, double acceleration, double scale)
     {
@@ -38,7 +40,14 @@ public abstract class Pawn extends Actor
             this.velocity = Vector2D.zero();
         }
 
-        this.velocity = Vector2D.add(this.velocity, Vector2D.fromAngle(this.worldPosition, this.rotation, this.acceleration * deltatime));
+        if(this.isMoving || this.velocity.magnitude > 0.8)
+        {
+            this.velocity = Vector2D.add(this.velocity, Vector2D.fromAngle(this.worldPosition, this.rotation, this.acceleration * deltatime));
+        }
+        else
+        {
+            this.velocity = Vector2D.zero();
+        }
 
         if(this.parent == null)
         {

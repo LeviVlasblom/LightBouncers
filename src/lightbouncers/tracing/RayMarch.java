@@ -2,7 +2,7 @@ package lightbouncers.tracing;
 
 import javafx.scene.canvas.GraphicsContext;
 import lightbouncers.objects.Actor;
-import lightbouncers.vectormath.Vector2D;
+import lightbouncers.math.Vector2D;
 
 import java.util.ArrayList;
 

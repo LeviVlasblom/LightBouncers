@@ -5,11 +5,14 @@ import javafx.scene.canvas.Canvas;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.paint.Color;
-import lightbouncers.vectormath.Vector2D;
+import lightbouncers.objects.pawns.characters.LightBouncer;
+import lightbouncers.math.Vector2D;
 
 public class Viewport extends Canvas
 {
     protected Vector2D cursorPosition;
+    private LightBouncer player;
+    private LightBouncer test;
 
     public Viewport(int width, int height)
     {
@@ -19,8 +22,11 @@ public class Viewport extends Canvas
         this.setOnMousePressed(event -> onMousePressed(event));
         this.setOnMouseReleased(event -> onMouseReleased(event));
         this.setOnMouseMoved(event -> onMouseMoved(event));
-        this.setOnKeyPressed(event -> onKeyPressed(event));
-        this.setOnKeyReleased(event -> onKeyReleased(event));
+
+        this.player = new LightBouncer(new Vector2D(100, 100), 0.0, 5.0, 20.0, 1.0);
+        this.test = new LightBouncer(new Vector2D(100, 100), 0.0, 5.0, 20.0, 1.0);
+        this.test.setParent(this.player);
+        this.test.setLocalPosition(new Vector2D(0.5, 0.5));
 
         new AnimationTimer() {
             long last = -1;
@@ -35,17 +41,19 @@ public class Viewport extends Canvas
                 draw();
             }
         }.start();
-
     }
 
     private void update(double deltaTime)
     {
-
+        this.player.update(deltaTime);
+        this.test.update(deltaTime);
     }
 
     private void draw()
     {
         this.clear();
+        this.player.draw(this.getGraphicsContext2D());
+        this.test.draw(this.getGraphicsContext2D());
     }
 
     private void updateCursorPosition(Vector2D mousePosition)
@@ -68,14 +76,14 @@ public class Viewport extends Canvas
         updateCursorPosition(new Vector2D((float)event.getX(), (float)event.getY()));
     }
 
-    private void onKeyPressed(KeyEvent event)
+    public void onKeyPressed(KeyEvent event)
     {
-
+        this.player.onKeyPressed(event);
     }
 
-    private void onKeyReleased(KeyEvent event)
+    public void onKeyReleased(KeyEvent event)
     {
-
+        this.player.onKeyReleased(event);
     }
 
     public void onWidthChanged()
@@ -90,7 +98,7 @@ public class Viewport extends Canvas
 
     private void clear()
     {
-        this.getGraphicsContext2D().setFill(Color.BLACK);
+        this.getGraphicsContext2D().setFill(Color.WHITE);
         this.getGraphicsContext2D().fillRect(0, 0, this.getWidth(), this.getHeight());
     }
 }

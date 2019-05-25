@@ -1,4 +1,4 @@
-package lightbouncers.vectormath;
+package lightbouncers.math;
 
 public class Vector2D
 {

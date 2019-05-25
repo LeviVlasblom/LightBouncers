@@ -1,8 +1,7 @@
 package lightbouncers.objects.pawns.projectiles;
 
-import lightbouncers.objects.Actor;
 import lightbouncers.objects.pawns.Pawn;
-import lightbouncers.vectormath.Vector2D;
+import lightbouncers.math.Vector2D;
 
 public abstract class Projectile extends Pawn
 {

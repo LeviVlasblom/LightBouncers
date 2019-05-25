@@ -1,7 +1,7 @@
 package lightbouncers.objects.items;
 
 import lightbouncers.objects.Actor;
-import lightbouncers.vectormath.Vector2D;
+import lightbouncers.math.Vector2D;
 
 public abstract class Item extends Actor
 {
