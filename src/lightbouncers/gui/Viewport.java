@@ -5,14 +5,22 @@ import javafx.scene.canvas.Canvas;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.paint.Color;
+import lightbouncers.objects.Actor;
+import lightbouncers.objects.environment.EnvironmentObject;
+import lightbouncers.objects.environment.WallBox;
+import lightbouncers.objects.lights.Light;
 import lightbouncers.objects.pawns.characters.LightBouncer;
 import lightbouncers.math.Vector2D;
+
+import java.util.ArrayList;
 
 public class Viewport extends Canvas
 {
     protected Vector2D cursorPosition;
     private LightBouncer player;
     //private LightBouncer test;
+    private Light light;
+    private ArrayList<Actor> environmentObjects;
 
     public Viewport(int width, int height)
     {
@@ -24,6 +32,11 @@ public class Viewport extends Canvas
         this.setOnMouseMoved(event -> onMouseMoved(event));
 
         this.player = new LightBouncer(new Vector2D(100, 100), 0.0, 5.0, 50.0, 1.0);
+        this.light = new Light(new Vector2D(100, 100), 600, 1.0, Color.YELLOW, Color.BLUE);
+
+        this.environmentObjects = new ArrayList<Actor>();
+        this.environmentObjects.add(new WallBox(new Vector2D(400, 400), 0, 50, 50));
+
 //        this.test = new LightBouncer(new Vector2D(100, 100), 0.0, 5.0, 20.0, 1.0);
 //        this.test.setParent(this.player);
 //        this.test.setLocalPosition(new Vector2D(0.5, 0.5));
@@ -46,13 +59,19 @@ public class Viewport extends Canvas
     private void update(double deltaTime)
     {
         this.player.update(deltaTime);
+        this.light.setPosition(this.player.getWorldPosition());
         //this.test.update(deltaTime);
     }
 
     private void draw()
     {
         this.clear();
+        this.light.draw(this.getGraphicsContext2D(), this.environmentObjects);
         this.player.draw(this.getGraphicsContext2D());
+        for(Actor actor : this.environmentObjects)
+        {
+            actor.draw(this.getGraphicsContext2D());
+        }
         //this.test.draw(this.getGraphicsContext2D());
     }
 

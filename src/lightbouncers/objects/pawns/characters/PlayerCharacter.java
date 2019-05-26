@@ -105,7 +105,6 @@ public abstract class PlayerCharacter extends Pawn
         {
             this.isMoving = false;
             this.directionAngle = Angle.flipAngle(this.directionAngle);
-            System.out.println("Stopped moving!");
         }
     }
 }
