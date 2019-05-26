@@ -12,7 +12,7 @@ public class Viewport extends Canvas
 {
     protected Vector2D cursorPosition;
     private LightBouncer player;
-    private LightBouncer test;
+    //private LightBouncer test;
 
     public Viewport(int width, int height)
     {
@@ -23,10 +23,10 @@ public class Viewport extends Canvas
         this.setOnMouseReleased(event -> onMouseReleased(event));
         this.setOnMouseMoved(event -> onMouseMoved(event));
 
-        this.player = new LightBouncer(new Vector2D(100, 100), 0.0, 5.0, 20.0, 1.0);
-        this.test = new LightBouncer(new Vector2D(100, 100), 0.0, 5.0, 20.0, 1.0);
-        this.test.setParent(this.player);
-        this.test.setLocalPosition(new Vector2D(0.5, 0.5));
+        this.player = new LightBouncer(new Vector2D(100, 100), 0.0, 5.0, 50.0, 1.0);
+//        this.test = new LightBouncer(new Vector2D(100, 100), 0.0, 5.0, 20.0, 1.0);
+//        this.test.setParent(this.player);
+//        this.test.setLocalPosition(new Vector2D(0.5, 0.5));
 
         new AnimationTimer() {
             long last = -1;
@@ -46,14 +46,14 @@ public class Viewport extends Canvas
     private void update(double deltaTime)
     {
         this.player.update(deltaTime);
-        this.test.update(deltaTime);
+        //this.test.update(deltaTime);
     }
 
     private void draw()
     {
         this.clear();
         this.player.draw(this.getGraphicsContext2D());
-        this.test.draw(this.getGraphicsContext2D());
+        //this.test.draw(this.getGraphicsContext2D());
     }
 
     private void updateCursorPosition(Vector2D mousePosition)

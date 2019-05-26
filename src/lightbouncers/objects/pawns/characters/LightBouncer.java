@@ -1,6 +1,7 @@
 package lightbouncers.objects.pawns.characters;
 
 import javafx.scene.canvas.GraphicsContext;
+import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.paint.Color;
@@ -9,7 +10,7 @@ import lightbouncers.objects.Actor;
 import lightbouncers.objects.items.Item;
 import lightbouncers.math.Vector2D;
 
-public class LightBouncer extends Character
+public class LightBouncer extends PlayerCharacter
 {
     private Item item;
     private double radius;
@@ -46,51 +47,12 @@ public class LightBouncer extends Character
     }
 
     @Override
-    public void onKeyPressed(KeyEvent event)
-    {
-        switch(event.getCode())
-        {
-            case W:
-            {
-                this.rotation = (Math.PI / 2) * 3;
-                this.isMoving = true;
-                break;
-            }
-            case S:
-            {
-                this.rotation = (Math.PI / 2);
-                this.isMoving = true;
-                break;
-            }
-            case A:
-            {
-                this.rotation = Math.PI;
-                this.isMoving = true;
-                break;
-            }
-            case D:
-            {
-                this.rotation = 0;
-                this.isMoving = true;
-                break;
-            }
-        }
-    }
-
-    @Override
-    public void onKeyReleased(KeyEvent event)
-    {
-        this.isMoving = false;
-        this.rotation = Angle.flipAngle(this.rotation);
-    }
-
-    @Override
     public void draw(GraphicsContext graphicsContext)
     {
         graphicsContext.setFill(Color.BLUE);
         graphicsContext.fillOval(this.worldPosition.x - this.radius, this.worldPosition.y - this.radius, this.radius * 2, this.radius * 2);
         graphicsContext.setFill(Color.GREEN);
-        Vector2D newVector = Vector2D.fromAngleWithPosition(this.worldPosition, this.rotation, this.velocity.magnitude * 5);
+        Vector2D newVector = Vector2D.fromAngleWithPosition(this.worldPosition, this.directionAngle, this.velocity.magnitude * 5);
         graphicsContext.strokeLine(this.worldPosition.x, this.worldPosition.y, newVector.x, newVector.y);
     }
 
@@ -104,5 +66,11 @@ public class LightBouncer extends Character
     public double getDistanceFromPoint(Vector2D point)
     {
         return 0.0;
+    }
+
+    @Override
+    public Vector2D getClosestPoint(Vector2D point)
+    {
+        return null;
     }
 }

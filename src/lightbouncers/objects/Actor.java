@@ -40,6 +40,8 @@ public abstract class Actor
 
     public abstract double getDistanceFromPoint(Vector2D point);
 
+    public abstract Vector2D getClosestPoint(Vector2D point);
+
     public Vector2D getWorldPosition()
     {
         return this.worldPosition;

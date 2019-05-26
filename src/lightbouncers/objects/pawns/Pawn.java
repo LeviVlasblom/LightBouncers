@@ -9,6 +9,7 @@ public abstract class Pawn extends Actor
     protected double maxVelocity;
     protected double acceleration;
     protected double scale;
+    protected double directionAngle;
 
     protected boolean isMoving;
 
@@ -29,7 +30,7 @@ public abstract class Pawn extends Actor
         super.update(deltatime);
     }
 
-    private void updateMovement(double deltatime)
+    protected void updateMovement(double deltatime)
     {
         if(this.velocity.magnitude > this.maxVelocity)
         {
@@ -42,7 +43,7 @@ public abstract class Pawn extends Actor
 
         if(this.isMoving || this.velocity.magnitude > 0.8)
         {
-            this.velocity = Vector2D.add(this.velocity, Vector2D.fromAngle(this.worldPosition, this.rotation, this.acceleration * deltatime));
+            this.velocity = Vector2D.add(this.velocity, Vector2D.fromAngle(this.worldPosition, this.directionAngle, this.acceleration * deltatime));
         }
         else
         {

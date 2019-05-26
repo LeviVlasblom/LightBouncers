@@ -1,0 +1,20 @@
+{
+  "name": "LevelStandard",
+  "enviromentobjects": [
+    {
+      "type": "box",
+      "positionX": 10.0,
+      "positionY": 10.0,
+      "rotation": 0.0,
+      "width": 10,
+      "height": 10
+    },
+    {
+      "type": "circle",
+      "positionX": 100.0,
+      "positionY": 100.0,
+      "rotation": 0.0,
+      "radius": 5
+    }
+  ]
+}
