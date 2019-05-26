@@ -2,6 +2,7 @@ package lightbouncers.objects.lights;
 
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.paint.Color;
+import javafx.scene.shape.ArcType;
 import lightbouncers.math.Vector2D;
 import lightbouncers.objects.Actor;
 import lightbouncers.objects.environment.WallBox;
@@ -33,8 +34,54 @@ public class Light
 
     public void draw(GraphicsContext graphicsContext, ArrayList<Actor> actors)
     {
-        Actor lasttraced = null;
+        drawNew(graphicsContext, actors);
+    }
 
+    private void drawNew(GraphicsContext graphicsContext, ArrayList<Actor> actors)
+    {
+        Actor lasttraced = null;
+        Vector2D sweepStartPosition = null;
+        Vector2D lastSweepPosition = null;
+
+        double startAngle = 0;
+        double angleCounter = 0;
+
+        for(double i = 0; i < Math.PI * 2; i += Math.PI / 1000)
+        {
+            TraceResult2D traceResult = RayMarch.sphereTrace2D(this.position, i, actors, this.range, null);
+
+            if(lasttraced != traceResult.getObjectHit())
+            {
+                if(sweepStartPosition != null)
+                {
+                    graphicsContext.setFill(this.emissionColor);
+
+                    if(lasttraced != null)
+                    {
+                        double[] xPoints = {this.position.x, sweepStartPosition.x, lastSweepPosition.x};
+                        double[] yPoints = {this.position.y, sweepStartPosition.y, lastSweepPosition.y};
+                        graphicsContext.fillPolygon(xPoints, yPoints, 3);
+
+                        graphicsContext.setFill(this.castColor);
+                        graphicsContext.strokeLine(sweepStartPosition.x, sweepStartPosition.y, lastSweepPosition.x, lastSweepPosition.y);
+                    }
+                    else
+                    {
+                        graphicsContext.fillArc(this.position.x, this.position.y, this.range, this.range, Math.toDegrees(startAngle), Math.toDegrees(angleCounter), null);
+                    }
+                }
+                sweepStartPosition = traceResult.getHitPoint();
+                lasttraced = traceResult.getObjectHit();
+                startAngle = i;
+                angleCounter = 0;
+            }
+            lastSweepPosition = traceResult.getHitPoint();
+            angleCounter += Math.PI / 1000;
+        }
+    }
+
+    private void drawOld(GraphicsContext graphicsContext, ArrayList<Actor> actors)
+    {
         for(double i = 0; i < Math.PI * 2; i += Math.PI / 5000)
         {
             TraceResult2D traceResult = RayMarch.sphereTrace2D(this.position, i, actors, this.range, null);

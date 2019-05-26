@@ -25,6 +25,8 @@ public class WallBox extends EnvironmentObject
 //        graphicsContext.fillOval(this.position.x - this.radius, this.position.y - this.radius, this.radius * 2, this.radius * 2);
         graphicsContext.setStroke(Color.WHITE);
         graphicsContext.strokeRect(this.worldPosition.x - (this.width / 2), this.worldPosition.y - (this.height / 2), this.width, this.height);
+        graphicsContext.setFill(Color.BLACK);
+        graphicsContext.fillRect(this.worldPosition.x - (this.width / 2), this.worldPosition.y - (this.height / 2), this.width, this.height);
     }
 
     @Override
