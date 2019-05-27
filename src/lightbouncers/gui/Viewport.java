@@ -31,11 +31,14 @@ public class Viewport extends Canvas
         this.setOnMouseReleased(event -> onMouseReleased(event));
         this.setOnMouseMoved(event -> onMouseMoved(event));
 
-        this.player = new LightBouncer(new Vector2D(100, 100), 0.0, 5.0, 50.0, 1.0);
-        this.light = new Light(new Vector2D(100, 100), 600, 1.0, Color.YELLOW, Color.BLUE);
+        this.player = new LightBouncer(new Vector2D(100, 100), 0.0, 5.0, 40.0, 1.0);
+        this.light = new Light(new Vector2D(100, 100), 600, 1.0, Color.rgb(173, 168, 65, 0.1), Color.YELLOW);
 
         this.environmentObjects = new ArrayList<Actor>();
         this.environmentObjects.add(new WallBox(new Vector2D(400, 400), 0, 50, 50));
+        this.environmentObjects.add(new WallBox(new Vector2D(500, 400), 0, 50, 50));
+        this.environmentObjects.add(new WallBox(new Vector2D(600, 400), 0, 50, 50));
+        this.environmentObjects.add(new WallBox(new Vector2D(700, 400), 0, 50, 50));
 
 //        this.test = new LightBouncer(new Vector2D(100, 100), 0.0, 5.0, 20.0, 1.0);
 //        this.test.setParent(this.player);
@@ -68,10 +71,10 @@ public class Viewport extends Canvas
         this.clear();
         this.light.draw(this.getGraphicsContext2D(), this.environmentObjects);
         this.player.draw(this.getGraphicsContext2D());
-        for(Actor actor : this.environmentObjects)
-        {
-            actor.draw(this.getGraphicsContext2D());
-        }
+//        for(Actor actor : this.environmentObjects)
+//        {
+//            actor.draw(this.getGraphicsContext2D());
+//        }
         //this.test.draw(this.getGraphicsContext2D());
     }
 
@@ -117,7 +120,7 @@ public class Viewport extends Canvas
 
     private void clear()
     {
-        this.getGraphicsContext2D().setFill(Color.WHITE);
+        this.getGraphicsContext2D().setFill(Color.BLACK);
         this.getGraphicsContext2D().fillRect(0, 0, this.getWidth(), this.getHeight());
     }
 }

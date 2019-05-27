@@ -34,14 +34,18 @@ public class Light
 
     public void draw(GraphicsContext graphicsContext, ArrayList<Actor> actors)
     {
-        drawNew(graphicsContext, actors);
+        drawOld(graphicsContext, actors);
     }
 
     private void drawNew(GraphicsContext graphicsContext, ArrayList<Actor> actors)
     {
-        Actor lasttraced = null;
-        Vector2D sweepStartPosition = null;
+        TraceResult2D initialTrace = RayMarch.sphereTrace2D(this.position, 0, actors, this.range, null);
+        Actor lasttraced = initialTrace.getObjectHit();
+        Vector2D sweepStartPosition = initialTrace.getHitPoint();
         Vector2D lastSweepPosition = null;
+//        Actor lasttraced = null;
+//        Vector2D sweepStartPosition = null;
+//        Vector2D lastSweepPosition = null;
 
         double startAngle = 0;
         double angleCounter = 0;
@@ -50,7 +54,7 @@ public class Light
         {
             TraceResult2D traceResult = RayMarch.sphereTrace2D(this.position, i, actors, this.range, null);
 
-            if(lasttraced != traceResult.getObjectHit())
+            if(lasttraced != traceResult.getObjectHit() || (i + (Math.PI / 1000)) >= (Math.PI * 2))
             {
                 if(sweepStartPosition != null)
                 {
@@ -62,19 +66,28 @@ public class Light
                         double[] yPoints = {this.position.y, sweepStartPosition.y, lastSweepPosition.y};
                         graphicsContext.fillPolygon(xPoints, yPoints, 3);
 
-                        graphicsContext.setFill(this.castColor);
+                        graphicsContext.setStroke(this.castColor);
                         graphicsContext.strokeLine(sweepStartPosition.x, sweepStartPosition.y, lastSweepPosition.x, lastSweepPosition.y);
                     }
                     else
                     {
-                        graphicsContext.fillArc(this.position.x, this.position.y, this.range, this.range, Math.toDegrees(startAngle), Math.toDegrees(angleCounter), null);
+//                        double startDegrees = -Math.toDegrees((i + (Math.PI / 5000)) >= (Math.PI * 2) ? startAngle - (Math.PI / 5000) : startAngle);
+//                        double endDegrees = -Math.toDegrees((i + (Math.PI / 5000)) >= (Math.PI * 2) ? angleCounter + (Math.PI / 5000) : angleCounter);
+//                        double startDegrees = -Math.toDegrees(startAngle - (Math.PI / 1000));
+//                        double endDegrees = -Math.toDegrees(angleCounter + (Math.PI / 1000));
+                        double startDegrees = -Math.toDegrees(startAngle);
+                        double endDegrees = -Math.toDegrees(angleCounter);
+                        graphicsContext.fillArc(this.position.x - this.range, this.position.y - this.range, this.range * 2, this.range * 2, startDegrees, endDegrees, ArcType.ROUND);
+
+                        graphicsContext.setStroke(this.castColor);
+                        //graphicsContext.strokeArc(this.position.x - this.range, this.position.y - this.range, this.range * 2, this.range * 2, startDegrees, endDegrees, ArcType.ROUND);
                     }
                 }
                 sweepStartPosition = traceResult.getHitPoint();
-                lasttraced = traceResult.getObjectHit();
                 startAngle = i;
                 angleCounter = 0;
             }
+            lasttraced = traceResult.getObjectHit();
             lastSweepPosition = traceResult.getHitPoint();
             angleCounter += Math.PI / 1000;
         }
@@ -82,7 +95,7 @@ public class Light
 
     private void drawOld(GraphicsContext graphicsContext, ArrayList<Actor> actors)
     {
-        for(double i = 0; i < Math.PI * 2; i += Math.PI / 5000)
+        for(double i = 0; i < Math.PI * 2; i += Math.PI / 4000)
         {
             TraceResult2D traceResult = RayMarch.sphereTrace2D(this.position, i, actors, this.range, null);
             graphicsContext.setStroke(this.emissionColor);

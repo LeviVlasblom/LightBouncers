@@ -9,7 +9,7 @@ public abstract class Pawn extends Actor
     protected double maxVelocity;
     protected double acceleration;
     protected double scale;
-    protected double directionAngle;
+    protected Vector2D direction;
 
     protected boolean isMoving;
 
@@ -21,6 +21,7 @@ public abstract class Pawn extends Actor
         this.maxVelocity = maxVelocity;
         this.acceleration = acceleration;
         this.scale = scale;
+        this.direction = Vector2D.zero();
     }
 
     @Override
@@ -41,13 +42,14 @@ public abstract class Pawn extends Actor
             this.velocity = Vector2D.zero();
         }
 
-        if(this.isMoving || this.velocity.magnitude > 0.8)
+        if(this.isMoving)
         {
-            this.velocity = Vector2D.add(this.velocity, Vector2D.fromAngle(this.worldPosition, this.directionAngle, this.acceleration * deltatime));
+            this.velocity = Vector2D.add(this.velocity, Vector2D.multiply(this.direction, this.acceleration * deltatime));
         }
         else
         {
             this.velocity = Vector2D.zero();
+            this.direction = Vector2D.zero();
         }
 
         if(this.parent == null)

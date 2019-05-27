@@ -45,8 +45,7 @@ public abstract class PlayerCharacter extends Pawn
 
         if(this.isMovingUp || this.isMovingDown || this.isMovingLeft || this.isMovingRight)
         {
-            direction = Vector2D.multiply(direction, 10);
-            this.directionAngle = Math.atan2(direction.y, direction.x);
+            this.direction = direction;
         }
 
         super.updateMovement(deltatime);
@@ -104,7 +103,7 @@ public abstract class PlayerCharacter extends Pawn
         if(!this.isMovingUp && !this.isMovingDown && !this.isMovingLeft && !this.isMovingRight)
         {
             this.isMoving = false;
-            this.directionAngle = Angle.flipAngle(this.directionAngle);
+            this.direction.flip();
         }
     }
 }

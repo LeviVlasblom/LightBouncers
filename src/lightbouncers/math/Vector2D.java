@@ -48,6 +48,22 @@ public class Vector2D
 		return this.magnitude;
 	}
 
+	public void flip()
+	{
+		flipX();
+		flipY();
+	}
+
+	public void flipX()
+	{
+		this.x = -this.x;
+	}
+
+	public void flipY()
+	{
+		this.y = -this.y;
+	}
+
 	public javafx.geometry.Point2D toPoint2DJavaFX()
 	{
 		return new javafx.geometry.Point2D(this.x, this.y);

@@ -13,7 +13,6 @@ public class Angle
     public static double flipAngleX(double angle)
     {
         angle = normalizeAngle(angle);
-
         angle = (Math.PI * 2) - angle;
 
         return angle;

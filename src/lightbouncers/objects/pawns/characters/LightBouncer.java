@@ -5,6 +5,7 @@ import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.paint.Color;
+import javafx.scene.shape.ArcType;
 import lightbouncers.math.Angle;
 import lightbouncers.objects.Actor;
 import lightbouncers.objects.items.Item;
@@ -52,8 +53,8 @@ public class LightBouncer extends PlayerCharacter
         graphicsContext.setFill(Color.BLUE);
         graphicsContext.fillOval(this.worldPosition.x - this.radius, this.worldPosition.y - this.radius, this.radius * 2, this.radius * 2);
         graphicsContext.setFill(Color.GREEN);
-        Vector2D newVector = Vector2D.fromAngleWithPosition(this.worldPosition, this.directionAngle, this.velocity.magnitude * 5);
-        graphicsContext.strokeLine(this.worldPosition.x, this.worldPosition.y, newVector.x, newVector.y);
+//        Vector2D newVector = Vector2D.fromAngleWithPosition(this.worldPosition, this.directionAngle, this.velocity.magnitude * 5);
+//        graphicsContext.strokeLine(this.worldPosition.x, this.worldPosition.y, newVector.x, newVector.y);
     }
 
     @Override
