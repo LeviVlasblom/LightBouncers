@@ -22,7 +22,9 @@ public class LightBouncer extends PlayerCharacter
     {
         super(position, rotation, world, maxVelocity, acceleration, scale);
         this.item = null;
-        this.light = new Light(new Vector2D(100, 100), 600, 1.0, Color.rgb(173, 168, 65, 0.1), Color.YELLOW);
+        //this.light = new Light(new Vector2D(100, 100), 600, 1.0, Color.rgb(173, 168, 65, 0.1), Color.YELLOW);
+        //this.light = new Light(new Vector2D(100, 100), 600, 1.0, Color.rgb(5, 121, 255, 0.1),  Color.rgb(220, 0, 255, 1.0));
+        this.light = new Light(new Vector2D(100, 100), rotation, Math.PI / 2, 600, 1.0, Color.rgb(130, 68, 255, 0.1),  Color.rgb(5, 121, 255, 1.0));
     }
 
     @Override
@@ -30,12 +32,15 @@ public class LightBouncer extends PlayerCharacter
     {
         super.update(deltatime);
         this.light.setPosition(this.worldPosition);
+        this.light.setRotation(this.rotation);
     }
 
     @Override
     public void onMouseMoved(MouseEvent event)
     {
-
+        Vector2D mousePosition = new Vector2D(event.getX(), event.getY());
+        Vector2D direction = Vector2D.direction(this.worldPosition, mousePosition);
+        this.rotation = Vector2D.getAngle(direction);
     }
 
     @Override

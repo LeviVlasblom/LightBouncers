@@ -16,14 +16,18 @@ import java.util.ArrayList;
 public class Light
 {
     private Vector2D position;
+    private double rotation;
+    private double angleVisiblity;
     private double range;
     private double brightness;
     private Color emissionColor;
     private Color castColor;
 
-    public Light(Vector2D position, double range, double brightness, Color emissionColor, Color castColor)
+    public Light(Vector2D position, double rotation, double angleVisiblity, double range, double brightness, Color emissionColor, Color castColor)
     {
         this.position = position;
+        this.rotation = 0;
+        this.angleVisiblity = angleVisiblity;
         this.range = range;
         this.brightness = brightness;
         this.emissionColor = emissionColor;
@@ -95,7 +99,27 @@ public class Light
 
     private void drawOld(GraphicsContext graphicsContext, ArrayList<Actor> actors)
     {
-        for(double i = 0; i < Math.PI * 2; i += Math.PI / 4000)
+//        for(double i = 0; i < Math.PI * 2; i += Math.PI / 4000)
+//        {
+//            TraceResult2D traceResult = RayMarch.sphereTrace2D(this.position, i, actors, this.range, null);
+//            graphicsContext.setStroke(this.emissionColor);
+//            graphicsContext.strokeLine(this.position.x, this.position.y, traceResult.getHitPoint().x, traceResult.getHitPoint().y);
+//
+//            if(traceResult.getObjectHit() != null)
+//            {
+//                if(traceResult.getObjectHit() instanceof WallBox || traceResult.getObjectHit() instanceof WallCircle)
+//                {
+//                    graphicsContext.setFill(this.castColor);
+//                    graphicsContext.fillOval(traceResult.getHitPoint().x - 1, traceResult.getHitPoint().y - 1, 2, 2);
+//                }
+//                else if(traceResult.getObjectHit() instanceof PlayerCharacter)
+//                {
+//                    //graphicsContext.setFill(((PlayerCharacter)traceResult.getObjectHit()).getColor());
+//                    //graphicsContext.fillOval(traceResult.getHitPoint().x - 2, traceResult.getHitPoint().y - 2, 4, 4);
+//                }
+//            }
+//        }
+        for(double i = this.rotation - (this.angleVisiblity / 2); i < this.rotation + (this.angleVisiblity / 2); i += Math.PI / 4000)
         {
             TraceResult2D traceResult = RayMarch.sphereTrace2D(this.position, i, actors, this.range, null);
             graphicsContext.setStroke(this.emissionColor);
@@ -122,6 +146,16 @@ public class Light
         return this.position;
     }
 
+    public double getRotation()
+    {
+        return this.rotation;
+    }
+
+    public double getAngleVisiblity()
+    {
+        return this.angleVisiblity;
+    }
+
     public double getRange()
     {
         return this.range;
@@ -145,6 +179,16 @@ public class Light
     public void setPosition(Vector2D position)
     {
         this.position = position;
+    }
+
+    public void setRotation(double rotation)
+    {
+        this.rotation = rotation;
+    }
+
+    public void setAngleVisiblity(double angleVisiblity)
+    {
+        this.angleVisiblity = angleVisiblity;
     }
 
     public void setRange(double range)

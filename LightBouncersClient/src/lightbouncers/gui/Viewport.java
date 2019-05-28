@@ -104,6 +104,7 @@ public class Viewport extends Canvas
 
     private void onMouseMoved(MouseEvent event)
     {
+        this.player.onMouseMoved(event);
         updateCursorPosition(new Vector2D((float)event.getX(), (float)event.getY()));
     }
 
