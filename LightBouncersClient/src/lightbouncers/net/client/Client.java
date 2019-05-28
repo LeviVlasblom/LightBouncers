@@ -45,7 +45,8 @@ public class Client
         }
         catch (Exception e)
         {
-            e.printStackTrace();
+            //e.printStackTrace();
+            System.out.println("Could not connect to server!");
         }
     }
 
@@ -55,6 +56,7 @@ public class Client
         {
             if(this.isConnected)
             {
+                System.out.println("Disconnected from server!");
                 this.isConnected = false;
                 if(this.listenerThread != null)
                 {
@@ -100,7 +102,6 @@ public class Client
         }
     }
 
-
     public void listen()
     {
         try
@@ -117,7 +118,8 @@ public class Client
         }
         catch (Exception e)
         {
-            e.printStackTrace();
+            //e.printStackTrace();
+            disconnect();
         }
     }
 }
