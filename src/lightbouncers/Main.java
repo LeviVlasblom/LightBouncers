@@ -6,6 +6,8 @@ import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.stage.Stage;
 import lightbouncers.gui.Viewport;
+import lightbouncers.net.client.Client;
+import lightbouncers.net.server.Server;
 
 public class Main extends Application
 {
@@ -17,6 +19,10 @@ public class Main extends Application
     @Override
     public void start(Stage primaryStage) throws Exception
     {
+//        Server server = new Server(4509, null);
+//        Client client = new Client("localhost", 4509, null);
+//        server.start();
+//        client.connect();
         Viewport viewport = new Viewport(1920, 1080);
 
         Scene scene = new Scene(new Group(viewport), 1920, 1080);
