@@ -3,17 +3,14 @@ package lightbouncers;
 import javafx.application.Application;
 import javafx.scene.Group;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
 import javafx.stage.Stage;
 import lightbouncers.gui.Viewport;
-import lightbouncers.net.client.Client;
-import lightbouncers.net.server.Server;
 
-public class Main extends Application
+public class MainClient extends Application
 {
     public static void Main(String[] args)
     {
-        launch(Main.class);
+        launch(MainClient.class);
     }
 
     @Override

@@ -54,11 +54,11 @@ public class Server
                 this.isRunning = false;
                 for(Thread listenerThread : this.listenerThreads)
                 {
-                    listenerThread.stop();
+                    listenerThread = null;
                 }
                 if(this.connectionThread != null)
                 {
-                    this.connectionThread.stop();
+                    this.connectionThread = null;
                 }
 
                 if(this.serverSocket != null)
