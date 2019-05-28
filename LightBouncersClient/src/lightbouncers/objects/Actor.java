@@ -26,14 +26,14 @@ public abstract class Actor
     {
         if(this.parent != null)
         {
-            Vector2D newPosition = Vector2D.add(this.parent.worldPosition, this.localPosition);
-            double newRotation = this.parent.getRotation() + this.rotation;
-
-            Affine2D affine2D = new Affine2D();
-            affine2D.translate(newPosition.x, newPosition.y);
-            affine2D.rotate(newRotation, this.parent.getWorldPosition().x, this.parent.getWorldPosition().y);
-
-            this.worldPosition = new Vector2D(affine2D.getMxt(), affine2D.getMxy());
+//            Vector2D newPosition = Vector2D.add(this.parent.worldPosition, this.localPosition);
+//            double newRotation = this.parent.getRotation() + this.rotation;
+//
+//            Affine2D affine2D = new Affine2D();
+//            affine2D.translate(newPosition.x, newPosition.y);
+//            affine2D.rotate(newRotation, this.parent.getWorldPosition().x, this.parent.getWorldPosition().y);
+//
+//            this.worldPosition = new Vector2D(affine2D.getMxt(), affine2D.getMxy());
         }
     }
 

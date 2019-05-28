@@ -55,6 +55,14 @@ public class World
         this.player.draw(graphicsContext);
     }
 
+    public void addActor(Actor actor)
+    {
+        if(actor != null)
+        {
+            this.actors.add(actor);
+        }
+    }
+
     public ArrayList<Actor> getNonPlayersActors()
     {
         ArrayList<Actor> nonPlayerActors = new ArrayList<Actor>();

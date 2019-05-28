@@ -8,7 +8,7 @@ public abstract class Gun extends Item
 {
     private FireType fireType;
     private int fireRatePerMinute;
-    private int fireDelayInSeconds;
+    private double fireDelayInSeconds;
 
     protected double fireRateCounter;
     private boolean isFiring;
@@ -22,7 +22,7 @@ public abstract class Gun extends Item
 
         this.fireType = fireType;
         this.fireRatePerMinute = fireRatePerMinute;
-        this.fireDelayInSeconds = (60 / fireRatePerMinute);
+        this.fireDelayInSeconds = (60.0 / fireRatePerMinute);
         this.fireRateCounter = 0.0;
         this.isFiring = false;
         this.burstAmmount = 4;
@@ -46,7 +46,7 @@ public abstract class Gun extends Item
             else if(this.fireType == FireType.BURST)
             {
                 this.fireRateCounter += deltatime;
-                if(this.fireRateCounter >= this.fireDelayInSeconds && this.burstCounter <= this.burstAmmount)
+                if(this.fireRateCounter >= this.fireDelayInSeconds && this.burstCounter < this.burstAmmount)
                 {
                     fire();
                     this.fireRateCounter -= this.fireDelayInSeconds;
@@ -55,7 +55,7 @@ public abstract class Gun extends Item
                 else
                 {
                     this.isFiring = false;
-                    this.burstCounter =0;
+                    this.burstCounter = 0;
                 }
             }
             else if(this.fireType == FireType.SEMIAUTO)
@@ -75,6 +75,11 @@ public abstract class Gun extends Item
     public void onItemUse()
     {
         this.isFiring = true;
+        fire();
+        if(this.fireType == FireType.BURST)
+        {
+            this.burstCounter++;
+        }
     }
 
     @Override

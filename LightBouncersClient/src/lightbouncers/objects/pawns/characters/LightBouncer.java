@@ -10,6 +10,7 @@ import lightbouncers.math.Angle;
 import lightbouncers.objects.Actor;
 import lightbouncers.objects.items.Item;
 import lightbouncers.math.Vector2D;
+import lightbouncers.objects.items.weapons.guns.AutomaticPulseRifle;
 import lightbouncers.objects.lights.Light;
 import lightbouncers.world.World;
 
@@ -21,7 +22,7 @@ public class LightBouncer extends PlayerCharacter
     public LightBouncer(Vector2D position, double rotation, World world, double maxVelocity, double acceleration, double scale)
     {
         super(position, rotation, world, maxVelocity, acceleration, scale);
-        this.item = null;
+        this.item = new AutomaticPulseRifle(this.worldPosition, this.rotation, this.world);
         //this.light = new Light(new Vector2D(100, 100), 600, 1.0, Color.rgb(173, 168, 65, 0.1), Color.YELLOW);
         //this.light = new Light(new Vector2D(100, 100), 600, 1.0, Color.rgb(5, 121, 255, 0.1),  Color.rgb(220, 0, 255, 1.0));
         this.light = new Light(new Vector2D(100, 100), rotation, Math.PI / 2, 600, 1.0, Color.rgb(130, 68, 255, 0.1),  Color.rgb(5, 121, 255, 1.0));
@@ -33,6 +34,9 @@ public class LightBouncer extends PlayerCharacter
         super.update(deltatime);
         this.light.setPosition(this.worldPosition);
         this.light.setRotation(this.rotation);
+        this.item.setWorldPosition(this.worldPosition);
+        this.item.setRotation(this.rotation);
+        this.item.update(deltatime);
     }
 
     @Override
@@ -46,6 +50,7 @@ public class LightBouncer extends PlayerCharacter
     @Override
     public void onMousePressed(MouseEvent event)
     {
+        System.out.println("Fire start!");
         if(this.item != null)
         {
             this.item.onItemUse();
@@ -55,6 +60,7 @@ public class LightBouncer extends PlayerCharacter
     @Override
     public void onMouseReleased(MouseEvent event)
     {
+        System.out.println("Fire stop!");
         if(this.item != null)
         {
             this.item.onItemStopUse();

@@ -30,6 +30,7 @@ public class Main extends Application
         scene.setOnKeyReleased(event -> {
             viewport.onKeyReleased(event);
         });
+
         primaryStage.setScene(scene);
         primaryStage.show();
     }

@@ -14,6 +14,8 @@ import lightbouncers.math.Vector2D;
 import lightbouncers.world.LevelBuilder;
 import lightbouncers.world.World;
 
+import java.awt.*;
+import java.awt.geom.Point2D;
 import java.io.File;
 import java.util.ArrayList;
 
@@ -34,6 +36,7 @@ public class Viewport extends Canvas
         this.setOnMousePressed(event -> onMousePressed(event));
         this.setOnMouseReleased(event -> onMouseReleased(event));
         this.setOnMouseMoved(event -> onMouseMoved(event));
+        this.setOnMouseDragged(event -> onMouseMoved(event));
 
         this.world = new World();
         this.world.changeLevel(LevelBuilder.loadLevelFromFile(new File("src/lightbouncers/resources/levels/LevelStandard.json"), this.world));
@@ -72,6 +75,16 @@ public class Viewport extends Canvas
         this.player.update(deltaTime);
         //this.light.setPosition(this.player.getWorldPosition());
         //this.test.update(deltaTime);
+//        com.sun.glass.ui.Robot robot =
+//                com.sun.glass.ui.Application.GetApplication().createRobot();
+//
+//        int y = robot.getMouseY();
+//        System.out.println("y point = " + y);
+//        int x = robot.getMouseX();
+//        System.out.println("x point= " + x);
+//        Point2D point = MouseInfo.getPointerInfo().getLocation();
+//        System.out.println("y point = " + point.getY());
+//        System.out.println("x point= " + point.getX());
     }
 
     private void draw()
@@ -94,11 +107,13 @@ public class Viewport extends Canvas
 
     private void onMousePressed(MouseEvent event)
     {
+        this.player.onMousePressed(event);
         updateCursorPosition(new Vector2D((float)event.getX(), (float)event.getY()));
     }
 
     private void onMouseReleased(MouseEvent event)
     {
+        this.player.onMouseReleased(event);
         updateCursorPosition(new Vector2D((float)event.getX(), (float)event.getY()));
     }
 
