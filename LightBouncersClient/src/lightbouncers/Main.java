@@ -17,8 +17,8 @@ public class Main extends Application
     @Override
     public void start(Stage primaryStage) throws Exception
     {
-        Client client = new Client("localhost", 4509, null);
-        client.connect();
+        //Client client = new Client("localhost", 4509, null);
+        //client.connect();
         Viewport viewport = new Viewport(1920, 1080);
 
         Scene scene = new Scene(new Group(viewport), 1920, 1080);

@@ -3,20 +3,23 @@ package lightbouncers.objects;
 import com.sun.javafx.geom.transform.Affine2D;
 import javafx.scene.canvas.GraphicsContext;
 import lightbouncers.math.Vector2D;
+import lightbouncers.world.World;
 
 public abstract class Actor
 {
     protected Vector2D worldPosition;
     protected Vector2D localPosition;
     protected double rotation;
+    protected World world;
 
     protected Actor parent;
 
-    public Actor(Vector2D worldPosition, double rotation)
+    public Actor(Vector2D worldPosition, double rotation, World world)
     {
         this.worldPosition = worldPosition;
         this.localPosition = Vector2D.zero();
         this.rotation = rotation;
+        this.world = world;
     }
 
     public void update(double deltatime)

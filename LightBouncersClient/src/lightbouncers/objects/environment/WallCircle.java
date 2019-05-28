@@ -4,14 +4,15 @@ import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.paint.Color;
 import lightbouncers.math.Vector2D;
 import lightbouncers.objects.Actor;
+import lightbouncers.world.World;
 
 public class WallCircle extends EnvironmentObject
 {
     private double radius;
 
-    public WallCircle(Vector2D worldPosition, double rotation, double radius)
+    public WallCircle(Vector2D worldPosition, double rotation, World world, double radius)
     {
-        super(worldPosition, rotation);
+        super(worldPosition, rotation, world);
 
         this.radius = radius;
     }
@@ -26,12 +27,6 @@ public class WallCircle extends EnvironmentObject
     }
 
     @Override
-    public void checkCollision(Actor actor)
-    {
-
-    }
-
-    @Override
     public double getDistanceFromPoint(Vector2D point)
     {
         return Vector2D.distance(this.worldPosition, point) - this.radius;
@@ -41,5 +36,10 @@ public class WallCircle extends EnvironmentObject
     public Vector2D getClosestPoint(Vector2D point)
     {
         return Vector2D.fromAngleWithPosition(this.worldPosition, Vector2D.getAngle(Vector2D.direction(this.worldPosition, point)), this.radius);
+    }
+
+    public double getRadius()
+    {
+        return this.radius;
     }
 }

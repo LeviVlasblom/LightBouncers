@@ -2,6 +2,7 @@ package lightbouncers.objects.pawns;
 
 import lightbouncers.objects.Actor;
 import lightbouncers.math.Vector2D;
+import lightbouncers.world.World;
 
 public abstract class Pawn extends Actor
 {
@@ -13,9 +14,9 @@ public abstract class Pawn extends Actor
 
     protected boolean isMoving;
 
-    public Pawn(Vector2D position, double rotation, double maxVelocity, double acceleration, double scale)
+    public Pawn(Vector2D position, double rotation, World world, double maxVelocity, double acceleration, double scale)
     {
-        super(position, rotation);
+        super(position, rotation, world);
 
         this.velocity = Vector2D.zero();
         this.maxVelocity = maxVelocity;

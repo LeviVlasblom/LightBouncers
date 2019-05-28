@@ -10,17 +10,26 @@ import lightbouncers.math.Angle;
 import lightbouncers.objects.Actor;
 import lightbouncers.objects.items.Item;
 import lightbouncers.math.Vector2D;
+import lightbouncers.objects.lights.Light;
+import lightbouncers.world.World;
 
 public class LightBouncer extends PlayerCharacter
 {
     private Item item;
-    private double radius;
+    private Light light;
 
-    public LightBouncer(Vector2D position, double rotation, double maxVelocity, double acceleration, double scale)
+    public LightBouncer(Vector2D position, double rotation, World world, double maxVelocity, double acceleration, double scale)
     {
-        super(position, rotation, maxVelocity, acceleration, scale);
+        super(position, rotation, world, maxVelocity, acceleration, scale);
         this.item = null;
-        this.radius = 10;
+        this.light = new Light(new Vector2D(100, 100), 600, 1.0, Color.rgb(173, 168, 65, 0.1), Color.YELLOW);
+    }
+
+    @Override
+    public void update(double deltatime)
+    {
+        super.update(deltatime);
+        this.light.setPosition(this.worldPosition);
     }
 
     @Override
@@ -50,6 +59,7 @@ public class LightBouncer extends PlayerCharacter
     @Override
     public void draw(GraphicsContext graphicsContext)
     {
+        this.light.draw(graphicsContext, this.world.getLevel().getEnvironmentObjectsAsActors());
         graphicsContext.setFill(Color.BLUE);
         graphicsContext.fillOval(this.worldPosition.x - this.radius, this.worldPosition.y - this.radius, this.radius * 2, this.radius * 2);
         graphicsContext.setFill(Color.GREEN);
@@ -66,12 +76,12 @@ public class LightBouncer extends PlayerCharacter
     @Override
     public double getDistanceFromPoint(Vector2D point)
     {
-        return 0.0;
+        return Vector2D.distance(this.worldPosition, point) - this.radius;
     }
 
     @Override
     public Vector2D getClosestPoint(Vector2D point)
     {
-        return null;
+        return Vector2D.fromAngleWithPosition(this.worldPosition, Vector2D.getAngle(Vector2D.direction(this.worldPosition, point)), this.radius);
     }
 }

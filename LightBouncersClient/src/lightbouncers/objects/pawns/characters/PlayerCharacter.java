@@ -6,19 +6,28 @@ import javafx.scene.input.MouseEvent;
 import lightbouncers.math.Angle;
 import lightbouncers.objects.pawns.Pawn;
 import lightbouncers.math.Vector2D;
+import lightbouncers.world.World;
 
 public abstract class PlayerCharacter extends Pawn
 {
+    protected double radius;
     private boolean isMovingUp, isMovingDown, isMovingLeft, isMovingRight;
 
-    public PlayerCharacter(Vector2D position, double rotation, double maxVelocity, double acceleration, double scale)
+    public PlayerCharacter(Vector2D position, double rotation, World world, double maxVelocity, double acceleration, double scale)
     {
-        super(position, rotation, maxVelocity, acceleration, scale);
+        super(position, rotation, world, maxVelocity, acceleration, scale);
 
         this.isMovingUp = false;
         this.isMovingDown = false;
         this.isMovingLeft = false;
         this.isMovingRight = false;
+        this.radius = 10;
+    }
+
+    @Override
+    public void update(double deltatime)
+    {
+        super.update(deltatime);
     }
 
     @Override
@@ -105,5 +114,10 @@ public abstract class PlayerCharacter extends Pawn
             this.isMoving = false;
             this.direction.flip();
         }
+    }
+
+    public double getRadius()
+    {
+        return this.radius;
     }
 }

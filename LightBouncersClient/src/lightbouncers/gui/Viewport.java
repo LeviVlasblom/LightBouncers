@@ -11,7 +11,10 @@ import lightbouncers.objects.environment.WallBox;
 import lightbouncers.objects.lights.Light;
 import lightbouncers.objects.pawns.characters.LightBouncer;
 import lightbouncers.math.Vector2D;
+import lightbouncers.world.LevelBuilder;
+import lightbouncers.world.World;
 
+import java.io.File;
 import java.util.ArrayList;
 
 public class Viewport extends Canvas
@@ -19,8 +22,9 @@ public class Viewport extends Canvas
     protected Vector2D cursorPosition;
     private LightBouncer player;
     //private LightBouncer test;
-    private Light light;
-    private ArrayList<Actor> environmentObjects;
+    //private Light light;
+    //private ArrayList<Actor> environmentObjects;
+    private World world;
 
     public Viewport(int width, int height)
     {
@@ -31,14 +35,17 @@ public class Viewport extends Canvas
         this.setOnMouseReleased(event -> onMouseReleased(event));
         this.setOnMouseMoved(event -> onMouseMoved(event));
 
-        this.player = new LightBouncer(new Vector2D(100, 100), 0.0, 5.0, 40.0, 1.0);
-        this.light = new Light(new Vector2D(100, 100), 600, 1.0, Color.rgb(173, 168, 65, 0.1), Color.YELLOW);
+        this.world = new World();
+        this.world.changeLevel(LevelBuilder.loadLevelFromFile(new File("src/lightbouncers/resources/levels/LevelStandard.json"), this.world));
+        this.player = new LightBouncer(new Vector2D(100, 100), 0.0, world, 5.0, 40.0, 1.0);
+        this.world.setPlayer(this.player);
+        //this.light = new Light(new Vector2D(100, 100), 600, 1.0, Color.rgb(173, 168, 65, 0.1), Color.YELLOW);
 
-        this.environmentObjects = new ArrayList<Actor>();
-        this.environmentObjects.add(new WallBox(new Vector2D(400, 400), 0, 50, 50));
-        this.environmentObjects.add(new WallBox(new Vector2D(500, 400), 0, 50, 50));
-        this.environmentObjects.add(new WallBox(new Vector2D(600, 400), 0, 50, 50));
-        this.environmentObjects.add(new WallBox(new Vector2D(700, 400), 0, 50, 50));
+//        this.environmentObjects = new ArrayList<Actor>();
+//        this.environmentObjects.add(new WallBox(new Vector2D(400, 400), 0, this.world, 50, 50));
+//        this.environmentObjects.add(new WallBox(new Vector2D(500, 400), 0, this.world, 50, 50));
+//        this.environmentObjects.add(new WallBox(new Vector2D(600, 400), 0, this.world, 50, 50));
+//        this.environmentObjects.add(new WallBox(new Vector2D(700, 400), 0, this.world, 50, 50));
 
 //        this.test = new LightBouncer(new Vector2D(100, 100), 0.0, 5.0, 20.0, 1.0);
 //        this.test.setParent(this.player);
@@ -61,16 +68,18 @@ public class Viewport extends Canvas
 
     private void update(double deltaTime)
     {
+        this.world.update(deltaTime);
         this.player.update(deltaTime);
-        this.light.setPosition(this.player.getWorldPosition());
+        //this.light.setPosition(this.player.getWorldPosition());
         //this.test.update(deltaTime);
     }
 
     private void draw()
     {
         this.clear();
-        this.light.draw(this.getGraphicsContext2D(), this.environmentObjects);
-        this.player.draw(this.getGraphicsContext2D());
+        this.world.draw(this.getGraphicsContext2D());
+        //this.light.draw(this.getGraphicsContext2D(), this.environmentObjects);
+        //this.player.draw(this.getGraphicsContext2D());
 //        for(Actor actor : this.environmentObjects)
 //        {
 //            actor.draw(this.getGraphicsContext2D());

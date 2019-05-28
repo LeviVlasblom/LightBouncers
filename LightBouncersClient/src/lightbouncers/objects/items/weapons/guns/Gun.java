@@ -2,6 +2,7 @@ package lightbouncers.objects.items.weapons.guns;
 
 import lightbouncers.objects.items.Item;
 import lightbouncers.math.Vector2D;
+import lightbouncers.world.World;
 
 public abstract class Gun extends Item
 {
@@ -15,9 +16,9 @@ public abstract class Gun extends Item
     private int burstAmmount;
     private int burstCounter;
 
-    public Gun(Vector2D worldPosition, double rotation, FireType fireType, int fireRatePerMinute)
+    public Gun(Vector2D worldPosition, double rotation, World world, FireType fireType, int fireRatePerMinute)
     {
-        super(worldPosition, rotation);
+        super(worldPosition, rotation, world);
 
         this.fireType = fireType;
         this.fireRatePerMinute = fireRatePerMinute;

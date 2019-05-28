@@ -20,29 +20,39 @@ public class RayMarch
             if(objects != null)
             {
                 closestObject = getClosestObject(currentPoint, objects);
-                double distanceToObject = closestObject.getDistanceFromPoint(currentPoint);
-                totalDistance += distanceToObject;
 
-                if(distanceToObject > 0.01)
+                if(closestObject != null)
                 {
-                    if(totalDistance <= maxDistance)
+                    double distanceToObject = closestObject.getDistanceFromPoint(currentPoint);
+                    totalDistance += distanceToObject;
+
+                    if(distanceToObject > 0.01)
                     {
-                        currentPoint = Vector2D.fromAngleWithPosition(currentPoint, direction, distanceToObject);
+                        if(totalDistance <= maxDistance)
+                        {
+                            currentPoint = Vector2D.fromAngleWithPosition(currentPoint, direction, distanceToObject);
 //                        graphicsContext.setFill(Color.WHITE);
 //                        graphicsContext.fillOval(currentPoint.x - 2, currentPoint.y - 2, 4, 4);
 //                        graphicsContext.setStroke(Color.WHITE);
 //                        graphicsContext.strokeOval(currentPoint.x - distanceToObject, currentPoint.y - distanceToObject, distanceToObject * 2, distanceToObject * 2);
+                        }
+                        else
+                        {
+                            currentPoint = Vector2D.fromAngleWithPosition(origin, direction, maxDistance);
+                            traceResult2D.setHitPoint(currentPoint);
+                            break;
+                        }
                     }
                     else
                     {
-                        currentPoint = Vector2D.fromAngleWithPosition(origin, direction, maxDistance);
+                        traceResult2D.setObjectHit(closestObject);
                         traceResult2D.setHitPoint(currentPoint);
                         break;
                     }
                 }
                 else
                 {
-                    traceResult2D.setObjectHit(closestObject);
+                    currentPoint = Vector2D.fromAngleWithPosition(origin, direction, maxDistance);
                     traceResult2D.setHitPoint(currentPoint);
                     break;
                 }
@@ -60,19 +70,23 @@ public class RayMarch
 
     private static Actor getClosestObject(Vector2D point, ArrayList<Actor> objects)
     {
-        Actor closestObject = objects.get(0);
-        double closestDistance = closestObject.getDistanceFromPoint(point);
-
-        for(Actor object : objects)
+        if(objects != null && objects.size() != 0)
         {
-            double distance = object.getDistanceFromPoint(point);
-            if(distance < closestDistance)
-            {
-                closestObject = object;
-                closestDistance = distance;
-            }
-        }
+            Actor closestObject = objects.get(0);
+            double closestDistance = closestObject.getDistanceFromPoint(point);
 
-        return closestObject;
+            for(Actor object : objects)
+            {
+                double distance = object.getDistanceFromPoint(point);
+                if(distance < closestDistance)
+                {
+                    closestObject = object;
+                    closestDistance = distance;
+                }
+            }
+
+            return closestObject;
+        }
+        return null;
     }
 }

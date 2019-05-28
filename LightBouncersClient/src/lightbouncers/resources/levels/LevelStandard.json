@@ -3,18 +3,25 @@
   "enviromentobjects": [
     {
       "type": "box",
-      "positionX": 10.0,
-      "positionY": 10.0,
+      "positionx": 100.0,
+      "positiony": 100.0,
       "rotation": 0.0,
-      "width": 10,
-      "height": 10
+      "width": 100,
+      "height": 100
     },
     {
       "type": "circle",
-      "positionX": 100.0,
-      "positionY": 100.0,
+      "positionx": 500.0,
+      "positiony": 400.0,
       "rotation": 0.0,
-      "radius": 5
+      "radius": 50
+    },
+    {
+      "type": "circle",
+      "positionx": 1000.0,
+      "positiony": 400.0,
+      "rotation": 0.0,
+      "radius": 100
     }
   ]
 }

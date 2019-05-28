@@ -2,14 +2,13 @@ package lightbouncers.objects.pawns.projectiles;
 
 import lightbouncers.objects.pawns.Pawn;
 import lightbouncers.math.Vector2D;
+import lightbouncers.world.World;
 
 public abstract class Projectile extends Pawn
 {
-    protected double damage;
-
-    public Projectile(Vector2D position, double rotation, double maxVelocity, double acceleration, double scale)
+    public Projectile(Vector2D position, double rotation, World world, double maxVelocity, double acceleration, double scale)
     {
-        super(position, rotation, maxVelocity, acceleration, scale);
+        super(position, rotation, world, maxVelocity, acceleration, scale);
     }
 
     @Override

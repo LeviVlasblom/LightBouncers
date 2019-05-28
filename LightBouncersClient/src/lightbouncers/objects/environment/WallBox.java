@@ -4,15 +4,17 @@ import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.paint.Color;
 import lightbouncers.math.Vector2D;
 import lightbouncers.objects.Actor;
+import lightbouncers.objects.pawns.characters.PlayerCharacter;
+import lightbouncers.world.World;
 
 public class WallBox extends EnvironmentObject
 {
     private double width;
     private double height;
 
-    public WallBox(Vector2D worldPosition, double rotation, double width, double height)
+    public WallBox(Vector2D worldPosition, double rotation, World world, double width, double height)
     {
-        super(worldPosition, rotation);
+        super(worldPosition, rotation, world);
 
         this.width = width;
         this.height = height;
@@ -27,12 +29,6 @@ public class WallBox extends EnvironmentObject
         graphicsContext.strokeRect(this.worldPosition.x - (this.width / 2), this.worldPosition.y - (this.height / 2), this.width, this.height);
         graphicsContext.setFill(Color.BLACK);
         graphicsContext.fillRect(this.worldPosition.x - (this.width / 2), this.worldPosition.y - (this.height / 2), this.width, this.height);
-    }
-
-    @Override
-    public void checkCollision(Actor actor)
-    {
-
     }
 
     @Override
@@ -95,5 +91,15 @@ public class WallBox extends EnvironmentObject
         }
 
         return new Vector2D(closeX, closeY);
+    }
+
+    public double getWidth()
+    {
+        return this.width;
+    }
+
+    public double getHeight()
+    {
+        return this.height;
     }
 }
