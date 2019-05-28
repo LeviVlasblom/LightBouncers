@@ -6,11 +6,11 @@ import javafx.scene.Scene;
 import javafx.stage.Stage;
 import lightbouncers.gui.Viewport;
 
-public class MainClient extends Application
+public class Main extends Application
 {
     public static void Main(String[] args)
     {
-        launch(MainClient.class);
+        launch(Main.class);
     }
 
     @Override
