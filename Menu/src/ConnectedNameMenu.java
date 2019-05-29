@@ -77,7 +77,7 @@ public class ConnectedNameMenu extends View {
         join.getStyleClass().add("btnConnect");
 
         join.setOnMouseClicked(event -> {
-            ConnectedNameMenu cnm = new ConnectedNameMenu("Light Bouncers", 1920, 1080);
+            GameLobby gL = new GameLobby("Light Bouncers", 1920, 1080);
             this.close();
         });
         join.setFont(Font.loadFont(Main.class.getResource("Penumbra-HalfSerif-Std_35114.ttf").toExternalForm(), 28));
