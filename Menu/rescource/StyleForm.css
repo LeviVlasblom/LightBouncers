@@ -11,12 +11,29 @@
 
 .btnBack{
     -fx-background-color: transparent;
-    -fx-pref-width: 150;
+    -fx-pref-width: 200;
     -fx-stroke: rgba(255, 255, 255, 0.75);
     -fx-background-insets: 30;
     -fx-background-radius: 30;
     -fx-effect: dropshadow(gaussian, rgba(255, 255, 255, 0.75),30,0,0,0);
     -fx-text-fill: white;
+}
 
+.btnBack:hover{
+    -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.75),3,0.2,0,0);
+}
+
+.btnConnect{
+    -fx-background-color: transparent;
+    -fx-pref-width: 200;
+    -fx-stroke: rgba(255, 255, 255, 0.75);
+    -fx-background-insets: 30;
+    -fx-background-radius: 30;
+    -fx-effect: dropshadow(gaussian, rgba(255, 255, 255, 0.75),30,0,0,0);
+    -fx-text-fill: white;
+}
+
+.btnConnect:hover{
+    -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.75),3,0.2,0,0);
 }
 

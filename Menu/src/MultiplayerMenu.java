@@ -47,7 +47,7 @@ public class MultiplayerMenu extends View {
     private Text textIp;
     private Text textPoort;
     private Button btnBack;
-
+    private Button btnConnect;
 
     @Override
     void setupScene() {
@@ -85,10 +85,11 @@ public class MultiplayerMenu extends View {
 
     private void addMenu() {
         textIp = new Text("IP");
-        textPoort = new Text("POORT");
+        textPoort = new Text("PORT");
         txtPoort = new TextField();
         txtIp = new TextField();
         btnBack = new Button("Back");
+        btnConnect = new Button("Connect");
 
         txtIp.setTranslateX(this.getWidth() / 2 - 100);
         txtIp.setTranslateY(this.getHeight() / 3 + 100);
@@ -105,12 +106,15 @@ public class MultiplayerMenu extends View {
         textPoort.setTranslateX(this.getWidth() / 2 - 100);
         textPoort.setTranslateY(this.getHeight() / 3 + 170);
 
-        btnBack.setTranslateX(this.getWidth() / 2 - 100);
-        btnBack.setTranslateY(this.getHeight() / 3 + 230);
+        btnBack.setTranslateX(this.getWidth() / 2 - 130);
+        btnBack.setTranslateY(this.getHeight() / 3 + 330);
+        btnConnect.setTranslateX(this.getWidth() / 2 - 130);
+        btnConnect.setTranslateY(this.getHeight() / 3 + 250);
 
         txtIp.getStyleClass().add("TextFieldMenu");
         txtPoort.getStyleClass().add("TextFieldMenu");
         btnBack.getStyleClass().add("btnBack");
+        btnConnect.getStyleClass().add("btnConnect");
         //btnBack.setStroke(Color.color(1, 1, 1, 0.75));
 
         txtPoort.setTranslateX(this.getWidth() / 2 - 100);
@@ -123,6 +127,13 @@ public class MultiplayerMenu extends View {
         btnBack.setFont(Font.loadFont(Main.class.getResource("Penumbra-HalfSerif-Std_35114.ttf").toExternalForm(), 20));
         btnBack.setTextFill(Color.WHITE);
 
+        btnConnect.setOnMouseClicked(event -> {
+            ConnectedNameMenu cnm = new ConnectedNameMenu("Light Bouncers", 1920, 1080);
+            this.close();
+        });
+        btnConnect.setFont(Font.loadFont(Main.class.getResource("Penumbra-HalfSerif-Std_35114.ttf").toExternalForm(), 28));
+        btnConnect.setTextFill(Color.WHITE);
+
 
 
         root.getChildren().add(textIp);
@@ -130,6 +141,7 @@ public class MultiplayerMenu extends View {
         root.getChildren().add(txtIp);
         root.getChildren().add(txtPoort);
         root.getChildren().add(btnBack);
+        root.getChildren().add(btnConnect);
     }
 
 }
