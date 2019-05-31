@@ -47,7 +47,7 @@ public class Viewport extends Canvas
 
         Client client = Client.getInstance("localhost", 4509, null);
         client.connect("Kstrik");
-        client.setWorld(this.world);
+        //client.setWorld(this.world);
         new AnimationTimer() {
             long last = -1;
 

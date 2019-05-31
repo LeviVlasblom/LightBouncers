@@ -156,10 +156,11 @@ public class Client
     {
         if(!data.isEmpty())
         {
-            if(this.receiver != null)
-            {
-                this.receiver.receive(data);
-            }
+//            if(this.receiver != null)
+//            {
+//                this.receiver.receive(data);
+//            }
+            handleReceiveUTF(data);
             System.out.println("Client received: " + data);
         }
     }
@@ -274,7 +275,11 @@ public class Client
             else if(command.equals("addplayer"))
             {
                 String username = jsonObject.get("username").toString();
-                this.lobby.add(username);
+                if(!Main.username.equals(username))
+                {
+                    this.lobby.add(username);
+                }
+                System.out.println("Player " + username + " connected to lobby!");
             }
             else if(command.equals("addprojectle"))
             {
@@ -294,6 +299,7 @@ public class Client
             }
             else if(command.equals("endmatch"))
             {
+                this.world.setPlayer(null);
                 this.world.getPlayerActors().clear();
                 this.world.getProjectiles().clear();
             }
@@ -336,6 +342,11 @@ public class Client
                 }
             }
         }
+    }
+
+    public ArrayList<String> getLobby()
+    {
+        return this.lobby;
     }
 
     public void setWorld(World world)
