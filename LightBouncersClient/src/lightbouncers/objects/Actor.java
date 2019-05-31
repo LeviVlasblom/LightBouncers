@@ -7,6 +7,7 @@ import lightbouncers.world.World;
 
 public abstract class Actor
 {
+    protected String name;
     protected Vector2D worldPosition;
     protected Vector2D localPosition;
     protected double rotation;
@@ -65,6 +66,11 @@ public abstract class Actor
         return this.rotation;
     }
 
+    public String getName()
+    {
+        return this.name;
+    }
+
     public void setWorldPosition(Vector2D worldPosition)
     {
         this.worldPosition = worldPosition;
@@ -103,5 +109,10 @@ public abstract class Actor
         {
             this.worldPosition = parent.getWorldPosition();
         }
+    }
+
+    public void setName(String name)
+    {
+        this.name = name;
     }
 }

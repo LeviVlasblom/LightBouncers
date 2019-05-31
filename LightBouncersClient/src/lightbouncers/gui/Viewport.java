@@ -5,6 +5,8 @@ import javafx.scene.canvas.Canvas;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.paint.Color;
+import lightbouncers.Main;
+import lightbouncers.net.client.Client;
 import lightbouncers.objects.Actor;
 import lightbouncers.objects.environment.EnvironmentObject;
 import lightbouncers.objects.environment.WallBox;
@@ -40,8 +42,11 @@ public class Viewport extends Canvas
 
         this.world = new World();
         this.world.changeLevel(LevelBuilder.loadLevelFromFile(new File("src/lightbouncers/resources/levels/LevelStandard.json"), this.world));
-        this.player = new LightBouncer(new Vector2D(100, 100), 0.0, world, 5.0, 40.0, 1.0);
+        this.player = new LightBouncer(new Vector2D(100, 100), 0.0, world, 2.0, 40.0, 1.0, Main.username);
         this.world.setPlayer(this.player);
+
+        Client client = new Client("localhost", 4509, this.world);
+        client.connect("Kstrik");
         //this.light = new Light(new Vector2D(100, 100), 600, 1.0, Color.rgb(173, 168, 65, 0.1), Color.YELLOW);
 
 //        this.environmentObjects = new ArrayList<Actor>();

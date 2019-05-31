@@ -19,13 +19,14 @@ public class LightBouncer extends PlayerCharacter
     private Item item;
     private Light light;
 
-    public LightBouncer(Vector2D position, double rotation, World world, double maxVelocity, double acceleration, double scale)
+    public LightBouncer(Vector2D position, double rotation, World world, double maxVelocity, double acceleration, double scale, String name)
     {
         super(position, rotation, world, maxVelocity, acceleration, scale);
         this.item = new AutomaticPulseRifle(this.worldPosition, this.rotation, this.world);
         //this.light = new Light(new Vector2D(100, 100), 600, 1.0, Color.rgb(173, 168, 65, 0.1), Color.YELLOW);
         //this.light = new Light(new Vector2D(100, 100), 600, 1.0, Color.rgb(5, 121, 255, 0.1),  Color.rgb(220, 0, 255, 1.0));
         this.light = new Light(new Vector2D(100, 100), rotation, Math.PI / 2, 600, 1.0, Color.rgb(130, 68, 255, 0.1),  Color.rgb(5, 121, 255, 1.0));
+        this.name = name;
     }
 
     @Override

@@ -258,6 +258,7 @@ public class TestSession
             projectilesJson.add(SessionJSONUtil.getProjectileObjectJson(projectile));
         }
 
+        jsonObject.put("command", "update");
         jsonObject.put("players", playersJson);
         jsonObject.put("projectiles", projectilesJson);
         return jsonObject.toJSONString();

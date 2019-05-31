@@ -18,7 +18,7 @@ public class AutomaticPulseRifle extends Gun
     protected void fire()
     {
         AutomaticPulseRifleProjectile projectile = new AutomaticPulseRifleProjectile(this.worldPosition, this.rotation, this.world, Vector2D.fromAngleWithPosition(Vector2D.zero(), this.rotation, 10).normalized());
-        this.world.addActor(projectile);
+        this.world.addProjectile(projectile);
     }
 
     @Override

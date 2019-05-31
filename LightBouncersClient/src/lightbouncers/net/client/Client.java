@@ -39,7 +39,6 @@ public class Client
 
                     if(gameIsInProgress)
                     {
-                        //Send player data
                         if(world != null)
                         {
                             PlayerCharacter playerCharacter = world.getPlayer();

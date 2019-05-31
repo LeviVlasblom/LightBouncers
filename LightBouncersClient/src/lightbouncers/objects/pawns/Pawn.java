@@ -83,6 +83,11 @@ public abstract class Pawn extends Actor
         return this.scale;
     }
 
+    public Vector2D getDirection()
+    {
+        return this.direction;
+    }
+
     public void setVelocity(Vector2D velocity)
     {
         this.velocity = velocity;
@@ -101,5 +106,10 @@ public abstract class Pawn extends Actor
     public void setScale(double scale)
     {
         this.scale = scale;
+    }
+
+    public void setDirection(Vector2D direction)
+    {
+        this.direction = direction;
     }
 }
