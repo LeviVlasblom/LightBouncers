@@ -4,7 +4,7 @@ import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.paint.Color;
 import lightbouncers.math.Vector2D;
 import lightbouncers.objects.Actor;
-import lightbouncers.objects.pawns.projectiles.AutomaticPulseRifleProjectile;
+import lightbouncers.objects.pawns.projectiles.Projectile;
 import lightbouncers.world.World;
 
 public class AutomaticPulseRifle extends Gun
@@ -17,7 +17,8 @@ public class AutomaticPulseRifle extends Gun
     @Override
     protected void fire()
     {
-        AutomaticPulseRifleProjectile projectile = new AutomaticPulseRifleProjectile(this.worldPosition, this.rotation, this.world, Vector2D.fromAngleWithPosition(Vector2D.zero(), this.rotation, 10).normalized());
+        Projectile projectile = new Projectile(this.worldPosition, this.rotation, this.world, 20.0, 400.0, 1.0, Vector2D.fromAngleWithPosition(Vector2D.zero(), this.rotation, 10).normalized());
+        //AutomaticPulseRifleProjectile projectile = new AutomaticPulseRifleProjectile(this.worldPosition, this.rotation, this.world, Vector2D.fromAngleWithPosition(Vector2D.zero(), this.rotation, 10).normalized());
         this.world.addProjectile(projectile);
     }
 

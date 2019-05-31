@@ -1,15 +1,27 @@
 package lightbouncers.net.client;
 
+import lightbouncers.Main;
+import lightbouncers.math.Vector2D;
 import lightbouncers.net.PlayerObject;
+import lightbouncers.net.ProjectileObject;
+import lightbouncers.net.SessionData;
+import lightbouncers.objects.pawns.Pawn;
+import lightbouncers.objects.pawns.characters.LightBouncer;
 import lightbouncers.objects.pawns.characters.PlayerCharacter;
+import lightbouncers.objects.pawns.projectiles.Projectile;
 import lightbouncers.world.World;
+import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
+import org.json.simple.parser.JSONParser;
+import org.json.simple.parser.ParseException;
 
 import java.io.*;
 import java.net.Socket;
+import java.util.ArrayList;
 
 public class Client
 {
+    private static Client instance;
     private ITCPClientReceiver receiver;
     private String host;
     private int port;
@@ -21,8 +33,9 @@ public class Client
     private boolean isConnected;
 
     private World world;
+    private ArrayList<String> lobby;
 
-    public Client(String host, int port, ITCPClientReceiver receiver)
+    private Client(String host, int port, ITCPClientReceiver receiver)
     {
         this.host = host;
         this.port = port;
@@ -30,6 +43,7 @@ public class Client
         this.gameIsInProgress = false;
         this.isConnected = false;
         this.receiver = receiver;
+        this.lobby = new ArrayList<String>();
         this.listenerThread = new Thread("ClientSocketListener"){
             public void run()
             {
@@ -202,8 +216,139 @@ public class Client
         }
     }
 
+    public void handleReceiveUTF(String data)
+    {
+        JSONParser jsonParser = new JSONParser();
+        try
+        {
+            JSONObject jsonObject = (JSONObject)jsonParser.parse(data);
+            String command = jsonObject.get("command").toString();
+
+            if(command.equals("update"))
+            {
+                JSONArray players = (JSONArray)jsonObject.get("players");
+                JSONArray projectiles = (JSONArray)jsonObject.get("projectiles");
+
+                for(Object playerJSON : players)
+                {
+                    JSONObject playerObject = (JSONObject)playerJSON;
+                    Vector2D position = new Vector2D(Double.parseDouble(playerObject.get("positionx").toString()), Double.parseDouble(playerObject.get("positiony").toString()));
+                    Vector2D velocity = new Vector2D(Double.parseDouble(playerObject.get("velocityx").toString()), Double.parseDouble(playerObject.get("velocityy").toString()));
+                    String username = playerObject.get("username").toString();
+
+                    if(!world.getPlayer().getName().equals(username))
+                    {
+                        for(Pawn playerActor : this.world.getPlayerActors())
+                        {
+                            if(playerActor.getName().equals(username))
+                            {
+                                playerActor.setWorldPosition(position);
+                                playerActor.setVelocity(velocity);
+                                playerActor.setDirection(velocity.normalized());
+                            }
+                        }
+                    }
+                }
+
+                for(Object projectileJSON : projectiles)
+                {
+                    JSONObject projectileObject = (JSONObject)projectileJSON;
+                    Vector2D position = new Vector2D(Double.parseDouble(projectileObject.get("positionx").toString()), Double.parseDouble(projectileObject.get("positiony").toString()));
+                    Vector2D velocity = new Vector2D(Double.parseDouble(projectileObject.get("velocityx").toString()), Double.parseDouble(projectileObject.get("velocityy").toString()));
+                    String username = projectileObject.get("username").toString();
+
+                    if(!world.getPlayer().getName().equals(username))
+                    {
+                        for(Projectile projectile : this.world.getProjectiles())
+                        {
+                            if(projectile.getName().equals(username))
+                            {
+                                projectile.setWorldPosition(position);
+                                projectile.setVelocity(velocity);
+                                projectile.setDirection(velocity.normalized());
+                            }
+                        }
+                    }
+                }
+            }
+            else if(command.equals("addplayer"))
+            {
+                String username = jsonObject.get("username").toString();
+                this.lobby.add(username);
+            }
+            else if(command.equals("addprojectle"))
+            {
+                Vector2D position = new Vector2D(Double.parseDouble(jsonObject.get("positionx").toString()), Double.parseDouble(jsonObject.get("positiony").toString()));
+                Vector2D velocity = new Vector2D(Double.parseDouble(jsonObject.get("velocityx").toString()), Double.parseDouble(jsonObject.get("velocityy").toString()));
+                String username = jsonObject.get("username").toString();
+                this.world.addProjectile(new Projectile(position, Vector2D.getAngle(velocity), this.world, 20.0, 400.0, 1.0, velocity.normalized()));
+            }
+            else if(command.equals("startmatch"))
+            {
+                this.world.setPlayer(new LightBouncer(new Vector2D(100, 100), 0.0, world, 2.0, 40.0, 1.0, Main.username));
+
+                for(String username : this.lobby)
+                {
+                    this.world.addPlayerActor(new LightBouncer(Vector2D.zero(), 0.0, world, 2.0, 40.0, 1.0, username));
+                }
+            }
+            else if(command.equals("endmatch"))
+            {
+                this.world.getPlayerActors().clear();
+                this.world.getProjectiles().clear();
+            }
+        }
+        catch (ParseException e)
+        {
+            e.printStackTrace();
+        }
+    }
+
+    public void receive(Object data)
+    {
+        SessionData sessionData = (SessionData)data;
+
+        for(PlayerObject playerObject : sessionData.getPlayers())
+        {
+            if(!this.world.getPlayer().getName().equals(playerObject.getUsername()))
+            {
+                for(Pawn playerActor : this.world.getPlayerActors())
+                {
+                    if(playerActor.getName().equals(playerObject.getUsername()))
+                    {
+                        playerActor.setWorldPosition(playerObject.getPosition());
+                        playerActor.setVelocity(playerObject.getVelocity());
+                        playerActor.setDirection(playerObject.getVelocity().normalized());
+                    }
+                }
+            }
+        }
+
+        for(ProjectileObject projectileObject : sessionData.getProjectiles())
+        {
+            for(Projectile projectile : this.world.getProjectiles())
+            {
+                if(projectile.getName().equals(projectileObject.getUsername()))
+                {
+                    projectile.setWorldPosition(projectileObject.getPosition());
+                    projectile.setVelocity(projectileObject.getVelocity());
+                    projectile.setDirection(projectileObject.getVelocity().normalized());
+                }
+            }
+        }
+    }
+
     public void setWorld(World world)
     {
         this.world = world;
+    }
+
+    public static Client getInstance(String host, int port, ITCPClientReceiver receiver)
+    {
+        if(instance == null)
+        {
+            instance = new Client(host, port, receiver);
+        }
+        return instance;
     }
 }

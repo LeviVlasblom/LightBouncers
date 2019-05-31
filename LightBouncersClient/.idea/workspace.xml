@@ -5,7 +5,11 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="3c285142-ec7f-4818-99cc-f440bd37a515" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/lightbouncers/objects/pawns/projectiles/AutomaticPulseRifleProjectile.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/lightbouncers/objects/pawns/projectiles/Projectile.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/lightbouncers/objects/pawns/projectiles/Projectile.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../LightBouncersServer/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../LightBouncersServer/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../LightBouncersServer/src/lightbouncers/net/server/PlayerDataManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/../LightBouncersServer/src/lightbouncers/net/server/PlayerDataManager.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../LightBouncersServer/src/lightbouncers/net/server/TestSession.java" beforeDir="false" afterPath="$PROJECT_DIR$/../LightBouncersServer/src/lightbouncers/net/server/TestSession.java" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
@@ -15,20 +19,51 @@
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
+  <component name="DockManager">
+    <window id="1">
+      <content type="file-editors">
+        <state>
+          <leaf>
+            <file pinned="false" current-in-tab="true">
+              <entry file="file://$PROJECT_DIR$/src/lightbouncers/objects/pawns/projectiles/Projectile.java">
+                <provider selected="true" editor-type-id="text-editor">
+                  <state relative-caret-position="713">
+                    <caret line="42" lean-forward="true" selection-start-line="42" selection-end-line="42" />
+                  </state>
+                </provider>
+              </entry>
+            </file>
+          </leaf>
+        </state>
+      </content>
+    </window>
+  </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file pinned="false" current-in-tab="false">
+      <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/lightbouncers/net/client/Client.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="602">
-              <caret line="206" column="27" lean-forward="true" selection-start-line="206" selection-start-column="27" selection-end-line="206" selection-end-column="27" />
+            <state relative-caret-position="533">
+              <caret line="294" column="47" lean-forward="true" selection-start-line="294" selection-start-column="47" selection-end-line="294" selection-end-column="47" />
               <folding>
                 <element signature="imports" expanded="true" />
                 <element signature="method#disconnect#0;class#Client#0" />
                 <element signature="method#listen#0;class#Client#0" />
                 <element signature="method#sendUTF#0;class#Client#0" />
                 <element signature="method#sendObject#0;class#Client#0" />
-                <element signature="e#5973#5974#0" expanded="true" />
+                <element signature="e#12315#12316#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/lightbouncers/objects/items/weapons/guns/AutomaticPulseRifle.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="529">
+              <caret line="23" lean-forward="true" selection-start-line="23" selection-end-line="23" />
+              <folding>
+                <element signature="imports" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -46,21 +81,21 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/lightbouncers/gui/Viewport.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="588">
-              <caret line="48" column="33" lean-forward="true" selection-start-line="48" selection-start-column="33" selection-end-line="48" selection-end-column="33" />
+            <state relative-caret-position="460">
+              <caret line="63" column="5" lean-forward="true" selection-start-line="63" selection-start-column="5" selection-end-line="63" selection-end-column="5" />
+              <folding>
+                <element signature="e#2986#2987#0" expanded="true" />
+                <element signature="e#3030#3031#0" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="true">
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/lightbouncers/world/World.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="276">
-              <caret line="26" column="18" lean-forward="true" selection-start-line="26" selection-start-column="18" selection-end-line="26" selection-end-column="18" />
-              <folding>
-                <element signature="method#receive#0;class#World#0" />
-                <element signature="method#receive#1;class#World#0" />
-              </folding>
+            <state relative-caret-position="473">
+              <caret line="86" column="41" lean-forward="true" selection-start-line="86" selection-start-column="41" selection-end-line="86" selection-end-column="41" />
             </state>
           </provider>
         </entry>
@@ -102,7 +137,6 @@
         <option value="$PROJECT_DIR$/src/lightbouncers/objects/environment/WallCircle.java" />
         <option value="$PROJECT_DIR$/src/lightbouncers/objects/pawns/characters/PlayerCharacter.java" />
         <option value="$PROJECT_DIR$/src/lightbouncers/objects/lights/Light.java" />
-        <option value="$PROJECT_DIR$/src/lightbouncers/objects/pawns/projectiles/Projectile.java" />
         <option value="$PROJECT_DIR$/src/lightbouncers/objects/items/weapons/guns/Gun.java" />
         <option value="$PROJECT_DIR$/src/lightbouncers/objects/pawns/projectiles/AutomaticPulseRifleProjectile.java" />
         <option value="$PROJECT_DIR$/src/lightbouncers/net/SessionObject.java" />
@@ -111,13 +145,15 @@
         <option value="$PROJECT_DIR$/src/lightbouncers/net/client/ITCPClientReceiver.java" />
         <option value="$PROJECT_DIR$/src/lightbouncers/net/client/SessionJSONUtil.java" />
         <option value="$PROJECT_DIR$/src/lightbouncers/net/PlayerObject.java" />
-        <option value="$PROJECT_DIR$/src/lightbouncers/net/client/Client.java" />
-        <option value="$PROJECT_DIR$/src/lightbouncers/objects/items/weapons/guns/AutomaticPulseRifle.java" />
         <option value="$PROJECT_DIR$/src/lightbouncers/objects/pawns/characters/LightBouncer.java" />
         <option value="$PROJECT_DIR$/src/lightbouncers/objects/Actor.java" />
         <option value="$PROJECT_DIR$/src/lightbouncers/objects/pawns/Pawn.java" />
-        <option value="$PROJECT_DIR$/src/lightbouncers/world/World.java" />
         <option value="$PROJECT_DIR$/src/lightbouncers/Main.java" />
+        <option value="$PROJECT_DIR$/src/lightbouncers/net/client/Lobby.java" />
+        <option value="$PROJECT_DIR$/src/lightbouncers/objects/pawns/projectiles/Projectile.java" />
+        <option value="$PROJECT_DIR$/src/lightbouncers/objects/items/weapons/guns/AutomaticPulseRifle.java" />
+        <option value="$PROJECT_DIR$/src/lightbouncers/net/client/Client.java" />
+        <option value="$PROJECT_DIR$/src/lightbouncers/world/World.java" />
         <option value="$PROJECT_DIR$/src/lightbouncers/gui/Viewport.java" />
       </list>
     </option>
@@ -194,6 +230,33 @@
               <item name="src" type="462c0819:PsiDirectoryNode" />
               <item name="lightbouncers" type="462c0819:PsiDirectoryNode" />
               <item name="objects" type="462c0819:PsiDirectoryNode" />
+              <item name="items" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="LightBouncersClient" type="b2602c69:ProjectViewProjectNode" />
+              <item name="LightBouncersClient" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="lightbouncers" type="462c0819:PsiDirectoryNode" />
+              <item name="objects" type="462c0819:PsiDirectoryNode" />
+              <item name="items" type="462c0819:PsiDirectoryNode" />
+              <item name="weapons" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="LightBouncersClient" type="b2602c69:ProjectViewProjectNode" />
+              <item name="LightBouncersClient" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="lightbouncers" type="462c0819:PsiDirectoryNode" />
+              <item name="objects" type="462c0819:PsiDirectoryNode" />
+              <item name="items" type="462c0819:PsiDirectoryNode" />
+              <item name="weapons" type="462c0819:PsiDirectoryNode" />
+              <item name="guns" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="LightBouncersClient" type="b2602c69:ProjectViewProjectNode" />
+              <item name="LightBouncersClient" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="lightbouncers" type="462c0819:PsiDirectoryNode" />
+              <item name="objects" type="462c0819:PsiDirectoryNode" />
               <item name="pawns" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
@@ -203,7 +266,7 @@
               <item name="lightbouncers" type="462c0819:PsiDirectoryNode" />
               <item name="objects" type="462c0819:PsiDirectoryNode" />
               <item name="pawns" type="462c0819:PsiDirectoryNode" />
-              <item name="characters" type="462c0819:PsiDirectoryNode" />
+              <item name="projectiles" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="LightBouncersClient" type="b2602c69:ProjectViewProjectNode" />
@@ -222,7 +285,7 @@
   <component name="PropertiesComponent">
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
-    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1559333785211" />
+    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1559337398663" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$/../../../../IntelliJ Projects/TEST_CLIENT_SERVER_LIGHTBOUNCERS" />
     <property name="project.structure.last.edited" value="Libraries" />
     <property name="project.structure.proportion" value="0.0" />
@@ -316,7 +379,7 @@
       <window_info content_ui="combo" id="Project" order="6" visible="true" weight="0.17537314" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" />
-      <window_info active="true" anchor="bottom" id="Run" order="2" visible="true" weight="0.31772575" />
+      <window_info anchor="bottom" id="Run" order="2" weight="0.31772575" />
       <window_info anchor="bottom" id="Debug" order="3" weight="0.3979933" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
@@ -347,10 +410,10 @@
       <window_info id="UI Designer" order="3" />
       <window_info id="Favorites" order="4" side_tool="true" />
       <window_info id="Capture Tool" order="5" />
-      <window_info active="true" content_ui="combo" id="Project" order="6" visible="true" weight="0.16897655" />
+      <window_info content_ui="combo" id="Project" order="6" visible="true" weight="0.17537314" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" />
-      <window_info anchor="bottom" id="Run" order="2" weight="0.3277592" />
+      <window_info anchor="bottom" id="Run" order="2" weight="0.31772575" />
       <window_info anchor="bottom" id="Debug" order="3" weight="0.3979933" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
@@ -508,14 +571,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/lightbouncers/objects/pawns/projectiles/AutomaticPulseRifleProjectile.java" />
-    <entry file="file://$PROJECT_DIR$/src/lightbouncers/objects/pawns/projectiles/Projectile.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="253">
-          <caret line="13" column="5" lean-forward="true" selection-start-line="13" selection-start-column="5" selection-end-line="13" selection-end-column="5" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/lightbouncers/math/Vector2D.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="92">
@@ -578,13 +633,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/lightbouncers/objects/items/weapons/guns/AutomaticPulseRifle.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="391">
-          <caret line="22" lean-forward="true" selection-start-line="22" selection-end-line="22" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/lightbouncers/objects/pawns/characters/PlayerCharacter.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="391">
@@ -598,21 +646,6 @@
           <caret line="22" column="25" lean-forward="true" selection-start-line="22" selection-start-column="25" selection-end-line="22" selection-end-column="25" />
           <folding>
             <element signature="e#1782#1789#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/lightbouncers/net/client/Client.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="602">
-          <caret line="206" column="27" lean-forward="true" selection-start-line="206" selection-start-column="27" selection-end-line="206" selection-end-column="27" />
-          <folding>
-            <element signature="imports" expanded="true" />
-            <element signature="method#disconnect#0;class#Client#0" />
-            <element signature="method#listen#0;class#Client#0" />
-            <element signature="method#sendUTF#0;class#Client#0" />
-            <element signature="method#sendObject#0;class#Client#0" />
-            <element signature="e#5973#5974#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -645,20 +678,66 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/lightbouncers/gui/Viewport.java">
+    <entry file="file://$PROJECT_DIR$/src/lightbouncers/net/client/Lobby.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="588">
-          <caret line="48" column="33" lean-forward="true" selection-start-line="48" selection-start-column="33" selection-end-line="48" selection-end-column="33" />
+        <state relative-caret-position="138">
+          <caret line="6" selection-start-line="6" selection-end-line="13" selection-end-column="12" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/lightbouncers/objects/pawns/projectiles/AutomaticPulseRifleProjectile.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="299">
+          <caret line="17" column="5" lean-forward="true" selection-start-line="17" selection-start-column="5" selection-end-line="17" selection-end-column="5" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/lightbouncers/objects/pawns/projectiles/Projectile.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="713">
+          <caret line="42" lean-forward="true" selection-start-line="42" selection-end-line="42" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/lightbouncers/objects/items/weapons/guns/AutomaticPulseRifle.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="529">
+          <caret line="23" lean-forward="true" selection-start-line="23" selection-end-line="23" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/lightbouncers/world/World.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="276">
-          <caret line="26" column="18" lean-forward="true" selection-start-line="26" selection-start-column="18" selection-end-line="26" selection-end-column="18" />
+        <state relative-caret-position="473">
+          <caret line="86" column="41" lean-forward="true" selection-start-line="86" selection-start-column="41" selection-end-line="86" selection-end-column="41" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/lightbouncers/gui/Viewport.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="460">
+          <caret line="63" column="5" lean-forward="true" selection-start-line="63" selection-start-column="5" selection-end-line="63" selection-end-column="5" />
           <folding>
-            <element signature="method#receive#0;class#World#0" />
-            <element signature="method#receive#1;class#World#0" />
+            <element signature="e#2986#2987#0" expanded="true" />
+            <element signature="e#3030#3031#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/lightbouncers/net/client/Client.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="533">
+          <caret line="294" column="47" lean-forward="true" selection-start-line="294" selection-start-column="47" selection-end-line="294" selection-end-column="47" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="method#disconnect#0;class#Client#0" />
+            <element signature="method#listen#0;class#Client#0" />
+            <element signature="method#sendUTF#0;class#Client#0" />
+            <element signature="method#sendObject#0;class#Client#0" />
+            <element signature="e#12315#12316#0" expanded="true" />
           </folding>
         </state>
       </provider>

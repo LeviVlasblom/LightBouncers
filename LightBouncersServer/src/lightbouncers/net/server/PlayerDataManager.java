@@ -23,6 +23,7 @@ public class PlayerDataManager implements Serializable
     private boolean isConnected;
 
     private String username;
+    private boolean isReady;
 
     public PlayerDataManager(Socket clientSocket, TestSession session)
     {
@@ -31,6 +32,7 @@ public class PlayerDataManager implements Serializable
         this.projectiles = new ArrayList<ProjectileObject>();
         this.username = "";
         this.isConnected = true;
+        this.isReady = false;
         this.player = new PlayerObject(Vector2D.zero(), Vector2D.zero(), 10, "");
 
         initializeListenerThread();
@@ -114,6 +116,11 @@ public class PlayerDataManager implements Serializable
         return this.username;
     }
 
+    public boolean isReady()
+    {
+        return this.isReady;
+    }
+
     public void setPlayer(PlayerObject player)
     {
         if(player != null)
@@ -125,5 +132,10 @@ public class PlayerDataManager implements Serializable
     public void setUsername(String username)
     {
         this.username = username;
+    }
+
+    public void setReady(boolean ready)
+    {
+        isReady = ready;
     }
 }

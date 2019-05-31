@@ -24,7 +24,7 @@ import java.util.ArrayList;
 public class Viewport extends Canvas
 {
     protected Vector2D cursorPosition;
-    private LightBouncer player;
+    //private LightBouncer player;
     //private LightBouncer test;
     //private Light light;
     //private ArrayList<Actor> environmentObjects;
@@ -42,23 +42,12 @@ public class Viewport extends Canvas
 
         this.world = new World();
         this.world.changeLevel(LevelBuilder.loadLevelFromFile(new File("src/lightbouncers/resources/levels/LevelStandard.json"), this.world));
-        this.player = new LightBouncer(new Vector2D(100, 100), 0.0, world, 2.0, 40.0, 1.0, Main.username);
-        this.world.setPlayer(this.player);
+//        this.player = new LightBouncer(new Vector2D(100, 100), 0.0, world, 2.0, 40.0, 1.0, Main.username);
+//        this.world.setPlayer(this.player);
 
-        Client client = new Client("localhost", 4509, this.world);
+        Client client = Client.getInstance("localhost", 4509, null);
         client.connect("Kstrik");
-        //this.light = new Light(new Vector2D(100, 100), 600, 1.0, Color.rgb(173, 168, 65, 0.1), Color.YELLOW);
-
-//        this.environmentObjects = new ArrayList<Actor>();
-//        this.environmentObjects.add(new WallBox(new Vector2D(400, 400), 0, this.world, 50, 50));
-//        this.environmentObjects.add(new WallBox(new Vector2D(500, 400), 0, this.world, 50, 50));
-//        this.environmentObjects.add(new WallBox(new Vector2D(600, 400), 0, this.world, 50, 50));
-//        this.environmentObjects.add(new WallBox(new Vector2D(700, 400), 0, this.world, 50, 50));
-
-//        this.test = new LightBouncer(new Vector2D(100, 100), 0.0, 5.0, 20.0, 1.0);
-//        this.test.setParent(this.player);
-//        this.test.setLocalPosition(new Vector2D(0.5, 0.5));
-
+        client.setWorld(this.world);
         new AnimationTimer() {
             long last = -1;
 
@@ -77,32 +66,12 @@ public class Viewport extends Canvas
     private void update(double deltaTime)
     {
         this.world.update(deltaTime);
-        this.player.update(deltaTime);
-        //this.light.setPosition(this.player.getWorldPosition());
-        //this.test.update(deltaTime);
-//        com.sun.glass.ui.Robot robot =
-//                com.sun.glass.ui.Application.GetApplication().createRobot();
-//
-//        int y = robot.getMouseY();
-//        System.out.println("y point = " + y);
-//        int x = robot.getMouseX();
-//        System.out.println("x point= " + x);
-//        Point2D point = MouseInfo.getPointerInfo().getLocation();
-//        System.out.println("y point = " + point.getY());
-//        System.out.println("x point= " + point.getX());
     }
 
     private void draw()
     {
         this.clear();
         this.world.draw(this.getGraphicsContext2D());
-        //this.light.draw(this.getGraphicsContext2D(), this.environmentObjects);
-        //this.player.draw(this.getGraphicsContext2D());
-//        for(Actor actor : this.environmentObjects)
-//        {
-//            actor.draw(this.getGraphicsContext2D());
-//        }
-        //this.test.draw(this.getGraphicsContext2D());
     }
 
     private void updateCursorPosition(Vector2D mousePosition)
@@ -112,30 +81,50 @@ public class Viewport extends Canvas
 
     private void onMousePressed(MouseEvent event)
     {
-        this.player.onMousePressed(event);
+        //this.player.onMousePressed(event);
+        if(this.world.getPlayer() != null)
+        {
+            this.world.getPlayer().onMousePressed(event);
+        }
         updateCursorPosition(new Vector2D((float)event.getX(), (float)event.getY()));
     }
 
     private void onMouseReleased(MouseEvent event)
     {
-        this.player.onMouseReleased(event);
+        //this.player.onMouseReleased(event);
+        if(this.world.getPlayer() != null)
+        {
+            this.world.getPlayer().onMouseReleased(event);
+        }
         updateCursorPosition(new Vector2D((float)event.getX(), (float)event.getY()));
     }
 
     private void onMouseMoved(MouseEvent event)
     {
-        this.player.onMouseMoved(event);
+        //this.player.onMouseMoved(event);
+        if(this.world.getPlayer() != null)
+        {
+            this.world.getPlayer().onMouseMoved(event);
+        }
         updateCursorPosition(new Vector2D((float)event.getX(), (float)event.getY()));
     }
 
     public void onKeyPressed(KeyEvent event)
     {
-        this.player.onKeyPressed(event);
+        //this.player.onKeyPressed(event);
+        if(this.world.getPlayer() != null)
+        {
+            this.world.getPlayer().onKeyPressed(event);
+        }
     }
 
     public void onKeyReleased(KeyEvent event)
     {
-        this.player.onKeyReleased(event);
+        //this.player.onKeyReleased(event);
+        if(this.world.getPlayer() != null)
+        {
+            this.world.getPlayer().onKeyReleased(event);
+        }
     }
 
     public void onWidthChanged()

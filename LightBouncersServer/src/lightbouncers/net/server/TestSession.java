@@ -41,12 +41,14 @@ public class TestSession
             {
                 while(sessionIsConnected)
                 {
-                    if(sessionData.size() > 1 && !gameIsInProgress)
+                    if(sessionData.size() > 1 && !gameIsInProgress && arePlayersReady())
                     {
                         gameIsInProgress = true;
                         if(!readWriteObjectMode)
                         {
-                            broadcastUTF("start");
+                            JSONObject jsonObject = new JSONObject();
+                            jsonObject.put("command", "startmatch");
+                            broadcastUTF(jsonObject.toJSONString());
                         }
                         else
                         {
@@ -67,6 +69,21 @@ public class TestSession
                 }
             }
         };
+    }
+
+    private boolean arePlayersReady()
+    {
+        int counter = 0;
+
+        for(PlayerDataManager playerDataManager : this.sessionData.values())
+        {
+            if(playerDataManager.isReady())
+            {
+                counter++;
+            }
+        }
+
+        return (counter == this.sessionData.size()) ? true : false;
     }
 
     public void stop()
@@ -291,6 +308,11 @@ public class TestSession
             {
                 String username = jsonObject.get("username").toString();
                 this.sessionData.get(socket).getPlayer().setUsername(username);
+
+                JSONObject addPlayerJSON = new JSONObject();
+                addPlayerJSON.put("command", "addplayer");
+                addPlayerJSON.put("username", username);
+                sendUTF(addPlayerJSON.toJSONString(), socket);
             }
         }
         catch (ParseException e)
