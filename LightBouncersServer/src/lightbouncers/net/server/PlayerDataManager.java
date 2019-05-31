@@ -6,7 +6,7 @@ import lightbouncers.net.ProjectileObject;
 import lightbouncers.net.SessionObject;
 import lightbouncers.net.server.TestSession;
 
-import java.io.Serializable;
+import java.io.*;
 import java.net.Socket;
 import java.util.ArrayList;
 
@@ -45,7 +45,7 @@ public class PlayerDataManager implements Serializable
             {
                 while(isConnected && session.getServer().isRunning())
                 {
-                    session.listen(clientSocket);
+                    listen(clientSocket);
                     try {
                         Thread.sleep(10);
                     } catch (InterruptedException ex) {
@@ -55,6 +55,41 @@ public class PlayerDataManager implements Serializable
             }
         };
         this.listenerThread.start();
+    }
+
+    synchronized protected void listen(Socket socket)
+    {
+        try
+        {
+            if(!this.session.isReadWriteObjectMode())
+            {
+                BufferedReader serverInput = new BufferedReader(new InputStreamReader(socket.getInputStream()));
+                DataOutputStream serverOutput = new DataOutputStream(socket.getOutputStream());
+                String clientInput = serverInput.readLine();
+
+                if(clientInput != null)
+                {
+                    this.session.receiveUTFData(clientInput, socket);
+                }
+            }
+            else
+            {
+                ObjectInputStream serverInput = new ObjectInputStream(socket.getInputStream());
+                ObjectOutputStream serverOutput = new ObjectOutputStream(socket.getOutputStream());
+                Object clientInput = serverInput.readObject();
+
+                if(clientInput != null)
+                {
+                    this.session.receiveObjectData(clientInput, socket);
+                }
+            }
+        }
+        catch (Exception e)
+        {
+            this.session.getSessionData().get(socket).disconnect();
+            this.session.getSessionData().remove(socket);
+            System.out.println("Client disconnected with ip: " + socket.getInetAddress().getHostAddress() + " on port: " + socket.getPort());
+        }
     }
 
     public void disconnect()

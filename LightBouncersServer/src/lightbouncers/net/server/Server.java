@@ -101,7 +101,8 @@ public class Server
         }
         else
         {
-            session = new TestSession(this, 4);
+            session = new TestSession(this, 2);
+            this.sessions.add(session);
         }
         session.addSocketToSession(clientSocket);
     }

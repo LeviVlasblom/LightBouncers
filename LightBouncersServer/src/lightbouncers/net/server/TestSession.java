@@ -148,41 +148,6 @@ public class TestSession
         }
     }
 
-    synchronized protected void listen(Socket socket)
-    {
-        try
-        {
-            if(!this.readWriteObjectMode)
-            {
-                BufferedReader serverInput = new BufferedReader(new InputStreamReader(socket.getInputStream()));
-                DataOutputStream serverOutput = new DataOutputStream(socket.getOutputStream());
-                String clientInput = serverInput.readLine();
-
-                if(clientInput != null)
-                {
-                    receiveUTFData(clientInput, socket);
-                }
-            }
-            else
-            {
-                ObjectInputStream serverInput = new ObjectInputStream(socket.getInputStream());
-                ObjectOutputStream serverOutput = new ObjectOutputStream(socket.getOutputStream());
-                Object clientInput = serverInput.readObject();
-
-                if(clientInput != null)
-                {
-                    receiveObjectData(clientInput, socket);
-                }
-            }
-        }
-        catch (Exception e)
-        {
-            this.sessionData.get(socket).disconnect();
-            this.sessionData.remove(socket);
-            System.out.println("Client disconnected with ip: " + socket.getInetAddress().getHostAddress() + " on port: " + socket.getPort());
-        }
-    }
-
     public void receiveUTFData(String data, Socket socket)
     {
         if(socket != null && !data.isEmpty())
@@ -312,7 +277,8 @@ public class TestSession
                 JSONObject addPlayerJSON = new JSONObject();
                 addPlayerJSON.put("command", "addplayer");
                 addPlayerJSON.put("username", username);
-                sendUTF(addPlayerJSON.toJSONString(), socket);
+
+                broadcastUTF(addPlayerJSON.toJSONString());
             }
         }
         catch (ParseException e)
@@ -351,5 +317,15 @@ public class TestSession
     public int getConnectedSocketsCount()
     {
         return this.sessionData.size();
+    }
+
+    public HashMap<Socket, PlayerDataManager> getSessionData()
+    {
+        return sessionData;
+    }
+
+    public boolean isReadWriteObjectMode()
+    {
+        return readWriteObjectMode;
     }
 }

@@ -280,6 +280,7 @@ public class Client
                     this.lobby.add(username);
                 }
                 System.out.println("Player " + username + " connected to lobby!");
+
             }
             else if(command.equals("addprojectle"))
             {
