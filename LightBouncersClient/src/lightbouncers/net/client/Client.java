@@ -9,6 +9,7 @@ import lightbouncers.objects.pawns.Pawn;
 import lightbouncers.objects.pawns.characters.LightBouncer;
 import lightbouncers.objects.pawns.characters.PlayerCharacter;
 import lightbouncers.objects.pawns.projectiles.Projectile;
+import lightbouncers.world.LevelBuilder;
 import lightbouncers.world.World;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
@@ -23,10 +24,12 @@ public class Client
 {
     private static Client instance;
     private ITCPClientReceiver receiver;
+    private ILobbyUpdate lobbyUpdate;
     private String host;
     private int port;
     private Socket clientSocket;
     private Thread listenerThread;
+    private Thread gameThread;
 
     private boolean readWriteObjectMode;
     private boolean gameIsInProgress;
@@ -35,7 +38,7 @@ public class Client
     private World world;
     private ArrayList<String> lobby;
 
-    private Client(String host, int port, ITCPClientReceiver receiver)
+    private Client(String host, int port, ITCPClientReceiver receiver, ILobbyUpdate lobbyUpdate)
     {
         this.host = host;
         this.port = port;
@@ -43,6 +46,7 @@ public class Client
         this.gameIsInProgress = false;
         this.isConnected = false;
         this.receiver = receiver;
+        this.lobbyUpdate = lobbyUpdate;
         this.lobby = new ArrayList<String>();
         this.listenerThread = new Thread("ClientSocketListener"){
             public void run()
@@ -50,7 +54,15 @@ public class Client
                 while(isConnected)
                 {
                     listen();
+                }
+            }
+        };
 
+        this.gameThread = new Thread("ClientSocketListener"){
+            public void run()
+            {
+                while(isConnected)
+                {
                     if(gameIsInProgress)
                     {
                         if(world != null)
@@ -72,6 +84,7 @@ public class Client
                 }
             }
         };
+        this.gameThread.start();
     }
 
     public boolean connect(String username)
@@ -291,18 +304,23 @@ public class Client
             }
             else if(command.equals("startmatch"))
             {
+                this.world = new World();
+                this.world.changeLevel(LevelBuilder.loadLevelFromFile(new File("src/lightbouncers/resources/levels/LevelStandard.json"), world));
                 this.world.setPlayer(new LightBouncer(new Vector2D(100, 100), 0.0, world, 2.0, 40.0, 1.0, Main.username));
 
                 for(String username : this.lobby)
                 {
                     this.world.addPlayerActor(new LightBouncer(Vector2D.zero(), 0.0, world, 2.0, 40.0, 1.0, username));
                 }
+                this.gameIsInProgress = true;
+                lobbyUpdate.onMatchStart(this.world);
             }
             else if(command.equals("endmatch"))
             {
                 this.world.setPlayer(null);
                 this.world.getPlayerActors().clear();
                 this.world.getProjectiles().clear();
+                this.gameIsInProgress = false;
             }
         }
         catch (ParseException e)
@@ -355,11 +373,11 @@ public class Client
         this.world = world;
     }
 
-    public static Client getInstance(String host, int port, ITCPClientReceiver receiver)
+    public static Client getInstance(String host, int port, ITCPClientReceiver receiver, ILobbyUpdate lobbyUpdate)
     {
         if(instance == null)
         {
-            instance = new Client(host, port, receiver);
+            instance = new Client(host, port, receiver, lobbyUpdate);
         }
         return instance;
     }

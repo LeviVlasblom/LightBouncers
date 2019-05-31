@@ -9,6 +9,11 @@ import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 import lightbouncers.gui.Viewport;
 import lightbouncers.net.client.Client;
+import lightbouncers.world.LevelBuilder;
+import lightbouncers.world.World;
+import org.json.simple.JSONObject;
+
+import java.io.File;
 
 public class Main extends Application
 {
@@ -24,13 +29,14 @@ public class Main extends Application
     {
         TextField textField = new TextField();
         Button button = new Button("Submit");
+        Button readyButton = new Button("Not ready!");
 
         button.setOnAction(event -> {
             Main.username = textField.getText();
 
-            Viewport viewport = new Viewport(1920, 1080);
+            Viewport viewport = new Viewport(800, 600);
 
-            Scene scene = new Scene(new Group(viewport), 1920, 1080);
+            Scene scene = new Scene(new Group(viewport, readyButton), 800, 600);
             scene.setOnKeyPressed(event1 -> {
                 viewport.onKeyPressed(event1);
             });
@@ -42,6 +48,18 @@ public class Main extends Application
             stage.setScene(scene);
             stage.show();
             primaryStage.close();
+        });
+
+        readyButton.setOnAction(event -> {
+            if(readyButton.getText().equals("Not ready!"))
+            {
+                JSONObject readyPlayerJSON = new JSONObject();
+                readyPlayerJSON.put("command", "ready");
+                readyPlayerJSON.put("username", username);
+                Client.getInstance("", 0, null, null).sendUTF(readyPlayerJSON.toJSONString());
+            }
+
+            readyButton.setText("Ready");
         });
 
         Scene test = new Scene(new VBox(textField, button), 500, 600);

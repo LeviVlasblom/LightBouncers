@@ -7,6 +7,7 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.paint.Color;
 import lightbouncers.Main;
 import lightbouncers.net.client.Client;
+import lightbouncers.net.client.ILobbyUpdate;
 import lightbouncers.objects.Actor;
 import lightbouncers.objects.environment.EnvironmentObject;
 import lightbouncers.objects.environment.WallBox;
@@ -21,7 +22,7 @@ import java.awt.geom.Point2D;
 import java.io.File;
 import java.util.ArrayList;
 
-public class Viewport extends Canvas
+public class Viewport extends Canvas implements ILobbyUpdate
 {
     protected Vector2D cursorPosition;
     //private LightBouncer player;
@@ -40,12 +41,12 @@ public class Viewport extends Canvas
         this.setOnMouseMoved(event -> onMouseMoved(event));
         this.setOnMouseDragged(event -> onMouseMoved(event));
 
-        this.world = new World();
-        this.world.changeLevel(LevelBuilder.loadLevelFromFile(new File("src/lightbouncers/resources/levels/LevelStandard.json"), this.world));
+//        this.world = new World();
+//        this.world.changeLevel(LevelBuilder.loadLevelFromFile(new File("src/lightbouncers/resources/levels/LevelStandard.json"), this.world));
 //        this.player = new LightBouncer(new Vector2D(100, 100), 0.0, world, 2.0, 40.0, 1.0, Main.username);
 //        this.world.setPlayer(this.player);
 
-        Client client = Client.getInstance("localhost", 4509, null);
+        Client client = Client.getInstance("localhost", 4509, null, this);
         client.connect(Main.username);
         //client.setWorld(this.world);
         new AnimationTimer() {
@@ -65,13 +66,19 @@ public class Viewport extends Canvas
 
     private void update(double deltaTime)
     {
-        this.world.update(deltaTime);
+        if(world != null)
+        {
+            this.world.update(deltaTime);
+        }
     }
 
     private void draw()
     {
         this.clear();
-        this.world.draw(this.getGraphicsContext2D());
+        if(world != null)
+        {
+            this.world.draw(this.getGraphicsContext2D());
+        }
     }
 
     private void updateCursorPosition(Vector2D mousePosition)
@@ -82,7 +89,7 @@ public class Viewport extends Canvas
     private void onMousePressed(MouseEvent event)
     {
         //this.player.onMousePressed(event);
-        if(this.world.getPlayer() != null)
+        if(world != null && this.world.getPlayer() != null)
         {
             this.world.getPlayer().onMousePressed(event);
         }
@@ -92,7 +99,7 @@ public class Viewport extends Canvas
     private void onMouseReleased(MouseEvent event)
     {
         //this.player.onMouseReleased(event);
-        if(this.world.getPlayer() != null)
+        if(world != null && this.world.getPlayer() != null)
         {
             this.world.getPlayer().onMouseReleased(event);
         }
@@ -102,7 +109,7 @@ public class Viewport extends Canvas
     private void onMouseMoved(MouseEvent event)
     {
         //this.player.onMouseMoved(event);
-        if(this.world.getPlayer() != null)
+        if(world != null && this.world.getPlayer() != null)
         {
             this.world.getPlayer().onMouseMoved(event);
         }
@@ -112,7 +119,7 @@ public class Viewport extends Canvas
     public void onKeyPressed(KeyEvent event)
     {
         //this.player.onKeyPressed(event);
-        if(this.world.getPlayer() != null)
+        if(world != null && this.world.getPlayer() != null)
         {
             this.world.getPlayer().onKeyPressed(event);
         }
@@ -121,7 +128,7 @@ public class Viewport extends Canvas
     public void onKeyReleased(KeyEvent event)
     {
         //this.player.onKeyReleased(event);
-        if(this.world.getPlayer() != null)
+        if(world != null && this.world.getPlayer() != null)
         {
             this.world.getPlayer().onKeyReleased(event);
         }
@@ -141,5 +148,28 @@ public class Viewport extends Canvas
     {
         this.getGraphicsContext2D().setFill(Color.BLACK);
         this.getGraphicsContext2D().fillRect(0, 0, this.getWidth(), this.getHeight());
+    }
+
+    public void setWorld(World world)
+    {
+        this.world = world;
+    }
+
+    @Override
+    public void onPlayerConnectedToLobby(String username)
+    {
+
+    }
+
+    @Override
+    public void onPlayerDisconnectedLobby(String username)
+    {
+
+    }
+
+    @Override
+    public void onMatchStart(World world)
+    {
+        setWorld(world);
     }
 }

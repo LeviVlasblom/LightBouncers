@@ -41,6 +41,7 @@ public class TestSession
             {
                 while(sessionIsConnected)
                 {
+                    //System.out.println("Session size: " + sessionData.size() + " is in progress: " + gameIsInProgress + " are palyers ready : " + arePlayersReady());
                     if(sessionData.size() > 1 && !gameIsInProgress && arePlayersReady())
                     {
                         gameIsInProgress = true;
@@ -69,6 +70,7 @@ public class TestSession
                 }
             }
         };
+        this.sessionThread.start();
     }
 
     private boolean arePlayersReady()
@@ -279,6 +281,17 @@ public class TestSession
                 addPlayerJSON.put("username", username);
 
                 broadcastUTF(addPlayerJSON.toJSONString());
+            }
+            else if(command.toLowerCase().equals("ready"))
+            {
+                String username = jsonObject.get("username").toString();
+                this.sessionData.get(socket).setReady(true);
+
+                JSONObject readyPlayerJSON = new JSONObject();
+                readyPlayerJSON.put("command", "ready");
+                readyPlayerJSON.put("username", username);
+
+                broadcastUTF(readyPlayerJSON.toJSONString());
             }
         }
         catch (ParseException e)
