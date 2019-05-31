@@ -10,7 +10,7 @@ public class AutomaticPulseRifleProjectile extends Projectile
 {
     public AutomaticPulseRifleProjectile(Vector2D position, double rotation, World world, Vector2D direction)
     {
-        super(position, rotation, world, 40.0, 400.0, 1.0, direction);
+        super(position, rotation, world, 20.0, 400.0, 1.0, direction);
     }
 
     @Override

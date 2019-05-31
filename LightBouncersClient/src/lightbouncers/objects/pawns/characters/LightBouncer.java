@@ -76,6 +76,7 @@ public class LightBouncer extends PlayerCharacter
         graphicsContext.setFill(Color.GREEN);
 //        Vector2D newVector = Vector2D.fromAngleWithPosition(this.worldPosition, this.directionAngle, this.velocity.magnitude * 5);
 //        graphicsContext.strokeLine(this.worldPosition.x, this.worldPosition.y, newVector.x, newVector.y);
+        this.item.draw(graphicsContext);
     }
 
     @Override

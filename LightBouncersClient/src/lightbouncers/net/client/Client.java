@@ -32,7 +32,7 @@ public class Client
         };
     }
 
-    public void connect()
+    public boolean connect()
     {
         try
         {
@@ -41,6 +41,7 @@ public class Client
                 this.clientSocket = new Socket(this.host, this.port);
                 this.isConnected = true;
                 this.listenerThread.start();
+                return true;
             }
         }
         catch (Exception e)
@@ -48,6 +49,7 @@ public class Client
             //e.printStackTrace();
             System.out.println("Could not connect to server!");
         }
+        return this.isConnected;
     }
 
     public void disconnect()
