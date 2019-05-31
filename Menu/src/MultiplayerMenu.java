@@ -35,8 +35,6 @@ public class MultiplayerMenu extends View {
 
     }
 
-    private Text text;
-
     private Effect shadow = new DropShadow(5, Color.BLACK);
     private Effect blur = new BoxBlur(1, 1, 3);
 
@@ -94,13 +92,13 @@ public class MultiplayerMenu extends View {
         txtIp.setTranslateX(this.getWidth() / 2 - 100);
         txtIp.setTranslateY(this.getHeight() / 3 + 100);
 
-        textIp.setFont(Font.loadFont(Main.class.getResource("Penumbra-HalfSerif-Std_35114.ttf").toExternalForm(), 24));
+        textIp.setFont(new Font("Arial", 24));
         textIp.setFill(Color.WHITE);
         textIp.setEffect(new DropShadow(30, Color.BLACK));
         textIp.setTranslateX(this.getWidth() / 2 - 100);
         textIp.setTranslateY(this.getHeight() / 3 + 70);
 
-        textPoort.setFont(Font.loadFont(Main.class.getResource("Penumbra-HalfSerif-Std_35114.ttf").toExternalForm(), 24));
+        textPoort.setFont(new Font("Arial", 24));
         textPoort.setFill(Color.WHITE);
         textPoort.setEffect(new DropShadow(30, Color.BLACK));
         textPoort.setTranslateX(this.getWidth() / 2 - 100);
@@ -124,14 +122,14 @@ public class MultiplayerMenu extends View {
             MainMenuView mmv = new MainMenuView("Light Bouncers", 1920, 1080);
             this.close();
         });
-        btnBack.setFont(Font.loadFont(Main.class.getResource("Penumbra-HalfSerif-Std_35114.ttf").toExternalForm(), 20));
+        btnBack.setFont(new Font("Arial", 20));
         btnBack.setTextFill(Color.WHITE);
 
         btnConnect.setOnMouseClicked(event -> {
             ConnectedNameMenu cnm = new ConnectedNameMenu("Light Bouncers", 1920, 1080);
             this.close();
         });
-        btnConnect.setFont(Font.loadFont(Main.class.getResource("Penumbra-HalfSerif-Std_35114.ttf").toExternalForm(), 28));
+        btnConnect.setFont(new Font("Arial", 28));
         btnConnect.setTextFill(Color.WHITE);
 
 

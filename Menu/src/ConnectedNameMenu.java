@@ -19,6 +19,7 @@ public class ConnectedNameMenu extends View {
     private TextField txtName;
     private Text name;
     private Button join;
+    private String userName;
 
     @Override
     void setupScene() {
@@ -27,6 +28,7 @@ public class ConnectedNameMenu extends View {
         scene.getStylesheets().add(getClass().getResource("StyleForm.css").toExternalForm());
         this.setScene((scene));
         this.show();
+
     }
 
     private Parent createContent() {
@@ -37,6 +39,10 @@ public class ConnectedNameMenu extends View {
 
         return root;
 
+    }
+
+    private void savedName(){
+        SessionData.name = txtName.getText();
     }
 
     private void addBackground() {
@@ -63,7 +69,7 @@ public class ConnectedNameMenu extends View {
         txtName.setTranslateX(this.getWidth() / 2 - 100);
         txtName.setTranslateY(this.getHeight() / 3 + 100);
 
-        name.setFont(Font.loadFont(Main.class.getResource("Penumbra-HalfSerif-Std_35114.ttf").toExternalForm(), 24));
+        name.setFont(new Font("Arial", 24));
         name.setFill(Color.WHITE);
         name.setEffect(new DropShadow(30, Color.BLACK));
         name.setTranslateX(this.getWidth() / 2 - 90);
@@ -77,10 +83,11 @@ public class ConnectedNameMenu extends View {
         join.getStyleClass().add("btnConnect");
 
         join.setOnMouseClicked(event -> {
+            savedName();
             GameLobby gL = new GameLobby("Light Bouncers", 1920, 1080);
             this.close();
         });
-        join.setFont(Font.loadFont(Main.class.getResource("Penumbra-HalfSerif-Std_35114.ttf").toExternalForm(), 28));
+        join.setFont(new Font("Arial", 28));
         join.setTextFill(Color.WHITE);
 
 

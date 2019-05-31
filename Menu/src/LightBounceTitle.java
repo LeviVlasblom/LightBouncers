@@ -15,7 +15,7 @@ public class LightBounceTitle extends Pane {
         }
 
         text = new Text(spread);
-        text.setFont(Font.loadFont(LightBouncMenuItem.class.getResource("Penumbra-HalfSerif-Std_35114.ttf").toExternalForm(), 48));
+        text.setFont(new Font("Arial", 48));
         text.setFill(Color.WHITE);
         text.setEffect(new DropShadow(30, Color.BLACK));
 

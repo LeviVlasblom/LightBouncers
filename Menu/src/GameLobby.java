@@ -1,13 +1,10 @@
 import javafx.animation.ScaleTransition;
 import javafx.animation.TranslateTransition;
 import javafx.application.Platform;
-import javafx.beans.binding.Bindings;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
-import javafx.scene.control.TextField;
-import javafx.scene.effect.DropShadow;
 import javafx.scene.effect.GaussianBlur;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
@@ -15,13 +12,11 @@ import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Line;
-import javafx.scene.text.Font;
-import javafx.scene.text.Text;
 import javafx.util.Duration;
 import javafx.util.Pair;
 import javafx.scene.shape.Rectangle;
 
-import java.awt.*;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
@@ -39,13 +34,7 @@ public class GameLobby extends View{
 
     @Override
     void setupScene() {
-        menuData = Arrays.asList(
-                new Pair<String, Runnable>("Single Player", () -> {}),
-                new Pair<String, Runnable>("Multiplayer", () -> {}),
-                new Pair<String, Runnable>("Game Options", () -> {}),
-                new Pair<String, Runnable>("Exit to Desktop", Platform::exit)
 
-        );
         menuBox = new VBox(-5);
         root = new Pane();
         Scene scene = new Scene(createContent());
@@ -55,6 +44,8 @@ public class GameLobby extends View{
     }
 
     private Parent createContent() {
+        SessionData.playerNameSet.add(SessionData.name);
+        showUsers(SessionData.playerNameSet);
         addBackground();
         addTitle();
         double lineX = 1920 / 2 - 200;
@@ -73,6 +64,22 @@ public class GameLobby extends View{
         imageView.setFitHeight(this.getHeight());
 
         root.getChildren().add(imageView);
+    }
+
+    private void showUsers(ArrayList<String> username){
+        for (String names: username
+             ) {
+            menuData = Arrays.asList(
+                    new Pair<String, Runnable>(names, () -> {})
+            );
+        }
+//        menuData = Arrays.asList(
+//                new Pair<String, Runnable>("Single Player", () -> {}),
+//                new Pair<String, Runnable>("Multiplayer", () -> {}),
+//                new Pair<String, Runnable>("Game Options", () -> {}),
+//                new Pair<String, Runnable>("Exit to Desktop", Platform::exit)
+//
+//        );
     }
 
     private void addTitle() {
