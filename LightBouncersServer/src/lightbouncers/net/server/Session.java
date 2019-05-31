@@ -1,6 +1,7 @@
 package lightbouncers.net.server;
 
 import lightbouncers.math.Vector2D;
+import lightbouncers.net.SessionObject;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
@@ -9,6 +10,7 @@ import org.json.simple.parser.ParseException;
 import java.io.BufferedReader;
 import java.io.DataOutputStream;
 import java.io.InputStreamReader;
+import java.io.ObjectInputStream;
 import java.net.Socket;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -18,9 +20,8 @@ public class Session
     private int maxPlayerCount;
     private ArrayList<Socket> clientSockets;
     private HashMap<SessionObject, Socket> players;
-    //<Projectile, Owner>
     private HashMap<SessionObject, Socket> projectiles;
-    private ArrayList<Thread> listenerThreads;
+    private HashMap<Socket, Thread> listenerThreads;
 
     private Thread sessionThread;
     private Server server;
@@ -34,7 +35,7 @@ public class Session
         this.clientSockets = new ArrayList<Socket>();
         this.players = new HashMap<SessionObject, Socket>();
         this.projectiles = new HashMap<SessionObject, Socket>();
-        this.listenerThreads = new ArrayList<Thread>();
+        this.listenerThreads = new HashMap<Socket, Thread>();
         this.server = server;
         this.gameIsInProgress = false;
         this.jsonParser = new JSONParser();
@@ -94,7 +95,7 @@ public class Session
                 }
             };
 
-            listenerThreads.add(listenerThread);
+            listenerThreads.put(clientSocket, listenerThread);
             listenerThread.start();
         }
     }
@@ -119,19 +120,30 @@ public class Session
     {
         try
         {
-            BufferedReader serverInput = new BufferedReader(new InputStreamReader(socket.getInputStream()));
-            DataOutputStream serverOutput = new DataOutputStream(socket.getOutputStream());
+//            BufferedReader serverInput = new BufferedReader(new InputStreamReader(socket.getInputStream()));
+//            DataOutputStream serverOutput = new DataOutputStream(socket.getOutputStream());
+//
+//            String clientInput = serverInput.readLine();
 
-            String clientInput = serverInput.readLine();
+            ObjectInputStream serverInput = new ObjectInputStream(socket.getInputStream());
+
+            SessionObject clientInput = (SessionObject)serverInput.readObject();
 
             if(clientInput != null)
             {
-                receive(clientInput, socket);
+                //receive(clientInput, socket);
             }
         }
         catch (Exception e)
         {
-            e.printStackTrace();
+            //e.printStackTrace();
+            Thread thread = this.listenerThreads.get(socket);
+            thread = null;
+
+            removeProjectilesFromSocket(socket);
+            removeSocket(socket);
+            this.clientSockets.remove(socket);
+            System.out.println("Client disconnected with ip: " + socket.getInetAddress().getHostAddress() + " on port: " + socket.getPort());
         }
     }
 
@@ -233,6 +245,29 @@ public class Session
         catch (ParseException e)
         {
             e.printStackTrace();
+        }
+    }
+
+    private void removeSocket(Socket socket)
+    {
+        for(SessionObject sessionObject : this.players.keySet())
+        {
+            if(socket == this.players.get(sessionObject))
+            {
+                this.players.remove(sessionObject);
+                break;
+            }
+        }
+    }
+
+    private void removeProjectilesFromSocket(Socket socket)
+    {
+        for(SessionObject sessionObject : this.projectiles.keySet())
+        {
+            if(socket == this.projectiles.get(sessionObject))
+            {
+                this.projectiles.remove(sessionObject);
+            }
         }
     }
 

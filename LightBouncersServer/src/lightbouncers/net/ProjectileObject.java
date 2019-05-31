@@ -1,20 +1,22 @@
-package lightbouncers.net.server;
+package lightbouncers.net;
 
 import lightbouncers.math.Vector2D;
 
-public class SessionObject
+import java.io.Serializable;
+
+public class ProjectileObject implements Serializable
 {
     private Vector2D position;
     private Vector2D velocity;
     private double radius;
-    private String name;
+    private String username;
 
-    public SessionObject(Vector2D position, Vector2D velocity, double radius, String name)
+    public ProjectileObject(Vector2D position, Vector2D velocity, double radius, String username)
     {
         this.position = position;
         this.velocity = velocity;
         this.radius = radius;
-        this.name = name;
+        this.username = username;
     }
 
     public Vector2D getPosition()
@@ -32,9 +34,9 @@ public class SessionObject
         return this.radius;
     }
 
-    public String getName()
+    public String getUsername()
     {
-        return this.name;
+        return this.username;
     }
 
     public void setPosition(Vector2D position)
@@ -52,8 +54,8 @@ public class SessionObject
         this.radius = radius;
     }
 
-    public void setName(String name)
+    public void setUsername(String username)
     {
-        this.name = name;
+        this.username = username;
     }
 }

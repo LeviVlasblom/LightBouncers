@@ -1,6 +1,8 @@
 package lightbouncers.math;
 
-public class Vector2D
+import java.io.Serializable;
+
+public class Vector2D implements Serializable
 {
 	public double magnitude;
 	public double x;

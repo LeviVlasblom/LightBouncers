@@ -77,6 +77,11 @@ public class World
         return nonPlayerActors;
     }
 
+    public PlayerCharacter getPlayer()
+    {
+        return this.player;
+    }
+
     public Level getLevel()
     {
         return this.level;
