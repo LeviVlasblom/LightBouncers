@@ -12,6 +12,7 @@ import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Line;
+import javafx.scene.text.Font;
 import javafx.util.Duration;
 import javafx.util.Pair;
 import javafx.scene.shape.Rectangle;
@@ -27,15 +28,17 @@ public class GameLobby extends View{
 
     private Pane root;
     private Rectangle rectangle;
-    private Button join;
+    private Button btnReady;
     private List<Pair<String, Runnable>> menuData;
     private VBox menuBox;
+    private VBox readyBox;
     private Line line;
 
     @Override
     void setupScene() {
 
         menuBox = new VBox(-5);
+        readyBox = new VBox();
         root = new Pane();
         Scene scene = new Scene(createContent());
         scene.getStylesheets().add(getClass().getResource("StyleForm.css").toExternalForm());
@@ -45,6 +48,8 @@ public class GameLobby extends View{
 
     private Parent createContent() {
         SessionData.playerNameSet.add(SessionData.name);
+        SessionData.playerNameSet.add("LOLUI");
+        SessionData.playerNameSet.add("wadawawfawf");
         showUsers(SessionData.playerNameSet);
         addBackground();
         addTitle();
@@ -67,11 +72,10 @@ public class GameLobby extends View{
     }
 
     private void showUsers(ArrayList<String> username){
+        menuData = new ArrayList<>();
         for (String names: username
              ) {
-            menuData = Arrays.asList(
-                    new Pair<String, Runnable>(names, () -> {})
-            );
+            menuData.add( new Pair<String, Runnable>(names, () -> {}));
         }
 //        menuData = Arrays.asList(
 //                new Pair<String, Runnable>("Single Player", () -> {}),
@@ -109,10 +113,13 @@ public class GameLobby extends View{
 
     private void addMenu(double x, double y) {
 
+        btnReady = new Button("Ready");
 
 
         menuBox.setTranslateX(x);
         menuBox.setTranslateY(y);
+//        readyBox.setTranslateX(this.getWidth() /2 + 300);
+//        readyBox.setTranslateY(menuBox.getTranslateY());
         menuData.forEach(data -> {
             LightBouncMenuItem item = new LightBouncMenuItem(data.getKey());
             item.setOnAction(data.getValue());
@@ -123,6 +130,14 @@ public class GameLobby extends View{
 
             item.setClip(clip);
 
+//            ImageView notReady = new ImageView(new Image(getClass().getResource("NoReady.png").toExternalForm()));
+//            notReady.setFitWidth(50);
+//            notReady.setFitHeight(50);
+//
+//            notReady.setTranslateX(item.getTranslateX() + item.getWidth() - 50);
+//            notReady.setTranslateY(+35);
+//
+//            readyBox.getChildren().addAll(notReady);
             menuBox.getChildren().addAll(item);
         });
 
@@ -131,7 +146,20 @@ public class GameLobby extends View{
         rectangle.setStroke(Color.color(1, 1, 1, 0.75));
         rectangle.setFill(Color.color(0,0,0,0.50));
 
+        btnReady.setTranslateX(this.getWidth() / 2 - 130);
+        btnReady.setTranslateY(this.getHeight() / 2 + 390);
+
+        btnReady.getStyleClass().add("btnConnect");
+
+        btnReady.setOnMouseClicked(event -> {
+
+        });
+        btnReady.setFont(new Font("Arial", 28));
+        btnReady.setTextFill(Color.WHITE);
+
+        root.getChildren().add(btnReady);
         root.getChildren().add(rectangle);
         root.getChildren().add(menuBox);
+//        root.getChildren().add(readyBox);
     }
 }
