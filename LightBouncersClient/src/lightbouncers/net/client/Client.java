@@ -173,7 +173,7 @@ public class Client
         }
         catch (Exception e)
         {
-            //e.printStackTrace();
+            e.printStackTrace();
             disconnect();
         }
     }
@@ -290,12 +290,9 @@ public class Client
                     {
                         for(Projectile projectile : this.world.getProjectiles())
                         {
-                            if(projectile.getName().equals(username))
-                            {
-                                projectile.setWorldPosition(position);
-                                projectile.setVelocity(velocity);
-                                //projectile.setDirection(velocity.normalized());
-                            }
+                            //projectile.setWorldPosition(position);
+                            projectile.setVelocity(velocity);
+                            //projectile.setDirection(velocity.normalized());
                         }
                     }
                 }
@@ -316,7 +313,9 @@ public class Client
                 Vector2D velocity = new Vector2D(Double.parseDouble(jsonObject.get("velocityx").toString()), Double.parseDouble(jsonObject.get("velocityy").toString()));
                 double radius = Double.parseDouble(jsonObject.get("radius").toString());
                 String username = jsonObject.get("username").toString();
-                this.world.addProjectile(new Projectile(position, Vector2D.getAngle(velocity), this.world, 20.0, 400.0, 1.0, velocity.normalized(), radius));
+                Projectile projectile = new Projectile(position, Vector2D.getAngle(velocity), this.world, 20.0, 400.0, 1.0, velocity.normalized(), radius);
+                projectile.setName(username);
+                this.world.addProjectile(projectile);
             }
             else if(command.equals("startmatch"))
             {

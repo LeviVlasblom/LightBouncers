@@ -24,7 +24,7 @@ public class AutomaticPulseRifle extends Gun
     {
         Projectile projectile = new Projectile(this.worldPosition, this.rotation, this.world, 20.0, 400.0, 1.0, Vector2D.fromAngleWithPosition(Vector2D.zero(), this.rotation, 10).normalized(), 6);
         //AutomaticPulseRifleProjectile projectile = new AutomaticPulseRifleProjectile(this.worldPosition, this.rotation, this.world, Vector2D.fromAngleWithPosition(Vector2D.zero(), this.rotation, 10).normalized());
-        this.world.addProjectile(projectile);
+        //this.world.addProjectile(projectile);
 
         ProjectileObject projectileObject = new ProjectileObject(projectile.getWorldPosition(), Vector2D.fromAngleWithPosition(this.worldPosition, this.rotation, 20.0), projectile.getRadius(), Main.username);
         JSONObject jsonObject = SessionJSONUtil.getProjectileObjectJson(projectileObject);
