@@ -3,6 +3,7 @@ package lightbouncers.objects.items.weapons.guns;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.paint.Color;
 import lightbouncers.math.Vector2D;
+import lightbouncers.net.client.Client;
 import lightbouncers.objects.Actor;
 import lightbouncers.objects.pawns.projectiles.Projectile;
 import lightbouncers.world.World;
@@ -11,7 +12,7 @@ public class AutomaticPulseRifle extends Gun
 {
     public AutomaticPulseRifle(Vector2D worldPosition, double rotation, World world)
     {
-        super(worldPosition, rotation, world, FireType.FULLAUTO, 300);
+        super(worldPosition, rotation, world, FireType.FULLAUTO, 2000);
     }
 
     @Override

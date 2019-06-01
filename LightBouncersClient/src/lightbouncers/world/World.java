@@ -40,7 +40,7 @@ public class World
 
     public void update(double deltaTime)
     {
-        for(Actor actor : this.playerActors)
+        for(Pawn actor : this.playerActors)
         {
             actor.update(deltaTime);
         }

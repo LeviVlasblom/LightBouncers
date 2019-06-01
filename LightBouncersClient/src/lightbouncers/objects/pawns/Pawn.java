@@ -112,4 +112,9 @@ public abstract class Pawn extends Actor
     {
         this.direction = direction;
     }
+
+    public void setMoving(boolean moving)
+    {
+        isMoving = moving;
+    }
 }

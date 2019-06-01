@@ -58,7 +58,7 @@ public class Client
             }
         };
 
-        this.gameThread = new Thread("ClientSocketListener"){
+        this.gameThread = new Thread("GameSocketListener"){
             public void run()
             {
                 while(isConnected)
@@ -67,6 +67,11 @@ public class Client
                     {
                         if(world != null)
                         {
+//                            try {
+//                                Thread.sleep(2);
+//                            } catch (InterruptedException e) {
+//                                e.printStackTrace();
+//                            }
                             PlayerCharacter playerCharacter = world.getPlayer();
                             PlayerObject playerObject = new PlayerObject(playerCharacter.getWorldPosition(), playerCharacter.getVelocity(), playerCharacter.getRadius(), Main.username);
                             if(!readWriteObjectMode)
@@ -74,17 +79,22 @@ public class Client
                                 JSONObject jsonObject = SessionJSONUtil.getPlayerObjectJson(playerObject);
                                 jsonObject.put("command", "updateposition");
                                 sendUTF(jsonObject.toJSONString());
+                                System.out.println("Client send: " + jsonObject.toJSONString());
                             }
                             else
                             {
                                 sendObject(playerObject);
+                            }
+                            try {
+                                Thread.sleep(2);
+                            } catch (InterruptedException e) {
+                                e.printStackTrace();
                             }
                         }
                     }
                 }
             }
         };
-        this.gameThread.start();
     }
 
     public boolean connect(String username)
@@ -139,6 +149,15 @@ public class Client
                 DataOutputStream clientOutput = new DataOutputStream(this.clientSocket.getOutputStream());
 
                 String serverInput = clientInput.readLine();
+
+//                DataInputStream clientInput = new DataInputStream(this.clientSocket.getInputStream());
+//                String serverInput = "";
+//                byte[] buffer = new byte[clientInput.available()];
+//                for(int i = 0; i < clientInput.available(); i++)
+//                {
+//                    buffer[i] = clientInput.readByte();
+//                }
+//                serverInput = new String(buffer);
 
                 if(serverInput != null)
                 {
@@ -258,7 +277,7 @@ public class Client
                             {
                                 playerActor.setWorldPosition(position);
                                 playerActor.setVelocity(velocity);
-                                playerActor.setDirection(velocity.normalized());
+                                //playerActor.setDirection(velocity.normalized());
                             }
                         }
                     }
@@ -279,7 +298,7 @@ public class Client
                             {
                                 projectile.setWorldPosition(position);
                                 projectile.setVelocity(velocity);
-                                projectile.setDirection(velocity.normalized());
+                                //projectile.setDirection(velocity.normalized());
                             }
                         }
                     }
@@ -305,15 +324,17 @@ public class Client
             else if(command.equals("startmatch"))
             {
                 this.world = new World();
-                //this.world.changeLevel(LevelBuilder.loadLevelFromFile(new File("src/lightbouncers/resources/levels/LevelStandard.json"), world));
+                this.world.changeLevel(LevelBuilder.loadLevelFromFile(new File("src/lightbouncers/resources/levels/LevelStandard.json"), world));
                 this.world.setPlayer(new LightBouncer(new Vector2D(100, 100), 0.0, world, 2.0, 40.0, 1.0, Main.username));
 
                 for(String username : this.lobby)
                 {
-                    this.world.addPlayerActor(new LightBouncer(Vector2D.zero(), 0.0, world, 2.0, 40.0, 1.0, username));
+                    LightBouncer lightBouncer = new LightBouncer(Vector2D.zero(), 0.0, world, 2.0, 40.0, 1.0, username);
+                    this.world.addPlayerActor(lightBouncer);
                 }
                 this.gameIsInProgress = true;
                 lobbyUpdate.onMatchStart(this.world);
+                this.gameThread.start();
             }
             else if(command.equals("endmatch"))
             {
@@ -341,7 +362,7 @@ public class Client
                 {
                     if(playerActor.getName().equals(playerObject.getUsername()))
                     {
-                        playerActor.setWorldPosition(playerObject.getPosition());
+                        //playerActor.setWorldPosition(playerObject.getPosition());
                         playerActor.setVelocity(playerObject.getVelocity());
                         playerActor.setDirection(playerObject.getVelocity().normalized());
                     }
@@ -355,7 +376,7 @@ public class Client
             {
                 if(projectile.getName().equals(projectileObject.getUsername()))
                 {
-                    projectile.setWorldPosition(projectileObject.getPosition());
+                    //projectile.setWorldPosition(projectileObject.getPosition());
                     projectile.setVelocity(projectileObject.getVelocity());
                     projectile.setDirection(projectileObject.getVelocity().normalized());
                 }

@@ -9,7 +9,7 @@ public class Server
     private int port;
     private ServerSocket serverSocket;
     private Thread connectionThread;
-    private ArrayList<TestSession> sessions;
+    private ArrayList<Session> sessions;
 
     private boolean isRunning;
 
@@ -17,7 +17,7 @@ public class Server
     {
         this.port = port;
         this.isRunning = false;
-        this.sessions = new ArrayList<TestSession>();
+        this.sessions = new ArrayList<Session>();
     }
 
     public void start()
@@ -45,7 +45,7 @@ public class Server
             if(this.isRunning)
             {
                 this.isRunning = false;
-                for(TestSession session : this.sessions)
+                for(Session session : this.sessions)
                 {
                     session.stop();
                 }
@@ -93,7 +93,7 @@ public class Server
 
     private void assignSocketToSession(Socket clientSocket)
     {
-        TestSession session = null;
+        Session session = null;
 
         if(this.sessions.size() != 0 && this.sessions.get(this.sessions.size() - 1).getMaxPlayerCount() > this.sessions.get(this.sessions.size() - 1).getConnectedSocketsCount())
         {
@@ -101,7 +101,7 @@ public class Server
         }
         else
         {
-            session = new TestSession(this, 2);
+            session = new Session(this, 4);
             this.sessions.add(session);
         }
         session.addSocketToSession(clientSocket);

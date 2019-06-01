@@ -115,6 +115,11 @@ public class Vector2D implements Serializable
 		return new Vector2D(a.x + Math.cos(angle) * length, a.y + Math.sin(angle) * length);
 	}
 
+	public double getAngle()
+	{
+		return Math.atan2(this.y, this.x);
+	}
+
 	public static double getAngle(Vector2D a)
 	{
 		return Math.atan2(a.y, a.x);

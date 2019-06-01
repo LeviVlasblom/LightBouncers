@@ -3,8 +3,9 @@ package lightbouncers.net.server;
 import lightbouncers.math.Vector2D;
 import lightbouncers.net.PlayerObject;
 import lightbouncers.net.ProjectileObject;
-import lightbouncers.net.SessionObject;
-import lightbouncers.net.server.TestSession;
+import org.json.simple.JSONObject;
+import org.json.simple.parser.JSONParser;
+import org.json.simple.parser.ParseException;
 
 import java.io.*;
 import java.net.Socket;
@@ -17,7 +18,7 @@ public class PlayerDataManager implements Serializable
 
     private PlayerObject player;
     private ArrayList<ProjectileObject> projectiles;
-    private TestSession session;
+    private Session session;
 
     private int points;
     private boolean isConnected;
@@ -25,7 +26,7 @@ public class PlayerDataManager implements Serializable
     private String username;
     private boolean isReady;
 
-    public PlayerDataManager(Socket clientSocket, TestSession session)
+    public PlayerDataManager(Socket clientSocket, Session session)
     {
         this.clientSocket = clientSocket;
         this.session = session;
@@ -57,7 +58,7 @@ public class PlayerDataManager implements Serializable
         this.listenerThread.start();
     }
 
-    synchronized protected void listen(Socket socket)
+    private void listen(Socket socket)
     {
         try
         {
@@ -66,6 +67,14 @@ public class PlayerDataManager implements Serializable
                 BufferedReader serverInput = new BufferedReader(new InputStreamReader(socket.getInputStream()));
                 DataOutputStream serverOutput = new DataOutputStream(socket.getOutputStream());
                 String clientInput = serverInput.readLine();
+//                DataInputStream serverInput = new DataInputStream(socket.getInputStream());
+//                String clientInput = "";
+//                byte[] buffer = new byte[serverInput.available()];
+//                for(int i = 0; i < serverInput.available(); i++)
+//                {
+//                    buffer[i] = serverInput.readByte();
+//                }
+//                clientInput = new String(buffer);
 
                 if(clientInput != null)
                 {
@@ -121,7 +130,7 @@ public class PlayerDataManager implements Serializable
         return this.listenerThread;
     }
 
-    public TestSession getSession()
+    public Session getSession()
     {
         return this.session;
     }
