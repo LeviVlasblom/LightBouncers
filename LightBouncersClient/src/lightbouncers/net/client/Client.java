@@ -1,5 +1,6 @@
 package lightbouncers.net.client;
 
+import javafx.util.Pair;
 import lightbouncers.Main;
 import lightbouncers.math.Vector2D;
 import lightbouncers.net.PlayerObject;
@@ -19,6 +20,8 @@ import org.json.simple.parser.ParseException;
 import java.io.*;
 import java.net.Socket;
 import java.util.ArrayList;
+import java.util.LinkedList;
+import java.util.Queue;
 
 public class Client
 {
@@ -38,6 +41,8 @@ public class Client
     private World world;
     private ArrayList<String> lobby;
 
+    public Queue<String> sends;
+
     private Client(String host, int port, ITCPClientReceiver receiver, ILobbyUpdate lobbyUpdate)
     {
         this.host = host;
@@ -48,6 +53,7 @@ public class Client
         this.receiver = receiver;
         this.lobbyUpdate = lobbyUpdate;
         this.lobby = new ArrayList<String>();
+        this.sends = new LinkedList<String>();
         this.listenerThread = new Thread("ClientSocketListener"){
             public void run()
             {
@@ -78,7 +84,8 @@ public class Client
                             {
                                 JSONObject jsonObject = SessionJSONUtil.getPlayerObjectJson(playerObject);
                                 jsonObject.put("command", "updateposition");
-                                sendUTF(jsonObject.toJSONString());
+                                //sendUTF(jsonObject.toJSONString());
+                                sends.add(jsonObject.toJSONString());
                                 System.out.println("Client send: " + jsonObject.toJSONString());
                             }
                             else
@@ -95,6 +102,20 @@ public class Client
                 }
             }
         };
+
+        Thread sendsThread = new Thread(){
+            public void run()
+            {
+                while(isConnected)
+                {
+                    if(sends.size() != 0)
+                    {
+                        sendUTF(sends.poll());
+                    }
+                }
+            }
+        };
+        sendsThread.start();
     }
 
     public boolean connect(String username)
@@ -269,7 +290,7 @@ public class Client
                     Vector2D velocity = new Vector2D(Double.parseDouble(playerObject.get("velocityx").toString()), Double.parseDouble(playerObject.get("velocityy").toString()));
                     String username = playerObject.get("username").toString();
 
-                    if(!world.getPlayer().getName().equals(username))
+                    if(world != null && !world.getPlayer().getName().equals(username))
                     {
                         for(Pawn playerActor : this.world.getPlayerActors())
                         {

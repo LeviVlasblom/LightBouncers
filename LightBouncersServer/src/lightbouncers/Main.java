@@ -8,7 +8,7 @@ public class Main
 {
     public static void main(String[] args)
     {
-        Server server = new Server(4509);
+        Server server = new Server(25575);
         server.start();
         boolean isRunning = true;
 

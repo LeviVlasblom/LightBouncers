@@ -46,7 +46,7 @@ public class Viewport extends Canvas implements ILobbyUpdate
 //        this.player = new LightBouncer(new Vector2D(100, 100), 0.0, world, 2.0, 40.0, 1.0, Main.username);
 //        this.world.setPlayer(this.player);
 
-        Client client = Client.getInstance("localhost", 4509, null, this);
+        Client client = Client.getInstance("localhost", 25575, null, this);
         client.connect(Main.username);
         //client.setWorld(this.world);
         new AnimationTimer() {

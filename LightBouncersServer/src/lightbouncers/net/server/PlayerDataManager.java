@@ -1,5 +1,6 @@
 package lightbouncers.net.server;
 
+import javafx.util.Pair;
 import lightbouncers.math.Vector2D;
 import lightbouncers.net.PlayerObject;
 import lightbouncers.net.ProjectileObject;
@@ -46,12 +47,13 @@ public class PlayerDataManager implements Serializable
             {
                 while(isConnected && session.getServer().isRunning())
                 {
+                    //Thread.yield();
                     listen(clientSocket);
-                    try {
-                        Thread.sleep(10);
-                    } catch (InterruptedException ex) {
-                        ex.printStackTrace();
-                    }
+//                    try {
+//                        Thread.sleep(10);
+//                    } catch (InterruptedException ex) {
+//                        ex.printStackTrace();
+//                    }
                 }
             }
         };
@@ -78,7 +80,8 @@ public class PlayerDataManager implements Serializable
 
                 if(clientInput != null)
                 {
-                    this.session.receiveUTFData(clientInput, socket);
+                    this.session.receives.add(new Pair<String, Socket>(clientInput, socket));
+                    //this.session.receiveUTFData(clientInput, socket);
                 }
             }
             else
