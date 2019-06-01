@@ -2,11 +2,14 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="b7d9fc77-5780-4743-8edd-9b499bdf0ba2" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/src/lightbouncers/net/newserver/ServerThread.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../LightBouncersClient/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../LightBouncersClient/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../LightBouncersClient/src/lightbouncers/gui/Viewport.java" beforeDir="false" afterPath="$PROJECT_DIR$/../LightBouncersClient/src/lightbouncers/gui/Viewport.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../LightBouncersClient/src/lightbouncers/net/PlayerObject.java" beforeDir="false" afterPath="$PROJECT_DIR$/../LightBouncersClient/src/lightbouncers/net/PlayerObject.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../LightBouncersClient/src/lightbouncers/net/client/Client.java" beforeDir="false" afterPath="$PROJECT_DIR$/../LightBouncersClient/src/lightbouncers/net/client/Client.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../LightBouncersClient/src/lightbouncers/objects/items/weapons/guns/AutomaticPulseRifle.java" beforeDir="false" afterPath="$PROJECT_DIR$/../LightBouncersClient/src/lightbouncers/objects/items/weapons/guns/AutomaticPulseRifle.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../LightBouncersClient/src/lightbouncers/objects/pawns/projectiles/Projectile.java" beforeDir="false" afterPath="$PROJECT_DIR$/../LightBouncersClient/src/lightbouncers/objects/pawns/projectiles/Projectile.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/lightbouncers/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/lightbouncers/Main.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/lightbouncers/net/PlayerObject.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/lightbouncers/net/PlayerObject.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/lightbouncers/net/server/PlayerDataManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/lightbouncers/net/server/PlayerDataManager.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/lightbouncers/net/server/Session.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/lightbouncers/net/server/Session.java" afterDir="false" />
     </list>
@@ -24,41 +27,13 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/lightbouncers/Main.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="161">
-              <caret line="7" column="1" selection-start-line="7" selection-start-column="1" selection-end-line="7" selection-end-column="1" />
-              <folding>
-                <element signature="imports" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/lightbouncers/net/server/Server.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="989">
-              <caret line="103" column="43" selection-start-line="103" selection-start-column="43" selection-end-line="103" selection-end-column="43" />
-              <folding>
-                <element signature="imports" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/lightbouncers/net/server/PlayerDataManager.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="416">
-              <caret line="59" column="36" selection-start-line="59" selection-start-column="36" selection-end-line="59" selection-end-column="36" />
+            <state relative-caret-position="504">
+              <caret line="154" column="13" lean-forward="true" selection-start-line="154" selection-start-column="13" selection-end-line="154" selection-end-column="13" />
               <folding>
                 <element signature="imports" expanded="true" />
-                <element signature="e#1238#1707#0" expanded="true" />
-                <element signature="e#1706#1707#0" expanded="true" />
-                <element signature="e#4269#4270#0" expanded="true" />
-                <element signature="e#4303#4304#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -67,11 +42,19 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/lightbouncers/net/server/Session.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="361">
-              <caret line="352" selection-start-line="352" selection-end-line="352" />
+            <state relative-caret-position="440">
+              <caret line="152" lean-forward="true" selection-start-line="152" selection-end-line="152" />
               <folding>
                 <element signature="imports" expanded="true" />
-                <element signature="e#9068#9082#0" expanded="true" />
+                <element signature="e#714#730#0" expanded="true" />
+                <element signature="method#arePlayersReady#0;class#Session#0" />
+                <element signature="method#stop#0;class#Session#0" />
+                <element signature="method#broadcastObject#0;class#Session#0" />
+                <element signature="method#receiveObjectData#0;class#Session#0" />
+                <element signature="method#sendObject#0;class#Session#0" />
+                <element signature="method#getAllPlayers#0;class#Session#0" />
+                <element signature="method#getAllProjectiles#0;class#Session#0" />
+                <element signature="method#handleObjectReceive#0;class#Session#0" />
               </folding>
             </state>
           </provider>
@@ -105,22 +88,25 @@
         <option value="$PROJECT_DIR$/src/lightbouncers/net/server/JSONUtil.java" />
         <option value="$PROJECT_DIR$/src/lightbouncers/math/Vector2D.java" />
         <option value="$PROJECT_DIR$/src/lightbouncers/net/server/SessionObject.java" />
-        <option value="$PROJECT_DIR$/src/lightbouncers/net/PlayerObject.java" />
         <option value="$PROJECT_DIR$/src/lightbouncers/net/ProjectileObject.java" />
-        <option value="$PROJECT_DIR$/src/lightbouncers/net/server/SessionJSONUtil.java" />
         <option value="$PROJECT_DIR$/src/lightbouncers/net/server/PlayerData.java" />
         <option value="$PROJECT_DIR$/src/lightbouncers/net/PlayerData.java" />
         <option value="$PROJECT_DIR$/src/lightbouncers/net/SessionData.java" />
         <option value="$PROJECT_DIR$/src/lightbouncers/net/server/Server.java" />
         <option value="$PROJECT_DIR$/src/lightbouncers/net/server/TestSession.java" />
         <option value="$PROJECT_DIR$/src/lightbouncers/Main.java" />
+        <option value="$PROJECT_DIR$/src/lightbouncers/net/newserver/Server.java" />
+        <option value="$PROJECT_DIR$/src/lightbouncers/net/newserver/Session.java" />
+        <option value="$PROJECT_DIR$/src/lightbouncers/net/newserver/ServerThread.java" />
         <option value="$PROJECT_DIR$/src/lightbouncers/net/server/Session.java" />
+        <option value="$PROJECT_DIR$/src/lightbouncers/net/PlayerObject.java" />
+        <option value="$PROJECT_DIR$/src/lightbouncers/net/server/SessionJSONUtil.java" />
         <option value="$PROJECT_DIR$/src/lightbouncers/net/server/PlayerDataManager.java" />
       </list>
     </option>
   </component>
   <component name="ProjectFrameBounds" extendedState="6">
-    <option name="x" value="-8" />
+    <option name="x" value="1912" />
     <option name="y" value="-8" />
     <option name="width" value="1936" />
     <option name="height" value="1056" />
@@ -180,7 +166,7 @@
     </panes>
   </component>
   <component name="PropertiesComponent">
-    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1559402620217" />
+    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1559427894375" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="project.structure.last.edited" value="Libraries" />
     <property name="project.structure.proportion" value="0.0" />
@@ -238,10 +224,10 @@
     <servers />
   </component>
   <component name="ToolWindowManager">
-    <frame x="-8" y="-8" width="1936" height="1056" extended-state="6" />
+    <frame x="1912" y="-8" width="1936" height="1056" extended-state="6" />
     <editor active="true" />
     <layout>
-      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.26066098" />
+      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.26332623" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Image Layers" order="2" />
       <window_info id="Designer" order="3" />
@@ -250,15 +236,15 @@
       <window_info id="Favorites" order="6" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" />
-      <window_info anchor="bottom" id="Run" order="2" sideWeight="0.49946696" weight="0.32998884" />
-      <window_info active="true" anchor="bottom" id="Debug" order="3" sideWeight="0.4989339" visible="true" weight="0.38684505" />
+      <window_info anchor="bottom" id="Run" order="2" sideWeight="0.49946696" weight="0.32936078" />
+      <window_info anchor="bottom" id="Debug" order="3" sideWeight="0.4989339" weight="0.38678223" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
       <window_info anchor="bottom" id="TODO" order="6" />
       <window_info anchor="bottom" id="Terminal" order="7" weight="0.32998884" />
       <window_info anchor="bottom" id="Event Log" order="8" sideWeight="0.5010661" side_tool="true" weight="0.38684505" />
       <window_info anchor="bottom" id="Version Control" order="9" />
-      <window_info anchor="bottom" id="Messages" order="10" weight="0.32998884" />
+      <window_info anchor="bottom" id="Messages" order="10" weight="0.32936078" />
       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
       <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
@@ -298,18 +284,6 @@
       <window_info anchor="right" id="Palette&#9;" order="7" />
     </layout-to-restore>
   </component>
-  <component name="XDebuggerManager">
-    <breakpoint-manager>
-      <breakpoints>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/lightbouncers/net/server/Session.java</url>
-          <line>328</line>
-          <properties />
-          <option name="timeStamp" value="23" />
-        </line-breakpoint>
-      </breakpoints>
-    </breakpoint-manager>
-  </component>
   <component name="editorHistoryManager">
     <entry file="file://$PROJECT_DIR$/src/lightbouncers/net/app/server/LightbouncersServer.java" />
     <entry file="file://$PROJECT_DIR$/src/lightbouncers/net/client/ITCPClientReceiver.java" />
@@ -329,16 +303,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="575">
           <caret line="34" column="5" lean-forward="true" selection-start-line="34" selection-start-column="5" selection-end-line="34" selection-end-column="5" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/lightbouncers/net/PlayerObject.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="598">
-          <caret line="35" lean-forward="true" selection-start-line="35" selection-end-line="35" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
@@ -376,16 +340,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/lightbouncers/net/server/SessionJSONUtil.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="376">
-          <caret line="17" column="26" lean-forward="true" selection-start-line="17" selection-start-column="26" selection-end-line="17" selection-end-column="26" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="jar://C:/Program Files/Java/jdk1.8.0_152/src.zip!/java/lang/StringBuffer.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="193">
@@ -414,20 +368,91 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/lightbouncers/Main.java">
+    <entry file="jar://C:/Program Files/Java/jdk1.8.0_152/javafx-src.zip!/javafx/util/Pair.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="161">
-          <caret line="7" column="1" selection-start-line="7" selection-start-column="1" selection-end-line="7" selection-end-column="1" />
+        <state relative-caret-position="239">
+          <caret line="66" selection-start-line="66" selection-end-line="66" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://C:/Program Files/Java/jdk1.8.0_152/src.zip!/java/util/LinkedList.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="187">
+          <caret line="965" selection-start-line="965" selection-end-line="965" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://C:/Program Files/Java/jdk1.8.0_152/src.zip!/java/net/SocketOutputStream.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="463">
+          <caret line="110" selection-start-line="110" selection-end-line="110" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/lightbouncers/net/server/Server.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1513">
+          <caret line="89" column="10" lean-forward="true" selection-start-line="89" selection-start-column="10" selection-end-line="89" selection-end-column="10" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/lightbouncers/net/server/Server.java">
+    <entry file="file://$PROJECT_DIR$/src/lightbouncers/net/newserver/ServerThread.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="989">
-          <caret line="103" column="43" selection-start-line="103" selection-start-column="43" selection-end-line="103" selection-end-column="43" />
+        <state relative-caret-position="357">
+          <caret line="21" lean-forward="true" selection-start-line="21" selection-end-line="21" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="e#433#434#0" expanded="true" />
+            <element signature="e#481#482#0" expanded="true" />
+            <element signature="method#closeConnection#0;class#ServerThread#0" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/lightbouncers/net/newserver/Server.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="255">
+          <caret line="15" column="27" lean-forward="true" selection-start-line="15" selection-start-column="27" selection-end-line="15" selection-end-column="27" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/lightbouncers/net/newserver/Session.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="221">
+          <caret line="13" column="34" lean-forward="true" selection-start-line="13" selection-start-column="34" selection-end-line="13" selection-end-column="34" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/lightbouncers/Main.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="595">
+          <caret line="35" lean-forward="true" selection-start-line="35" selection-end-line="35" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/lightbouncers/net/server/SessionJSONUtil.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="306">
+          <caret line="20" lean-forward="true" selection-start-line="20" selection-end-line="20" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/lightbouncers/net/PlayerObject.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="476">
+          <caret line="37" lean-forward="true" selection-start-line="37" selection-end-line="37" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
@@ -436,25 +461,29 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/lightbouncers/net/server/Session.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="361">
-          <caret line="352" selection-start-line="352" selection-end-line="352" />
+        <state relative-caret-position="440">
+          <caret line="152" lean-forward="true" selection-start-line="152" selection-end-line="152" />
           <folding>
             <element signature="imports" expanded="true" />
-            <element signature="e#9068#9082#0" expanded="true" />
+            <element signature="e#714#730#0" expanded="true" />
+            <element signature="method#arePlayersReady#0;class#Session#0" />
+            <element signature="method#stop#0;class#Session#0" />
+            <element signature="method#broadcastObject#0;class#Session#0" />
+            <element signature="method#receiveObjectData#0;class#Session#0" />
+            <element signature="method#sendObject#0;class#Session#0" />
+            <element signature="method#getAllPlayers#0;class#Session#0" />
+            <element signature="method#getAllProjectiles#0;class#Session#0" />
+            <element signature="method#handleObjectReceive#0;class#Session#0" />
           </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/lightbouncers/net/server/PlayerDataManager.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="416">
-          <caret line="59" column="36" selection-start-line="59" selection-start-column="36" selection-end-line="59" selection-end-column="36" />
+        <state relative-caret-position="504">
+          <caret line="154" column="13" lean-forward="true" selection-start-line="154" selection-start-column="13" selection-end-line="154" selection-end-column="13" />
           <folding>
             <element signature="imports" expanded="true" />
-            <element signature="e#1238#1707#0" expanded="true" />
-            <element signature="e#1706#1707#0" expanded="true" />
-            <element signature="e#4269#4270#0" expanded="true" />
-            <element signature="e#4303#4304#0" expanded="true" />
           </folding>
         </state>
       </provider>

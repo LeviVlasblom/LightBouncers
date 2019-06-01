@@ -2,25 +2,34 @@ package lightbouncers.objects.items.weapons.guns;
 
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.paint.Color;
+import lightbouncers.Main;
 import lightbouncers.math.Vector2D;
+import lightbouncers.net.ProjectileObject;
 import lightbouncers.net.client.Client;
+import lightbouncers.net.client.SessionJSONUtil;
 import lightbouncers.objects.Actor;
 import lightbouncers.objects.pawns.projectiles.Projectile;
 import lightbouncers.world.World;
+import org.json.simple.JSONObject;
 
 public class AutomaticPulseRifle extends Gun
 {
     public AutomaticPulseRifle(Vector2D worldPosition, double rotation, World world)
     {
-        super(worldPosition, rotation, world, FireType.FULLAUTO, 2000);
+        super(worldPosition, rotation, world, FireType.FULLAUTO, 300);
     }
 
     @Override
     protected void fire()
     {
-        Projectile projectile = new Projectile(this.worldPosition, this.rotation, this.world, 20.0, 400.0, 1.0, Vector2D.fromAngleWithPosition(Vector2D.zero(), this.rotation, 10).normalized());
+        Projectile projectile = new Projectile(this.worldPosition, this.rotation, this.world, 20.0, 400.0, 1.0, Vector2D.fromAngleWithPosition(Vector2D.zero(), this.rotation, 10).normalized(), 6);
         //AutomaticPulseRifleProjectile projectile = new AutomaticPulseRifleProjectile(this.worldPosition, this.rotation, this.world, Vector2D.fromAngleWithPosition(Vector2D.zero(), this.rotation, 10).normalized());
         this.world.addProjectile(projectile);
+
+        ProjectileObject projectileObject = new ProjectileObject(projectile.getWorldPosition(), Vector2D.fromAngleWithPosition(this.worldPosition, this.rotation, 20.0), projectile.getRadius(), Main.username);
+        JSONObject jsonObject = SessionJSONUtil.getProjectileObjectJson(projectileObject);
+        jsonObject.put("command", "addprojectile");
+        Client.getInstance("", 0, null, null).sendUTF(jsonObject.toJSONString());
     }
 
     @Override

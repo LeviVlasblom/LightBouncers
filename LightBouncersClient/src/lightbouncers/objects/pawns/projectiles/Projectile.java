@@ -9,11 +9,14 @@ import lightbouncers.world.World;
 
 public class Projectile extends Pawn
 {
-    public Projectile(Vector2D position, double rotation, World world, double maxVelocity, double acceleration, double scale, Vector2D direction)
+    private double radius;
+
+    public Projectile(Vector2D position, double rotation, World world, double maxVelocity, double acceleration, double scale, Vector2D direction, double radius)
     {
         super(position, rotation, world, maxVelocity, acceleration, scale);
         this.isMoving = true;
         this.direction = direction;
+        this.radius = radius;
     }
 
     @Override
@@ -26,7 +29,7 @@ public class Projectile extends Pawn
     public void draw(GraphicsContext graphicsContext)
     {
         graphicsContext.setFill(Color.GREEN);
-        graphicsContext.fillOval(this.worldPosition.x - 4, this.worldPosition.y - 4, 8, 8);
+        graphicsContext.fillOval(this.worldPosition.x - this.radius, this.worldPosition.y - this.radius, this.radius * 2, this.radius * 2);
     }
 
     @Override
@@ -45,5 +48,10 @@ public class Projectile extends Pawn
     public Vector2D getClosestPoint(Vector2D point)
     {
         return null;
+    }
+
+    public double getRadius()
+    {
+        return this.radius;
     }
 }

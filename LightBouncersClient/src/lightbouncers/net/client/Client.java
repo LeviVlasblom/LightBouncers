@@ -41,8 +41,6 @@ public class Client
     private World world;
     private ArrayList<String> lobby;
 
-    public Queue<String> sends;
-
     private Client(String host, int port, ITCPClientReceiver receiver, ILobbyUpdate lobbyUpdate)
     {
         this.host = host;
@@ -53,7 +51,6 @@ public class Client
         this.receiver = receiver;
         this.lobbyUpdate = lobbyUpdate;
         this.lobby = new ArrayList<String>();
-        this.sends = new LinkedList<String>();
         this.listenerThread = new Thread("ClientSocketListener"){
             public void run()
             {
@@ -64,7 +61,7 @@ public class Client
             }
         };
 
-        this.gameThread = new Thread("GameSocketListener"){
+        this.gameThread = new Thread(){
             public void run()
             {
                 while(isConnected)
@@ -79,14 +76,13 @@ public class Client
 //                                e.printStackTrace();
 //                            }
                             PlayerCharacter playerCharacter = world.getPlayer();
-                            PlayerObject playerObject = new PlayerObject(playerCharacter.getWorldPosition(), playerCharacter.getVelocity(), playerCharacter.getRadius(), Main.username);
+                            PlayerObject playerObject = new PlayerObject(playerCharacter.getWorldPosition(), playerCharacter.getVelocity(), playerCharacter.getRadius(), Main.username, playerCharacter.getRotation());
                             if(!readWriteObjectMode)
                             {
                                 JSONObject jsonObject = SessionJSONUtil.getPlayerObjectJson(playerObject);
                                 jsonObject.put("command", "updateposition");
-                                //sendUTF(jsonObject.toJSONString());
-                                sends.add(jsonObject.toJSONString());
-                                System.out.println("Client send: " + jsonObject.toJSONString());
+                                sendUTF(jsonObject.toJSONString());
+                                //sends.add(jsonObject.toJSONString());
                             }
                             else
                             {
@@ -102,20 +98,6 @@ public class Client
                 }
             }
         };
-
-        Thread sendsThread = new Thread(){
-            public void run()
-            {
-                while(isConnected)
-                {
-                    if(sends.size() != 0)
-                    {
-                        sendUTF(sends.poll());
-                    }
-                }
-            }
-        };
-        sendsThread.start();
     }
 
     public boolean connect(String username)
@@ -170,15 +152,6 @@ public class Client
                 DataOutputStream clientOutput = new DataOutputStream(this.clientSocket.getOutputStream());
 
                 String serverInput = clientInput.readLine();
-
-//                DataInputStream clientInput = new DataInputStream(this.clientSocket.getInputStream());
-//                String serverInput = "";
-//                byte[] buffer = new byte[clientInput.available()];
-//                for(int i = 0; i < clientInput.available(); i++)
-//                {
-//                    buffer[i] = clientInput.readByte();
-//                }
-//                serverInput = new String(buffer);
 
                 if(serverInput != null)
                 {
@@ -289,6 +262,7 @@ public class Client
                     Vector2D position = new Vector2D(Double.parseDouble(playerObject.get("positionx").toString()), Double.parseDouble(playerObject.get("positiony").toString()));
                     Vector2D velocity = new Vector2D(Double.parseDouble(playerObject.get("velocityx").toString()), Double.parseDouble(playerObject.get("velocityy").toString()));
                     String username = playerObject.get("username").toString();
+                    double rotation = Double.parseDouble(playerObject.get("rotation").toString());
 
                     if(world != null && !world.getPlayer().getName().equals(username))
                     {
@@ -298,6 +272,7 @@ public class Client
                             {
                                 playerActor.setWorldPosition(position);
                                 playerActor.setVelocity(velocity);
+                                playerActor.setRotation(rotation);
                                 //playerActor.setDirection(velocity.normalized());
                             }
                         }
@@ -339,8 +314,9 @@ public class Client
             {
                 Vector2D position = new Vector2D(Double.parseDouble(jsonObject.get("positionx").toString()), Double.parseDouble(jsonObject.get("positiony").toString()));
                 Vector2D velocity = new Vector2D(Double.parseDouble(jsonObject.get("velocityx").toString()), Double.parseDouble(jsonObject.get("velocityy").toString()));
+                double radius = Double.parseDouble(jsonObject.get("radius").toString());
                 String username = jsonObject.get("username").toString();
-                this.world.addProjectile(new Projectile(position, Vector2D.getAngle(velocity), this.world, 20.0, 400.0, 1.0, velocity.normalized()));
+                this.world.addProjectile(new Projectile(position, Vector2D.getAngle(velocity), this.world, 20.0, 400.0, 1.0, velocity.normalized(), radius));
             }
             else if(command.equals("startmatch"))
             {
@@ -386,6 +362,7 @@ public class Client
                         //playerActor.setWorldPosition(playerObject.getPosition());
                         playerActor.setVelocity(playerObject.getVelocity());
                         playerActor.setDirection(playerObject.getVelocity().normalized());
+                        playerActor.setRotation(playerObject.getRotation());
                     }
                 }
             }

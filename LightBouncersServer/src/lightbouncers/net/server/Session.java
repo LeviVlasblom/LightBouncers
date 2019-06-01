@@ -16,11 +16,13 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.Queue;
+import java.util.concurrent.ConcurrentHashMap;
 
 public class Session
 {
     private int maxPlayerCount;
-    private HashMap<Socket, PlayerDataManager> sessionData;
+    private ConcurrentHashMap<Socket, PlayerDataManager> sessionData;
+    private ConcurrentHashMap<String, Socket> activeClients = new ConcurrentHashMap<String, Socket>();
 
     private Thread sessionThread;
     private Server server;
@@ -29,22 +31,16 @@ public class Session
     private JSONParser jsonParser;
     private boolean readWriteObjectMode;
     private boolean sessionIsConnected;
-    public Queue<String> broadcasts;
-    public Queue<Pair<String, Socket>> sends;
-    public Queue<Pair<String, Socket>> receives;
 
     public Session(Server server, int maxPlayerCount)
     {
         this.server = server;
         this.maxPlayerCount = maxPlayerCount;
-        this.sessionData = new HashMap<Socket, PlayerDataManager>();
+        this.sessionData = new ConcurrentHashMap<Socket, PlayerDataManager>();
         this.gameIsInProgress = false;
         this.jsonParser = new JSONParser();
         this.readWriteObjectMode = false;
         this.sessionIsConnected = true;
-        this.broadcasts = new LinkedList<String>();
-        this.sends = new LinkedList<Pair<String, Socket>>();
-        this.receives = new LinkedList<Pair<String, Socket>>();
         this.sessionThread = new Thread(){
             public void run()
             {
@@ -62,8 +58,8 @@ public class Session
                         {
                             JSONObject jsonObject = new JSONObject();
                             jsonObject.put("command", "startmatch");
-                            broadcasts.add(jsonObject.toJSONString());
-                            //broadcastUTF(jsonObject.toJSONString());
+                            //broadcasts.add(jsonObject.toJSONString());
+                            broadcastUTF(jsonObject.toJSONString());
                             gameIsInProgress = true;
                         }
                         else
@@ -75,8 +71,8 @@ public class Session
                     {
                         if(!readWriteObjectMode)
                         {
-                            broadcasts.add(getSessionObjectsJson());
-                            //broadcastUTF(getSessionObjectsJson());
+                            //broadcasts.add(getSessionObjectsJson());
+                            broadcastUTF(getSessionObjectsJson());
                         }
                         else
                         {
@@ -92,61 +88,6 @@ public class Session
             }
         };
         this.sessionThread.start();
-
-        Thread broadcastsThread = new Thread(){
-            public void run()
-            {
-                while(sessionIsConnected)
-                {
-                    Thread.yield();
-                    if(broadcasts.size() != 0)
-                    {
-                        broadcastUTF(broadcasts.poll());
-                    }
-                }
-            }
-        };
-        broadcastsThread.start();
-
-        Thread sendsThread = new Thread(){
-            public void run()
-            {
-                while(sessionIsConnected)
-                {
-                    try {
-                        Thread.sleep(2);
-                    } catch (InterruptedException e) {
-                        e.printStackTrace();
-                    }
-                    if(sends.size() != 0)
-                    {
-                        Pair<String, Socket> pair = sends.poll();
-                        sendUTF(pair.getKey(), pair.getValue());
-                    }
-                }
-            }
-        };
-        sendsThread.start();
-
-        Thread receivesThread = new Thread(){
-            public void run()
-            {
-                while(sessionIsConnected)
-                {
-                    try {
-                        Thread.sleep(2);
-                    } catch (InterruptedException e) {
-                        e.printStackTrace();
-                    }
-                    if(receives.size() != 0)
-                    {
-                        Pair<String, Socket> pair = receives.poll();
-                        receiveUTFData(pair.getKey(), pair.getValue());
-                    }
-                }
-            }
-        };
-        receivesThread.start();
     }
 
     private boolean arePlayersReady()
@@ -190,24 +131,52 @@ public class Session
         {
             PlayerDataManager playerData = new PlayerDataManager(clientSocket, this);
             this.sessionData.put(clientSocket, playerData);
+            this.activeClients.put(clientSocket.getInetAddress().getHostAddress(), clientSocket);
             System.out.println("Client connected with ip: " + clientSocket.getInetAddress().getHostAddress() + " on port: " + clientSocket.getPort());
         }
     }
 
-    private void broadcastUTF(String data)
+    protected synchronized void broadcastUTF(String data)
     {
+//        for(String clientHost : activeClients.keySet())
+//        {
+//            try
+//            {
+//                DataOutputStream serverOutput = new DataOutputStream(this.activeClients.get(clientHost).getOutputStream());
+//                serverOutput.writeBytes(data + '\n');
+//            }
+//            catch (Exception e)
+//            {
+//                e.printStackTrace();
+//            }
+//        }
+
         for(PlayerDataManager playerData : sessionData.values())
         {
             try
             {
-                DataOutputStream serverOutput = new DataOutputStream(playerData.getClientSocket().getOutputStream());
-                serverOutput.writeBytes(data + '\n');
+//                DataOutputStream serverOutput = new DataOutputStream(playerData.getClientSocket().getOutputStream());
+//                serverOutput.writeBytes(data + '\n');
+                playerData.sendUTF(data);
             }
             catch (Exception e)
             {
                 e.printStackTrace();
             }
         }
+
+//        for(Socket socket : sessionData.keySet())
+//        {
+//            try
+//            {
+//                DataOutputStream serverOutput = new DataOutputStream(socket.getOutputStream());
+//                serverOutput.writeBytes(data + '\n');
+//            }
+//            catch (Exception e)
+//            {
+//                e.printStackTrace();
+//            }
+//        }
     }
 
     public void broadcastObject(Object data)
@@ -226,14 +195,6 @@ public class Session
         }
     }
 
-    protected void receiveUTFData(String data, Socket socket)
-    {
-        if(socket != null && !data.isEmpty())
-        {
-            handleJsonReceive(data, socket);
-            System.out.println("Server received: " + data);
-        }
-    }
 
     public void receiveObjectData(Object data, Socket socket)
     {
@@ -244,22 +205,6 @@ public class Session
         }
     }
 
-    public void sendUTF(String data, Socket socket)
-    {
-        try
-        {
-            if(socket != null)
-            {
-                DataOutputStream serverOutput = new DataOutputStream(socket.getOutputStream());
-                serverOutput.writeBytes(data + '\n');
-                System.out.println("Server send: " + data);
-            }
-        }
-        catch (Exception e)
-        {
-            e.printStackTrace();
-        }
-    }
 
     public void sendObject(Object data, Socket socket)
     {
@@ -302,7 +247,7 @@ public class Session
         return projectileObjects;
     }
 
-    private String getSessionObjectsJson()
+    private synchronized String getSessionObjectsJson()
     {
         JSONObject jsonObject = new JSONObject();
         JSONArray playersJson = new JSONArray();
@@ -322,72 +267,6 @@ public class Session
         jsonObject.put("players", playersJson);
         jsonObject.put("projectiles", projectilesJson);
         return jsonObject.toJSONString();
-    }
-
-    protected void handleJsonReceive(String jsonString, Socket socket)
-    {
-        try
-        {
-            JSONObject jsonObject = (JSONObject)this.jsonParser.parse(jsonString);
-            String command = jsonObject.get("command").toString();
-
-            if(command.toLowerCase().equals("addprojectile"))
-            {
-                Vector2D position = new Vector2D(Double.parseDouble(jsonObject.get("positionx").toString()), Double.parseDouble(jsonObject.get("positiony").toString()));
-                Vector2D velocity = new Vector2D(Double.parseDouble(jsonObject.get("velocityx").toString()), Double.parseDouble(jsonObject.get("velocityy").toString()));
-                double radius = Double.parseDouble(jsonObject.get("radius").toString());
-                String username = jsonObject.get("username").toString();
-                ProjectileObject projectile = new ProjectileObject(position, velocity, radius, username);
-                this.sessionData.get(socket).addProjectile(projectile);
-            }
-            else if(command.toLowerCase().equals("updateposition"))
-            {
-                Vector2D position = new Vector2D(Double.parseDouble(jsonObject.get("positionx").toString()), Double.parseDouble(jsonObject.get("positiony").toString()));
-                Vector2D velocity = new Vector2D(Double.parseDouble(jsonObject.get("velocityx").toString()), Double.parseDouble(jsonObject.get("velocityy").toString()));
-                this.sessionData.get(socket).getPlayer().setPosition(position);
-                this.sessionData.get(socket).getPlayer().setVelocity(velocity);
-            }
-            else if(command.toLowerCase().equals("setusername"))
-            {
-                String username = jsonObject.get("username").toString();
-                this.sessionData.get(socket).getPlayer().setUsername(username);
-
-                JSONObject addPlayerJSON = new JSONObject();
-                addPlayerJSON.put("command", "addplayer");
-                addPlayerJSON.put("username", username);
-
-                this.broadcasts.add(addPlayerJSON.toJSONString());
-                //broadcastUTF(addPlayerJSON.toJSONString());
-
-                for(PlayerDataManager playerDataManager : this.sessionData.values())
-                {
-                    JSONObject newlayerJSON = new JSONObject();
-                    newlayerJSON.put("command", "addplayer");
-                    newlayerJSON.put("username", playerDataManager.getPlayer().getUsername());
-                    if(!playerDataManager.getPlayer().getUsername().equals(username))
-                    {
-                        this.sends.add(new Pair<String, Socket>(newlayerJSON.toJSONString(), socket));
-                        //sendUTF(newlayerJSON.toJSONString(), socket);
-                    }
-                }
-            }
-            else if(command.toLowerCase().equals("ready"))
-            {
-                String username = jsonObject.get("username").toString();
-                this.sessionData.get(socket).setReady(true);
-
-                JSONObject readyPlayerJSON = new JSONObject();
-                readyPlayerJSON.put("command", "ready");
-                readyPlayerJSON.put("username", username);
-
-                this.broadcasts.add(readyPlayerJSON.toJSONString());
-                //broadcastUTF(readyPlayerJSON.toJSONString());
-            }
-        }
-        catch (ParseException e)
-        {
-            e.printStackTrace();
-        }
     }
 
     private void handleObjectReceive(Object data, Socket socket)
@@ -422,7 +301,7 @@ public class Session
         return this.sessionData.size();
     }
 
-    public HashMap<Socket, PlayerDataManager> getSessionData()
+    public ConcurrentHashMap<Socket, PlayerDataManager> getSessionData()
     {
         return sessionData;
     }

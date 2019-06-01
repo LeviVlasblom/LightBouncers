@@ -104,4 +104,11 @@ public class LightBouncer extends PlayerCharacter
     {
         return Vector2D.fromAngleWithPosition(this.worldPosition, Vector2D.getAngle(Vector2D.direction(this.worldPosition, point)), this.radius);
     }
+
+    @Override
+    public void setRotation(double rotation)
+    {
+        this.rotation = rotation;
+        this.light.setRotation(Vector2D.getAngle(direction));
+    }
 }

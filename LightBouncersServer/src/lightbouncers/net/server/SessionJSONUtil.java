@@ -11,6 +11,7 @@ public class SessionJSONUtil
         JSONObject objectJson = new JSONObject();
         objectJson.put("username", playerObject.getUsername());
         objectJson.put("radius", playerObject.getRadius());
+        objectJson.put("rotation", playerObject.getRotation());
         objectJson.put("positionx", playerObject.getPosition().x);
         objectJson.put("positiony", playerObject.getPosition().y);
         objectJson.put("velocityx", playerObject.getVelocity().x);
