@@ -68,7 +68,7 @@ public class Client
                         if(world != null)
                         {
                             PlayerCharacter playerCharacter = world.getPlayer();
-                            PlayerObject playerObject = new PlayerObject(playerCharacter.getWorldPosition(), playerCharacter.getVelocity(), playerCharacter.getRadius(), "Test");
+                            PlayerObject playerObject = new PlayerObject(playerCharacter.getWorldPosition(), playerCharacter.getVelocity(), playerCharacter.getRadius(), Main.username);
                             if(!readWriteObjectMode)
                             {
                                 JSONObject jsonObject = SessionJSONUtil.getPlayerObjectJson(playerObject);
@@ -305,7 +305,7 @@ public class Client
             else if(command.equals("startmatch"))
             {
                 this.world = new World();
-                this.world.changeLevel(LevelBuilder.loadLevelFromFile(new File("src/lightbouncers/resources/levels/LevelStandard.json"), world));
+                //this.world.changeLevel(LevelBuilder.loadLevelFromFile(new File("src/lightbouncers/resources/levels/LevelStandard.json"), world));
                 this.world.setPlayer(new LightBouncer(new Vector2D(100, 100), 0.0, world, 2.0, 40.0, 1.0, Main.username));
 
                 for(String username : this.lobby)

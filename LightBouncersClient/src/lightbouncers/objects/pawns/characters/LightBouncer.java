@@ -71,7 +71,14 @@ public class LightBouncer extends PlayerCharacter
     @Override
     public void draw(GraphicsContext graphicsContext)
     {
-        this.light.draw(graphicsContext, this.world.getLevel().getEnvironmentObjectsAsActors());
+        if(world.getLevel() != null)
+        {
+            this.light.draw(graphicsContext, this.world.getLevel().getEnvironmentObjectsAsActors());
+        }
+        else
+        {
+            this.light.draw(graphicsContext, null);
+        }
         graphicsContext.setFill(Color.BLUE);
         graphicsContext.fillOval(this.worldPosition.x - this.radius, this.worldPosition.y - this.radius, this.radius * 2, this.radius * 2);
         graphicsContext.setFill(Color.GREEN);

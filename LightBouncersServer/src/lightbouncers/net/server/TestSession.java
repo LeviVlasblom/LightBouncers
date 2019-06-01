@@ -44,12 +44,12 @@ public class TestSession
                     //System.out.println("Session size: " + sessionData.size() + " is in progress: " + gameIsInProgress + " are palyers ready : " + arePlayersReady());
                     if(sessionData.size() > 1 && !gameIsInProgress && arePlayersReady())
                     {
-                        gameIsInProgress = true;
                         if(!readWriteObjectMode)
                         {
                             JSONObject jsonObject = new JSONObject();
                             jsonObject.put("command", "startmatch");
                             broadcastUTF(jsonObject.toJSONString());
+                            gameIsInProgress = true;
                         }
                         else
                         {
