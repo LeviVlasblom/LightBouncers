@@ -147,4 +147,9 @@ public class Player extends Actor implements Serializable
     {
         this.isMovingRight = movingRight;
     }
+
+    public void setPoints(int points)
+    {
+        this.points = points;
+    }
 }
