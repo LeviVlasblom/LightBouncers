@@ -9,7 +9,7 @@ import java.io.Serializable;
 public abstract class Actor implements Serializable
 {
     protected Vector2D position;
-    protected Color color;
+    transient protected Color color;
 
     public Actor(Vector2D position, Color color)
     {

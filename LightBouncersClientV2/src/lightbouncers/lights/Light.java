@@ -50,7 +50,7 @@ public class Light
 //                graphicsContext.fillOval(traceResult.getHitPoint().x - 1, traceResult.getHitPoint().y - 1, 2, 2);
 //            }
 //        }
-        for(double i = 0; i < Math.PI * 2; i += Math.PI / 200)
+        for(double i = 0; i < Math.PI * 2; i += Math.PI / 2000)
         {
             TraceResult2D traceResult = RayMarch.sphereTrace2D(this.position, i, actors, this.range, null);
             graphicsContext.setStroke(this.emissionColor);

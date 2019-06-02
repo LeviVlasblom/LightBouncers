@@ -8,6 +8,7 @@ import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.ButtonType;
+import javafx.scene.control.Label;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.BorderPane;
@@ -40,11 +41,15 @@ public class GameView extends View implements IClientReceiver
     private Ball ball;
     private Light light;
 
+    private Label player1Points;
+    private Label player2Points;
+
     public GameView(int width, int height)
     {
         super(width, height);
         this.player1 = new Player(Color.BLUE, "Test1");
         this.player2 = new Player(Color.BLUE, "Test2");
+        this.setResizable(false);
 
         this.canvas = new Canvas();
         this.canvas.setWidth(width);
@@ -71,7 +76,21 @@ public class GameView extends View implements IClientReceiver
             this.readybutton.setDisable(true);
         });
 
-        Scene scene = new Scene(new Group(this.canvas, readybutton), this.width, this.height);
+        this.player1Points = new Label();
+        this.player1Points.setVisible(false);
+        this.player1Points.setTranslateX(10);
+        this.player1Points.setTranslateY(10);
+        this.player1Points.setFont(new Font("Arial", 12));
+        this.player1Points.setTextFill(Color.WHITE);
+
+        this.player2Points = new Label();
+        this.player2Points.setVisible(false);
+        this.player2Points.setTranslateX(10);
+        this.player2Points.setTranslateY(this.height - 50);
+        this.player2Points.setFont(new Font("Arial", 12));
+        this.player2Points.setTextFill(Color.WHITE);
+
+        Scene scene = new Scene(new Group(this.canvas, this.readybutton, this.player1Points, this.player2Points), this.width, this.height);
 
         scene.setOnKeyPressed(event -> {
             onKeyPressed(event);
@@ -93,7 +112,7 @@ public class GameView extends View implements IClientReceiver
         }
         else
         {
-            Command command = new Command("command", "ready");
+            Command command = new Command("ready", null);
             this.client.send(command);
         }
     }
@@ -110,7 +129,7 @@ public class GameView extends View implements IClientReceiver
             }
             else
             {
-                Command command = new Command("command", "startmoveleft");
+                Command command = new Command("startmoveleft", null);
                 this.client.send(command);
             }
         }
@@ -124,7 +143,7 @@ public class GameView extends View implements IClientReceiver
             }
             else
             {
-                Command command = new Command("command", "startmoveright");
+                Command command = new Command("startmoveright", null);
                 this.client.send(command);
             }
         }
@@ -142,7 +161,7 @@ public class GameView extends View implements IClientReceiver
             }
             else
             {
-                Command command = new Command("command", "stopmoveleft");
+                Command command = new Command("stopmoveleft", null);
                 this.client.send(command);
             }
         }
@@ -156,7 +175,7 @@ public class GameView extends View implements IClientReceiver
             }
             else
             {
-                Command command = new Command("command", "stopmoveright");
+                Command command = new Command("stopmoveright", null);
                 this.client.send(command);
             }
         }
@@ -184,6 +203,8 @@ public class GameView extends View implements IClientReceiver
                 player2.draw(graphicsContext);
                 light.draw(graphicsContext, new ArrayList<Actor>(Arrays.asList(player1, player2)));
                 ball.draw(graphicsContext);
+                player1Points.setText(Integer.toString(player1.getPoints()));
+                player2Points.setText(Integer.toString(player2.getPoints()));
             }
         });
 //        this.ball.draw(graphicsContext);
@@ -193,18 +214,24 @@ public class GameView extends View implements IClientReceiver
     public void onGameStart()
     {
         this.readybutton.setVisible(false);
+        this.player1Points.setVisible(true);
+        this.player2Points.setVisible(true);
     }
 
     @Override
-    public void onGameEnd()
+    public void onGameEnd(String username)
     {
         Platform.runLater(new Runnable() {
             @Override
             public void run() {
+                Alert alert = new Alert(Alert.AlertType.INFORMATION, username + " won the game!", ButtonType.OK);
+                alert.show();
                 clear();
                 readybutton.setText("Ready up!");
                 readybutton.setDisable(false);
                 readybutton.setVisible(true);
+                player1Points.setVisible(false);
+                player2Points.setVisible(false);
             }
         });
     }
@@ -215,8 +242,10 @@ public class GameView extends View implements IClientReceiver
         Platform.runLater(new Runnable() {
             @Override
             public void run() {
-                MultiplayerMenu menuView = new MultiplayerMenu("Lightbouncers",1280, 720);
-                menuView.show();
+//                MenuView menuView = new MenuView(width, height);
+//                menuView.display();
+                MultiplayerMenu multiplayerMenu = new MultiplayerMenu("Lightbouncers", 1280, 720);
+                multiplayerMenu.show();
                 close();
                 Alert alert = new Alert(Alert.AlertType.ERROR, "Connection terminated!", ButtonType.OK);
                 alert.show();
@@ -228,7 +257,9 @@ public class GameView extends View implements IClientReceiver
     public void onUpdate(GameData gameData)
     {
         this.player1.setPosition(gameData.getPlayer1().getPosition());
+        this.player1.setPoints(gameData.getPlayer1().getPoints());
         this.player2.setPosition(gameData.getPlayer2().getPosition());
+        this.player2.setPoints(gameData.getPlayer2().getPoints());
         this.ball.setPosition(gameData.getBall().getPosition());
         this.light.setPosition(gameData.getBall().getPosition());
         draw();

@@ -1,7 +1,5 @@
 package lightbouncers.net.client;
 
-import javafx.scene.control.Alert;
-import javafx.scene.control.ButtonType;
 import javafx.scene.paint.Color;
 import lightbouncers.Main;
 import lightbouncers.game.Ball;
@@ -33,6 +31,9 @@ public class Client
 
     private IClientReceiver clientReceiver;
 
+    private ObjectOutputStream clientOutput;
+    private ObjectInputStream clientInput;
+
     public Client(String host, int port, boolean objectMode)
     {
         this.host = host;
@@ -44,10 +45,10 @@ public class Client
         this.listenerThread = new Thread(){
             public void run()
             {
-                while(isConnected)
-                {
-                    listen();
-                }
+            while(isConnected)
+            {
+                listen();
+            }
             }
         };
     }
@@ -60,6 +61,17 @@ public class Client
             {
                 this.clientSocket = new Socket(this.host, this.port);
                 this.isConnected = true;
+
+                try
+                {
+                    this.clientOutput = new ObjectOutputStream(this.clientSocket.getOutputStream());
+                    this.clientInput = new ObjectInputStream(this.clientSocket.getInputStream());
+                }
+                catch(Exception e)
+                {
+                    e.printStackTrace();
+                }
+
                 this.listenerThread.start();
 
                 if(!this.objectMode)
@@ -94,6 +106,7 @@ public class Client
             {
                 System.out.println("Disconnected from server!");
                 this.isConnected = false;
+                this.clientSocket.close();
             }
         }
         catch (Exception e)
@@ -118,7 +131,7 @@ public class Client
             }
             else
             {
-                ObjectInputStream clientInput = new ObjectInputStream(this.clientSocket.getInputStream());
+                //ObjectInputStream clientInput = new ObjectInputStream(this.clientSocket.getInputStream());
                 Object serverInput = clientInput.readObject();
 
                 if(serverInput != null)
@@ -129,6 +142,7 @@ public class Client
         }
         catch (Exception e)
         {
+            this.gameIsInProgress = false;
             //e.printStackTrace();
             this.clientReceiver.onDisconnect();
             disconnect();
@@ -166,20 +180,20 @@ public class Client
                     Vector2D ballPosition = new Vector2D(Double.parseDouble(ballJson.get("positionx").toString()), Double.parseDouble(ballJson.get("positiony").toString()));
                     Player player1 = new Player(Color.BLUE, player1Json.get("username").toString());
                     player1.setPosition(player1Position);
+                    player1.setPoints(Integer.parseInt(player1Json.get("points").toString()));
                     Player player2 = new Player(Color.BLUE, player1Json.get("username").toString());
                     player2.setPosition(player2Position);
+                    player2.setPoints(Integer.parseInt(player2Json.get("points").toString()));
                     Ball ball = new Ball(ballPosition, 10, Color.ORANGE);
 
                     GameData gameData = new GameData(player1, player2, ball);
                     this.clientReceiver.onUpdate(gameData);
                 }
-                else if(command.equals("players"))
+                else if(command.equals("wongame"))
                 {
+                    String username = jsonData.get("username").toString();
 
-                }
-                else if(command.equals("addplayer"))
-                {
-
+                    this.clientReceiver.onGameEnd(username);
                 }
             }
             else
@@ -197,16 +211,33 @@ public class Client
                 }
                 else if(command.getCommand().equals("update"))
                 {
-                    GameData gameData = (GameData)object;
+                    String data = (String)command.getObject();
+                    JSONObject jsonData = (JSONObject)(new JSONParser()).parse(data);
+                    JSONObject player1Json = (JSONObject)jsonData.get("player1");
+                    JSONObject player2Json = (JSONObject)jsonData.get("player2");
+                    JSONObject ballJson = (JSONObject)jsonData.get("ball");
+
+                    Vector2D player1Position = new Vector2D(Double.parseDouble(player1Json.get("positionx").toString()), Double.parseDouble(player1Json.get("positiony").toString()));
+                    Vector2D player2Position = new Vector2D(Double.parseDouble(player2Json.get("positionx").toString()), Double.parseDouble(player2Json.get("positiony").toString()));
+                    Vector2D ballPosition = new Vector2D(Double.parseDouble(ballJson.get("positionx").toString()), Double.parseDouble(ballJson.get("positiony").toString()));
+                    Player player1 = new Player(Color.BLUE, player1Json.get("username").toString());
+                    player1.setPosition(player1Position);
+                    player1.setPoints(Integer.parseInt(player1Json.get("points").toString()));
+                    Player player2 = new Player(Color.BLUE, player1Json.get("username").toString());
+                    player2.setPosition(player2Position);
+                    player2.setPoints(Integer.parseInt(player2Json.get("points").toString()));
+                    Ball ball = new Ball(ballPosition, 10, Color.ORANGE);
+
+                    GameData gameData = new GameData(player1, player2, ball);
+
+                    //GameData gameData = (GameData)command.getObject();
                     this.clientReceiver.onUpdate(gameData);
                 }
-                else if(command.getCommand().equals("players"))
+                else if(command.getCommand().equals("wongame"))
                 {
+                    String username = (String)command.getObject();
 
-                }
-                else if(command.getCommand().equals("addplayer"))
-                {
-
+                    this.clientReceiver.onGameEnd(username);
                 }
             }
             System.out.println("Client received: " + object);
@@ -232,7 +263,7 @@ public class Client
                 }
                 else
                 {
-                    ObjectOutputStream clientOutput = new ObjectOutputStream(this.clientSocket.getOutputStream());
+                    //ObjectOutputStream clientOutput = new ObjectOutputStream(this.clientSocket.getOutputStream());
                     clientOutput.writeObject(object);
                     clientOutput.flush();
                     System.out.println("Client send: " + object);
