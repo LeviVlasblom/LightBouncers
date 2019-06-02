@@ -18,6 +18,7 @@ import lightbouncers.game.Ball;
 import lightbouncers.game.Player;
 import lightbouncers.lights.Light;
 import lightbouncers.math.Vector2D;
+import lightbouncers.menu.MultiplayerMenu;
 import lightbouncers.net.Command;
 import lightbouncers.net.GameData;
 import lightbouncers.net.client.Client;
@@ -214,8 +215,8 @@ public class GameView extends View implements IClientReceiver
         Platform.runLater(new Runnable() {
             @Override
             public void run() {
-                MenuView menuView = new MenuView(width, height);
-                menuView.display();
+                MultiplayerMenu menuView = new MultiplayerMenu("Lightbouncers",1280, 720);
+                menuView.show();
                 close();
                 Alert alert = new Alert(Alert.AlertType.ERROR, "Connection terminated!", ButtonType.OK);
                 alert.show();

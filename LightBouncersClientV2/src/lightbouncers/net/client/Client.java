@@ -1,5 +1,7 @@
 package lightbouncers.net.client;
 
+import javafx.scene.control.Alert;
+import javafx.scene.control.ButtonType;
 import javafx.scene.paint.Color;
 import lightbouncers.Main;
 import lightbouncers.game.Ball;
