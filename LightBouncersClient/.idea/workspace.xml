@@ -25,6 +25,7 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/lightbouncers/net/client/Client.java">
           <provider selected="true" editor-type-id="text-editor">
+<<<<<<< HEAD
 <<<<<<< Updated upstream
             <state relative-caret-position="151">
               <caret line="299" column="48" lean-forward="true" selection-start-line="299" selection-start-column="48" selection-end-line="299" selection-end-column="48" />
@@ -41,6 +42,10 @@
 =======
             <state relative-caret-position="180">
               <caret line="87" column="37" selection-start-line="87" selection-start-column="32" selection-end-line="87" selection-end-column="37" />
+=======
+            <state relative-caret-position="544">
+              <caret line="32" column="5" selection-start-line="32" selection-start-column="5" selection-end-line="32" selection-end-column="5" />
+>>>>>>> Menu
               <folding>
                 <element signature="imports" expanded="true" />
                 <element signature="e#3818#4103#0" expanded="true" />
@@ -68,6 +73,7 @@
                 <element signature="e#603#604#0" expanded="true" />
 =======
       <file pinned="false" current-in-tab="false">
+<<<<<<< HEAD
         <entry file="file://$PROJECT_DIR$/src/lightbouncers/net/client/SessionJSONUtil.java">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="255">
@@ -269,15 +275,29 @@
             <state relative-caret-position="163">
               <caret line="49" selection-start-line="49" selection-end-line="49" />
 >>>>>>> Stashed changes
+=======
+        <entry file="file://$PROJECT_DIR$/src/lightbouncers/world/World.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="476">
+              <caret line="31" column="31" selection-start-line="31" selection-start-column="31" selection-end-line="31" selection-end-column="31" />
+>>>>>>> Menu
             </state>
           </provider>
         </entry>
       </file>
+<<<<<<< HEAD
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/lightbouncers/gui/Viewport.java">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="1504">
               <caret line="138" lean-forward="true" selection-start-line="138" selection-end-line="138" />
+=======
+      <file pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/src/lightbouncers/Main.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="68">
+              <caret line="8" column="13" selection-start-line="8" selection-start-column="13" selection-end-line="8" selection-end-column="13" />
+>>>>>>> Menu
             </state>
           </provider>
         </entry>
@@ -349,11 +369,19 @@
       </list>
     </option>
   </component>
+<<<<<<< HEAD
   <component name="ProjectFrameBounds">
     <option name="x" value="-8" />
     <option name="y" value="-8" />
     <option name="width" value="1692" />
     <option name="height" value="1056" />
+=======
+  <component name="ProjectFrameBounds" extendedState="6">
+    <option name="x" value="74" />
+    <option name="y" value="-14" />
+    <option name="width" value="1612" />
+    <option name="height" value="876" />
+>>>>>>> Menu
   </component>
   <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
   <component name="ProjectView">
@@ -361,12 +389,17 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
+<<<<<<< HEAD
+=======
+      <pane id="PackagesPane" />
+>>>>>>> Menu
       <pane id="ProjectPane">
         <subPane>
           <expand>
             <path>
               <item name="LightBouncersClient" type="b2602c69:ProjectViewProjectNode" />
               <item name="LightBouncersClient" type="462c0819:PsiDirectoryNode" />
+<<<<<<< HEAD
             </path>
             <path>
               <item name="LightBouncersClient" type="b2602c69:ProjectViewProjectNode" />
@@ -431,10 +464,13 @@
               <item name="objects" type="462c0819:PsiDirectoryNode" />
               <item name="items" type="462c0819:PsiDirectoryNode" />
               <item name="weapons" type="462c0819:PsiDirectoryNode" />
+=======
+>>>>>>> Menu
             </path>
             <path>
               <item name="LightBouncersClient" type="b2602c69:ProjectViewProjectNode" />
               <item name="LightBouncersClient" type="462c0819:PsiDirectoryNode" />
+<<<<<<< HEAD
               <item name="src" type="462c0819:PsiDirectoryNode" />
               <item name="lightbouncers" type="462c0819:PsiDirectoryNode" />
               <item name="objects" type="462c0819:PsiDirectoryNode" />
@@ -449,10 +485,14 @@
               <item name="lightbouncers" type="462c0819:PsiDirectoryNode" />
               <item name="objects" type="462c0819:PsiDirectoryNode" />
               <item name="lights" type="462c0819:PsiDirectoryNode" />
+=======
+              <item name="lib" type="462c0819:PsiDirectoryNode" />
+>>>>>>> Menu
             </path>
             <path>
               <item name="LightBouncersClient" type="b2602c69:ProjectViewProjectNode" />
               <item name="LightBouncersClient" type="462c0819:PsiDirectoryNode" />
+<<<<<<< HEAD
               <item name="src" type="462c0819:PsiDirectoryNode" />
               <item name="lightbouncers" type="462c0819:PsiDirectoryNode" />
               <item name="objects" type="462c0819:PsiDirectoryNode" />
@@ -466,10 +506,14 @@
               <item name="objects" type="462c0819:PsiDirectoryNode" />
               <item name="pawns" type="462c0819:PsiDirectoryNode" />
               <item name="characters" type="462c0819:PsiDirectoryNode" />
+=======
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+>>>>>>> Menu
             </path>
             <path>
               <item name="LightBouncersClient" type="b2602c69:ProjectViewProjectNode" />
               <item name="LightBouncersClient" type="462c0819:PsiDirectoryNode" />
+<<<<<<< HEAD
               <item name="src" type="462c0819:PsiDirectoryNode" />
               <item name="lightbouncers" type="462c0819:PsiDirectoryNode" />
               <item name="objects" type="462c0819:PsiDirectoryNode" />
@@ -479,21 +523,26 @@
             <path>
               <item name="LightBouncersClient" type="b2602c69:ProjectViewProjectNode" />
               <item name="LightBouncersClient" type="462c0819:PsiDirectoryNode" />
+=======
+>>>>>>> Menu
               <item name="src" type="462c0819:PsiDirectoryNode" />
               <item name="lightbouncers" type="462c0819:PsiDirectoryNode" />
-              <item name="world" type="462c0819:PsiDirectoryNode" />
             </path>
           </expand>
           <select />
         </subPane>
       </pane>
       <pane id="Scope" />
+<<<<<<< HEAD
       <pane id="PackagesPane" />
+=======
+>>>>>>> Menu
     </panes>
   </component>
   <component name="PropertiesComponent">
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
+<<<<<<< HEAD
 <<<<<<< Updated upstream
     <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1559433110228" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$/../LightBouncersServer" />
@@ -502,6 +551,11 @@
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
 >>>>>>> Stashed changes
     <property name="project.structure.last.edited" value="Artifacts" />
+=======
+    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1559041313238" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/../LightBouncersServer" />
+    <property name="project.structure.last.edited" value="Libraries" />
+>>>>>>> Menu
     <property name="project.structure.proportion" value="0.0" />
     <property name="project.structure.side.proportion" value="0.2" />
     <property name="settings.editor.selected.configurable" value="preferences.pluginManager" />
@@ -576,6 +630,10 @@
     <recent_temporary>
       <list>
         <item itemvalue="Application.Main" />
+<<<<<<< HEAD
+=======
+        <item itemvalue="Application.MainServer" />
+>>>>>>> Menu
       </list>
     </recent_temporary>
   </component>
@@ -591,15 +649,27 @@
       <updated>1558946354292</updated>
       <workItem from="1558946355745" duration="6953000" />
       <workItem from="1558954182220" duration="3375000" />
+<<<<<<< HEAD
       <workItem from="1559404271293" duration="2871000" />
+=======
+      <workItem from="1559073058785" duration="116000" />
+      <workItem from="1559074789625" duration="685000" />
+>>>>>>> Menu
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
+<<<<<<< HEAD
     <option name="totallyTimeSpent" value="13199000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1692" height="1056" extended-state="0" />
+=======
+    <option name="totallyTimeSpent" value="11129000" />
+  </component>
+  <component name="ToolWindowManager">
+    <frame x="-8" y="-8" width="1696" height="1026" extended-state="6" />
+>>>>>>> Menu
     <layout>
       <window_info id="Structure" order="0" side_tool="true" weight="0.25" />
       <window_info id="Designer" order="1" />
@@ -607,6 +677,7 @@
       <window_info id="UI Designer" order="3" />
       <window_info id="Favorites" order="4" side_tool="true" />
       <window_info id="Capture Tool" order="5" />
+<<<<<<< HEAD
 <<<<<<< Updated upstream
       <window_info active="true" content_ui="combo" id="Project" order="6" visible="true" weight="0.17857143" />
       <window_info anchor="bottom" id="Message" order="0" />
@@ -621,6 +692,13 @@
       <window_info anchor="bottom" id="Run" order="2" weight="0.3163597" />
       <window_info anchor="bottom" id="Debug" order="3" weight="0.3846154" />
 >>>>>>> Stashed changes
+=======
+      <window_info content_ui="combo" id="Project" order="6" visible="true" weight="0.17114915" />
+      <window_info anchor="bottom" id="Message" order="0" />
+      <window_info anchor="bottom" id="Find" order="1" />
+      <window_info anchor="bottom" id="Run" order="2" weight="0.3281075" />
+      <window_info anchor="bottom" id="Debug" order="3" weight="0.39885056" />
+>>>>>>> Menu
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
       <window_info anchor="bottom" id="TODO" order="6" />
@@ -628,9 +706,16 @@
       <window_info anchor="bottom" id="Boebot Uploader" order="8" />
       <window_info anchor="bottom" id="Terminal" order="9" />
       <window_info anchor="bottom" id="Event Log" order="10" side_tool="true" weight="0.32998884" />
+<<<<<<< HEAD
       <window_info anchor="bottom" id="Messages" order="11" weight="0.32719395" />
       <window_info anchor="bottom" id="Database Changes" order="12" show_stripe_button="false" />
       <window_info anchor="bottom" id="Version Control" order="13" weight="0.32936078" />
+=======
+      <window_info anchor="bottom" id="Messages" order="11" weight="0.3281075" />
+      <window_info anchor="bottom" id="Database Changes" order="12" show_stripe_button="false" />
+      <window_info anchor="bottom" id="Version Control" order="13" />
+      <window_info anchor="bottom" id="Docker" order="14" show_stripe_button="false" />
+>>>>>>> Menu
       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
       <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
@@ -960,6 +1045,7 @@
         </state>
       </provider>
     </entry>
+<<<<<<< HEAD
     <entry file="file://$PROJECT_DIR$/src/lightbouncers/net/ProjectileObject.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="289">
@@ -1099,6 +1185,19 @@
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/lightbouncers/world/World.java">
+=======
+    <entry file="file://$PROJECT_DIR$/src/lightbouncers/net/server/ITCPServerReceiver.java" />
+    <entry file="file://$PROJECT_DIR$/src/lightbouncers/net/client/ITCPClientReceiver.java">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/lightbouncers/MainClient.java" />
+    <entry file="file://$PROJECT_DIR$/src/lightbouncers/net/app/server/LightbouncersServer.java" />
+    <entry file="file://$PROJECT_DIR$/src/lightbouncers/net/app/client/LightbouncersClient.java" />
+    <entry file="file://$PROJECT_DIR$/src/lightbouncers/net/server/Server.java" />
+    <entry file="file://$PROJECT_DIR$/src/lightbouncers/MainServer.java" />
+    <entry file="file://$PROJECT_DIR$/src/lightbouncers/net/server/Session.java" />
+    <entry file="file://$PROJECT_DIR$/src/lightbouncers/objects/items/weapons/guns/Gun.java">
+>>>>>>> Menu
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="695">
           <caret line="142" column="9" lean-forward="true" selection-start-line="142" selection-start-column="9" selection-end-line="142" selection-end-column="9" />
@@ -1141,6 +1240,7 @@
         </state>
       </provider>
     </entry>
+<<<<<<< HEAD
     <entry file="file://$PROJECT_DIR$/src/lightbouncers/objects/pawns/characters/LightBouncer.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="476">
@@ -1198,6 +1298,32 @@
             <element signature="e#4102#4103#0" expanded="true" />
 >>>>>>> Stashed changes
           </folding>
+=======
+    <entry file="file://$PROJECT_DIR$/LightBouncers.iml">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/lightbouncers/net/client/Client.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="544">
+          <caret line="32" column="5" selection-start-line="32" selection-start-column="5" selection-end-line="32" selection-end-column="5" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/lightbouncers/world/World.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="476">
+          <caret line="31" column="31" selection-start-line="31" selection-start-column="31" selection-end-line="31" selection-end-column="31" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/lightbouncers/Main.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="68">
+          <caret line="8" column="13" selection-start-line="8" selection-start-column="13" selection-end-line="8" selection-end-column="13" />
+>>>>>>> Menu
         </state>
       </provider>
     </entry>
